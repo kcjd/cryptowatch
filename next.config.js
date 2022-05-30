@@ -4,6 +4,9 @@ const nextConfig = {
   i18n: {
     locales: ['fr'],
     defaultLocale: 'fr'
+  },
+  compiler: {
+    styledComponents: true
   }
 }
 
