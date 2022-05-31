@@ -62,8 +62,8 @@ const GlobalStyle = createGlobalStyle`
     isolation: isolate;
   }
 
-  *:not(input):focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.primary};
+  *:focus {
+    outline: none;
   }
 
   body {
