@@ -4,8 +4,11 @@ const theme = {
     textLight: 'hsl(218 11% 65%)',
     background: 'hsl(221 39% 11%)',
     surface: 'hsl(215 28% 17%)',
+    surfaceLight: 'hsl(217 19% 22%)',
+    highlight: 'hsl(242 47% 34%)',
     border: 'hsl(215 28% 17%)',
-    primary: 'hsl(168 84% 78%)',
+    borderLight: 'hsl(217 19% 27%)',
+    primary: 'hsl(239 84% 67%)',
     success: 'hsl(142 77% 73%)',
     danger: 'hsl(0 94% 82%)',
     glass: 'hsl(221 39% 11% / 0.5)',
@@ -30,6 +33,7 @@ const theme = {
     800: '4rem',
     850: '5rem',
     900: '6rem',
+    950: '7rem',
     container: 'min(100% - 2rem, 80rem)'
   },
   fontFamilies: {
@@ -52,6 +56,10 @@ const theme = {
     300: '0.5rem',
     400: '0.75rem',
     full: '9999px'
+  },
+  shadows: {
+    400: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+    500: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)'
   }
 }
 
