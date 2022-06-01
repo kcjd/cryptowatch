@@ -49,6 +49,7 @@ const ModalBody = styled(motion.div)`
   margin-inline: auto;
   margin-top: 25vh;
   border-radius: ${({ theme }) => theme.borderRadius[400]};
+  border: 1px solid ${({ theme }) => theme.colors.border};
   background-color: ${({ theme }) => theme.colors.surface};
   box-shadow: ${({ theme }) => theme.shadows[500]};
   overflow: hidden;

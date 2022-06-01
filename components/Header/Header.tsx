@@ -41,8 +41,7 @@ const Wrapper = styled.header`
   top: 0;
   z-index: 10;
   border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-  background-color: ${({ theme }) => theme.colors.glass};
-  backdrop-filter: blur(30px);
+  background-color: ${({ theme }) => theme.colors.background};
 `
 
 const Inner = styled(Container)`
@@ -56,7 +55,7 @@ const Logo = styled.a`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.sizes[200]};
-  font-weight: ${({ theme }) => theme.fontWeights[700]};
+  font-weight: ${({ theme }) => theme.fontWeights[600]};
 `
 
 const Options = styled.div`

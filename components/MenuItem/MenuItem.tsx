@@ -11,7 +11,6 @@ const MenuItem = styled.li<Props>`
   padding: ${({ theme }) => theme.sizes[200]} ${({ theme }) => theme.sizes[350]};
   background-color: ${({ theme, active }) => active && theme.colors.highlight};
   color: ${({ theme }) => theme.colors.text};
-  font-size: ${({ theme }) => theme.fontSizes[300]};
   cursor: pointer;
   transition: background-color 0.15s linear;
 `

@@ -5,10 +5,13 @@ import useSWR from 'swr'
 import styled from 'styled-components'
 import { Combobox } from '@headlessui/react'
 import { Search } from '@styled-icons/ionicons-solid'
+import CoinName from '../CoinName'
+import CoinSymbol from '../CoinSymbol'
 import Loader from '../Loader'
 import MenuItem from '../MenuItem'
 import Modal from '../Modal'
 import useDebounce from '../../hooks/useDebounce'
+import { API_ENDPOINTS } from '../../constants'
 
 type Props = {
   isOpen: boolean
@@ -20,7 +23,7 @@ const SearchBar = ({ isOpen, toggle }: Props) => {
   const [query, setQuery] = useState('')
   const debouncedQuery = useDebounce(query)
   const { data: results, isValidating } = useSWR<SearchResponse>(
-    debouncedQuery ? ['/search', { query: debouncedQuery }] : null
+    debouncedQuery ? [API_ENDPOINTS.search, { query: debouncedQuery }] : null
   )
   const [selected, setSelected] = useState<CoinBaseData | null>(null)
 
@@ -51,8 +54,8 @@ const SearchBar = ({ isOpen, toggle }: Props) => {
               <Combobox.Option key={coin.id} value={coin}>
                 {({ active }) => (
                   <MenuItem active={active}>
-                    <Name>{coin.name}</Name>
-                    <Symbol>{coin.symbol}</Symbol>
+                    <CoinName>{coin.name}</CoinName>
+                    <CoinSymbol>{coin.symbol}</CoinSymbol>
                   </MenuItem>
                 )}
               </Combobox.Option>
@@ -85,7 +88,6 @@ const Input = styled.input`
   border: 0;
   background-color: transparent;
   color: ${({ theme }) => theme.colors.text};
-  font-size: ${({ theme }) => theme.fontSizes[300]};
 
   &::placeholder {
     color: ${({ theme }) => theme.colors.textLight};
@@ -101,16 +103,8 @@ const SearchLoader = styled(Loader)`
 `
 
 const ResultList = styled.ul`
-  border-top: 1px solid ${({ theme }) => theme.colors.borderLight};
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
   padding-block: ${({ theme }) => theme.sizes[250]};
-`
-
-const Name = styled.span`
-  font-weight: ${({ theme }) => theme.fontWeights[500]};
-`
-
-const Symbol = styled.span`
-  color: ${({ theme }) => theme.colors.textLight};
 `
 
 export default SearchBar

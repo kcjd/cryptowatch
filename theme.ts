@@ -1,18 +1,23 @@
 const theme = {
+  screens: {
+    sm: 640,
+    md: 768,
+    lg: 1024,
+    xl: 1280
+  },
   colors: {
     text: 'hsl(0 0% 100%)',
     textLight: 'hsl(218 11% 65%)',
-    background: 'hsl(221 39% 11%)',
-    surface: 'hsl(215 28% 17%)',
-    surfaceLight: 'hsl(217 19% 22%)',
+    background: 'hsl(222 27% 12%)',
+    surface: 'hsl(222 27% 14%)',
+    surfaceLight: 'hsl(222 27% 16%)',
     highlight: 'hsl(242 47% 34%)',
-    border: 'hsl(215 28% 17%)',
-    borderLight: 'hsl(217 19% 27%)',
+    border: 'hsl(222 27% 17%)',
+    borderLight: 'hsl(222 27% 22%)',
     primary: 'hsl(239 84% 67%)',
     success: 'hsl(142 77% 73%)',
     danger: 'hsl(0 94% 82%)',
-    glass: 'hsl(221 39% 11% / 0.5)',
-    overlay: 'hsl(0 0% 0% / 0.4)'
+    overlay: 'hsl(0 0% 0% / 0.6)'
   },
   sizes: {
     50: '0.125rem',
@@ -49,12 +54,12 @@ const theme = {
   fontWeights: {
     400: 400,
     500: 500,
-    600: 600,
-    700: 700
+    600: 600
   },
   borderRadius: {
     300: '0.5rem',
     400: '0.75rem',
+    500: '1rem',
     full: '9999px'
   },
   shadows: {

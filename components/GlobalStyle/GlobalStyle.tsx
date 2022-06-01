@@ -72,18 +72,6 @@ const GlobalStyle = createGlobalStyle`
     font-size: ${({ theme }) => theme.fontSizes[400]};
     font-family: ${({ theme }) => theme.fontFamilies.base};
   }
-
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    background-image: url('/background.jpg');
-    background-size: cover;
-    background-position: center;
-    filter: blur(60px);
-    opacity: 0.2;
-  } 
 `
 
 export default GlobalStyle
