@@ -6,7 +6,7 @@ import Layout from '../components/Layout'
 import PreferencesProvider from '../context/preferencesContext'
 import theme from '../theme'
 import { SWRConfig } from 'swr'
-import { API_URL } from '../constants'
+import { API_URL } from '../helpers/constants'
 
 axios.defaults.baseURL = API_URL
 const fetcher = (url: string, params?: any) => axios.get(url, { params }).then((res) => res.data)

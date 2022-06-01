@@ -21,7 +21,7 @@ const TrendingItem = ({ coin }: Props) => {
           <Image src={coin.image} width={24} height={24} alt="" />
           <CoinName>{coin.name}</CoinName>
           <CoinSymbol>{coin.symbol}</CoinSymbol>
-          <CoinChange change={coin.price_change_percentage_24h} />
+          <CoinChange value={coin.price_change_percentage_24h} />
         </Header>
 
         <HistoryChart data={coin.sparkline_in_7d.price} />

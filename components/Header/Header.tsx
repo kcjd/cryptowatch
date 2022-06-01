@@ -7,7 +7,7 @@ import { Search } from '@styled-icons/ionicons-solid'
 import Button from '../Button'
 import Container from '../Container'
 import Select from '../Select'
-import { CURRENCIES } from '../../constants'
+import { CURRENCIES } from '../../helpers/constants'
 
 type Props = {
   toggleSearchBar: Dispatch<SetStateAction<boolean>>
@@ -27,7 +27,7 @@ const Header = ({ toggleSearchBar }: Props) => {
 
         <Options>
           <Select value={preferences.currency} options={CURRENCIES} onChange={setCurrency} />
-          <Button onClick={() => toggleSearchBar(true)}>
+          <Button onClick={() => toggleSearchBar(true)} aria-label="Recherche">
             <Search size={16} />
           </Button>
         </Options>

@@ -11,7 +11,7 @@ import {
   Tooltip
 } from 'chart.js'
 import 'chartjs-adapter-dayjs'
-import { getDate, getPrice } from '../../utils'
+import { getDate, getPrice } from '../../helpers/utils'
 import { HistoryChartData } from '../../types'
 import theme from '../../theme'
 

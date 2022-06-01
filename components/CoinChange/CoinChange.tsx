@@ -1,17 +1,17 @@
 import { CaretDown, CaretUp } from '@styled-icons/ionicons-solid'
 import styled from 'styled-components'
-import { getPercentage } from '../../utils'
+import { getPercentage } from '../../helpers/utils'
 
 type Props = {
-  change: number
+  value: number
 }
 
-const CoinChange = ({ change }: Props) => {
-  const isUp = change > 0
+const CoinChange = ({ value }: Props) => {
+  const isUp = value > 0
 
   return (
     <Change isUp={isUp}>
-      {isUp ? <CaretUp size={14} /> : <CaretDown size={14} />} {getPercentage(change)}
+      {isUp ? <CaretUp size={14} /> : <CaretDown size={14} />} {getPercentage(value)}
     </Change>
   )
 }

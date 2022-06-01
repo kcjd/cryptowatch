@@ -2,6 +2,7 @@ import { css } from 'styled-components'
 import theme from '../theme'
 
 export const truncate = css`
+  display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

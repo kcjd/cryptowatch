@@ -5,7 +5,7 @@ import { Flash } from '@styled-icons/ionicons-solid'
 import SectionTitle from '../SectionTitle'
 import TrendingItem from './TrendingItem'
 import { usePreferences } from '../../context/preferencesContext'
-import { API_ENDPOINTS } from '../../constants'
+import { API_ENDPOINTS } from '../../helpers/constants'
 import { mq } from '../../helpers/mixins'
 
 const Trending = () => {

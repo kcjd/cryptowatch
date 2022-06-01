@@ -11,7 +11,7 @@ import Loader from '../Loader'
 import MenuItem from '../MenuItem'
 import Modal from '../Modal'
 import useDebounce from '../../hooks/useDebounce'
-import { API_ENDPOINTS } from '../../constants'
+import { API_ENDPOINTS } from '../../helpers/constants'
 
 type Props = {
   isOpen: boolean
@@ -41,7 +41,7 @@ const SearchBar = ({ isOpen, toggle }: Props) => {
           <SearchIcon size={16} />
           <Combobox.Input
             as={Input}
-            placeholder="Recherche"
+            placeholder="Que recherchez-vous ?"
             autoComplete="off"
             displayValue={(coin: CoinBaseData | null) => coin?.name || ''}
             onChange={(e) => setQuery(e.target.value)}

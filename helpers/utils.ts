@@ -5,8 +5,13 @@ export const getPercentage = (value: number) => {
   return `${absoluteValue.toFixed(2)}%`
 }
 
-export const getPrice = (value: string | number) => {
-  const formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'usd', maximumFractionDigits: 8 })
+export const getPrice = (value: string | number, currency: string = 'USD') => {
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency,
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 6
+  })
   return formatter.format(Number(value))
 }
 
