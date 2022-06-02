@@ -1,5 +1,5 @@
 import { CoinBaseData, SearchResponse } from '../../types'
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, Fragment, SetStateAction, useState } from 'react'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import styled from 'styled-components'
@@ -25,33 +25,31 @@ const SearchBar = ({ isOpen, toggle }: Props) => {
   const { data: results, isValidating } = useSWR<SearchResponse>(
     debouncedQuery ? [API_ENDPOINTS.search, { query: debouncedQuery }] : null
   )
-  const [selected, setSelected] = useState<CoinBaseData | null>(null)
 
-  const handleChange = (coin: CoinBaseData | null) => {
+  const handleChange = (coin?: CoinBaseData) => {
     if (!coin) return
-
-    setSelected(coin)
     router.push(`/coins/${coin.id}`)
+    toggle(false)
   }
 
   return (
     <Modal isOpen={isOpen} toggle={toggle} onExit={() => setQuery('')}>
-      <Combobox value={selected} onChange={handleChange}>
+      <Combobox value={null} onChange={handleChange}>
         <InputWrapper>
           <SearchIcon size={16} />
           <Combobox.Input
             as={Input}
             placeholder="Que recherchez-vous ?"
             autoComplete="off"
-            displayValue={(coin: CoinBaseData | null) => coin?.name || ''}
             onChange={(e) => setQuery(e.target.value)}
+            aria-label="Recherche"
           />
           {isValidating && <SearchLoader />}
         </InputWrapper>
         {results && results.coins.length > 0 && (
           <Combobox.Options as={ResultList} static>
             {results.coins.slice(0, 5).map((coin) => (
-              <Combobox.Option key={coin.id} value={coin}>
+              <Combobox.Option key={coin.id} as={Fragment} value={coin}>
                 {({ active }) => (
                   <MenuItem active={active}>
                     <CoinName>{coin.name}</CoinName>
