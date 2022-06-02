@@ -1,4 +1,6 @@
+import { HistoryChartData } from '../../types'
 import { Line } from 'react-chartjs-2'
+import { isDayjs } from 'dayjs'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,10 +13,9 @@ import {
   Tooltip
 } from 'chart.js'
 import 'chartjs-adapter-dayjs'
+import { usePreferences } from '../../context/preferencesContext'
 import { getDate, getPrice } from '../../helpers/utils'
-import { HistoryChartData } from '../../types'
 import theme from '../../theme'
-import { isDayjs } from 'dayjs'
 
 ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement, TimeScale, Tooltip)
 
@@ -27,19 +28,18 @@ type Props = {
 }
 
 const SparklineChart = ({ data, width = 200, height = 60, showScales = false, showTooltip = false }: Props) => {
+  const { preferences } = usePreferences()
   const points = data.map((v) => (typeof v === 'number' ? v : v[1]))
   const labels = data.map((v, i) => (typeof v === 'number' ? i : getDate(v[0])))
 
-  const diff = () => {
-    const start = labels[0]
-    const end = labels[labels.length - 1]
+  const startDate = labels[0]
+  const startValue = points[0]
+  const endDate = labels[labels.length - 1]
+  const endValue = points[points.length - 1]
 
-    if (isDayjs(start) && isDayjs(end)) {
-      return end.diff(start, 'day')
-    } else return 0
-  }
+  const unit = isDayjs(endDate) && endDate.diff(startDate, 'day') > 1 ? 'day' : 'hour'
 
-  const isChangeUp = points[points.length - 1] > points[0]
+  const isChangeUp = endValue > startValue
 
   const chartData: ChartData<'line'> = {
     labels,
@@ -56,9 +56,10 @@ const SparklineChart = ({ data, width = 200, height = 60, showScales = false, sh
       x: {
         type: 'time',
         time: {
-          unit: diff() > 1 ? 'day' : 'hour',
+          unit,
           displayFormats: {
-            day: 'DD/MM'
+            day: 'DD/MM',
+            hour: 'HH:mm'
           },
           tooltipFormat: 'DD/MM/YYYY HH:mm'
         },
@@ -67,7 +68,13 @@ const SparklineChart = ({ data, width = 200, height = 60, showScales = false, sh
           display: false
         },
         ticks: {
-          color: theme.colors.textLight
+          padding: 12,
+          maxRotation: 0,
+          color: theme.colors.textLight,
+          font: {
+            family: theme.fontFamilies.base,
+            weight: '500'
+          }
         }
       },
       y: {
@@ -77,7 +84,11 @@ const SparklineChart = ({ data, width = 200, height = 60, showScales = false, sh
         },
         ticks: {
           color: theme.colors.textLight,
-          callback: (v) => getPrice(v)
+          font: {
+            family: theme.fontFamilies.base,
+            weight: '500'
+          },
+          callback: (v) => getPrice(v, preferences.currency)
         }
       }
     },
@@ -92,22 +103,34 @@ const SparklineChart = ({ data, width = 200, height = 60, showScales = false, sh
     },
     plugins: {
       tooltip: {
+        animation: {
+          duration: 100,
+          easing: 'linear'
+        },
+        callbacks: {
+          label: (context) => getPrice(context.raw as number, preferences.currency)
+        },
         enabled: showTooltip,
         displayColors: false,
-        backgroundColor: theme.colors.surface,
-        bodyColor: theme.colors.text,
-        bodyFont: {
-          size: 14
-        },
-        titleColor: theme.colors.text,
+        padding: 12,
+        cornerRadius: 8,
+        backgroundColor: theme.colors.text,
+        titleColor: theme.colors.primary,
+        bodyColor: theme.colors.background,
         titleFont: {
-          size: 14
+          family: theme.fontFamilies.base,
+          size: 14,
+          weight: '500'
         },
-        padding: 16
+        bodyFont: {
+          family: theme.fontFamilies.base,
+          size: 16,
+          weight: '600'
+        }
       }
     },
     interaction: {
-      mode: 'index',
+      mode: 'nearest',
       intersect: false
     }
   }
