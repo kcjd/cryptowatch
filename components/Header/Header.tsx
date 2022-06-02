@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { usePreferences } from '../../context/preferencesContext'
 import { Search } from '@styled-icons/ionicons-solid'
 import Button from '../Button'
+import ButtonGroup from '../ButtonGroup'
 import Container from '../Container'
 import Select from '../Select'
 import { CURRENCIES } from '../../helpers/constants'
@@ -25,12 +26,12 @@ const Header = ({ toggleSearchBar }: Props) => {
           </Logo>
         </Link>
 
-        <Options>
+        <ButtonGroup>
           <Select value={preferences.currency} options={CURRENCIES} onChange={setCurrency} />
           <Button onClick={() => toggleSearchBar(true)} aria-label="Recherche">
             <Search size={16} />
           </Button>
-        </Options>
+        </ButtonGroup>
       </Inner>
     </Wrapper>
   )
@@ -56,11 +57,6 @@ const Logo = styled.a`
   align-items: center;
   gap: ${({ theme }) => theme.sizes[200]};
   font-weight: ${({ theme }) => theme.fontWeights[600]};
-`
-
-const Options = styled.div`
-  display: flex;
-  gap: ${({ theme }) => theme.sizes[200]};
 `
 
 export default Header

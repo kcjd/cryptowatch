@@ -21,6 +21,7 @@ const Change = styled.span<{ isUp: boolean }>`
   align-items: center;
   gap: ${({ theme }) => theme.sizes[100]};
   color: ${({ theme, isUp }) => (isUp ? theme.colors.success : theme.colors.danger)};
+  font-size: ${({ theme }) => theme.fontSizes[400]};
 `
 
 export default CoinChange
