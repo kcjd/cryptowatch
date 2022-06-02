@@ -46,3 +46,7 @@ export type TrendingResponse = {
 }
 
 export type MarketsResponse = CoinMarketData[]
+
+export type MarketChartResponse = {
+  prices: HistoryChartData
+}

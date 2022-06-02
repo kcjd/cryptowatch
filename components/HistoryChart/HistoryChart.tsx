@@ -14,18 +14,30 @@ import 'chartjs-adapter-dayjs'
 import { getDate, getPrice } from '../../helpers/utils'
 import { HistoryChartData } from '../../types'
 import theme from '../../theme'
+import { isDayjs } from 'dayjs'
 
 ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement, TimeScale, Tooltip)
 
 type Props = {
   data: HistoryChartData
+  width?: number
+  height?: number
   showScales?: boolean
   showTooltip?: boolean
 }
 
-const SparklineChart = ({ data, showScales = false, showTooltip = false }: Props) => {
+const SparklineChart = ({ data, width = 200, height = 60, showScales = false, showTooltip = false }: Props) => {
   const points = data.map((v) => (typeof v === 'number' ? v : v[1]))
   const labels = data.map((v, i) => (typeof v === 'number' ? i : getDate(v[0])))
+
+  const diff = () => {
+    const start = labels[0]
+    const end = labels[labels.length - 1]
+
+    if (isDayjs(start) && isDayjs(end)) {
+      return end.diff(start, 'day')
+    } else return 0
+  }
 
   const isChangeUp = points[points.length - 1] > points[0]
 
@@ -39,11 +51,12 @@ const SparklineChart = ({ data, showScales = false, showTooltip = false }: Props
   }
 
   const options: ChartOptions<'line'> = {
+    responsive: true,
     scales: {
       x: {
         type: 'time',
         time: {
-          unit: 'day',
+          unit: diff() > 1 ? 'day' : 'hour',
           displayFormats: {
             day: 'DD/MM'
           },
@@ -99,7 +112,7 @@ const SparklineChart = ({ data, showScales = false, showTooltip = false }: Props
     }
   }
 
-  return <Line width={200} height={60} data={chartData} options={options} />
+  return <Line width={width} height={height} data={chartData} options={options} />
 }
 
 export default SparklineChart
