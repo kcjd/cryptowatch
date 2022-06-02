@@ -15,7 +15,9 @@ const Overview = () => {
   const router = useRouter()
   const id = router.query.id as string
   const { preferences } = usePreferences()
-  const { data } = useSWR<MarketsResponse>([API_ENDPOINTS.markets, { ids: id, vs_currency: preferences.currency }])
+  const { data } = useSWR<MarketsResponse>(
+    id ? [API_ENDPOINTS.markets, { ids: id, vs_currency: preferences.currency }] : null
+  )
   const coin = data?.[0]
 
   return (

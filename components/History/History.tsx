@@ -33,7 +33,7 @@ const History = () => {
         <FilterGroup value={days} filters={filters} onChange={(value) => router.push(`/coins/${id}?days=${value}`)} />
       </SectionTitle>
 
-      <Card>{data && <HistoryChart height={120} data={data?.prices} showScales showTooltip />}</Card>
+      <Card>{data && <HistoryChart height={160} data={data?.prices} showScales showTooltip />}</Card>
     </section>
   )
 }

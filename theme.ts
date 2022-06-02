@@ -39,7 +39,7 @@ const theme = {
     850: '5rem',
     900: '6rem',
     950: '7rem',
-    container: 'min(100% - 2rem, 80rem)'
+    container: 'min(100% - 2rem, 85rem)'
   },
   fontFamilies: {
     base: '"Inter", sans-serif'
