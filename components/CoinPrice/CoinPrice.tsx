@@ -1,15 +1,13 @@
 import styled from 'styled-components'
-import { usePreferences } from '../../context/preferencesContext'
 import { truncate } from '../../helpers/mixins'
 import { getPrice } from '../../helpers/utils'
 
 type Props = {
   value: number
+  currency: string
 }
 
-const CoinPrice = ({ value }: Props) => {
-  const { currency } = usePreferences()
-
+const CoinPrice = ({ value, currency }: Props) => {
   return <Price>{getPrice(value, currency)}</Price>
 }
 

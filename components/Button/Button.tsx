@@ -20,6 +20,7 @@ const Button = styled.button<Props>`
 
   &:disabled {
     opacity: 0.5;
+    pointer-events: none;
   }
 `
 

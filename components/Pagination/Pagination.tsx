@@ -1,17 +1,27 @@
+import { useRouter } from 'next/router'
 import styled from 'styled-components'
-import Button from '../Button'
 import { ChevronBack, ChevronForward } from '@styled-icons/ionicons-solid'
+import Button from '../Button'
 
 type Props = {
   current: number
   max: number
-  onChange: (page: number) => void
 }
 
-const Pagination = ({ current, max, onChange }: Props) => {
+const Pagination = ({ current, max }: Props) => {
+  const router = useRouter()
+
+  const handleChange = (page: number) => {
+    router.push(`?page=${page}`)
+  }
+
   return (
     <Wrapper aria-label="Pagination">
-      <Button onClick={() => onChange(Math.max(current - 1, 1))} disabled={current === 1} aria-label="Page précédente">
+      <Button
+        onClick={() => handleChange(Math.max(current - 1, 1))}
+        disabled={current === 1}
+        aria-label="Page précédente"
+      >
         <ChevronBack size={16} />
       </Button>
       {[...Array(max)].map((_, i) => {
@@ -21,7 +31,7 @@ const Pagination = ({ current, max, onChange }: Props) => {
           <Button
             key={page}
             active={isActive}
-            onClick={() => onChange(page)}
+            onClick={() => handleChange(page)}
             aria-current={isActive ? 'page' : 'false'}
             aria-label={`Page ${page}`}
           >
@@ -30,7 +40,7 @@ const Pagination = ({ current, max, onChange }: Props) => {
         )
       })}
       <Button
-        onClick={() => onChange(Math.min(current + 1, max))}
+        onClick={() => handleChange(Math.min(current + 1, max))}
         disabled={current === max}
         aria-label="Page suivante"
       >

@@ -13,15 +13,14 @@ import {
   Tooltip
 } from 'chart.js'
 import 'chartjs-adapter-dayjs'
-import { usePreferences } from '../../context/preferencesContext'
 import { getDate, getPrice } from '../../helpers/utils'
 import theme from '../../theme'
-import styled from 'styled-components'
 
 ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement, TimeScale, Tooltip)
 
 type Props = {
   data: HistoryChartData
+  currency?: string
   width?: number
   height?: number
   showScales?: boolean
@@ -29,7 +28,6 @@ type Props = {
 }
 
 const SparklineChart = ({ data, width = 200, height = 60, showScales = false, showTooltip = false }: Props) => {
-  const { currency } = usePreferences()
   const points = data.map((v) => (typeof v === 'number' ? v : v[1]))
   const labels = data.map((v, i) => (typeof v === 'number' ? i : getDate(v[0])))
 
@@ -88,7 +86,7 @@ const SparklineChart = ({ data, width = 200, height = 60, showScales = false, sh
             family: theme.fontFamilies.base,
             weight: '500'
           },
-          callback: (v) => getPrice(v, currency)
+          callback: (v) => getPrice(v)
         }
       }
     },
@@ -108,7 +106,7 @@ const SparklineChart = ({ data, width = 200, height = 60, showScales = false, sh
           easing: 'linear'
         },
         callbacks: {
-          label: (context) => getPrice(context.raw as number, currency)
+          label: (context) => getPrice(context.raw as number)
         },
         enabled: showTooltip,
         displayColors: false,

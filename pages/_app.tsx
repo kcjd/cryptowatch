@@ -3,7 +3,6 @@ import axios from 'axios'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyle from '../components/GlobalStyle'
 import Layout from '../components/Layout'
-import PreferencesProvider from '../context/preferencesContext'
 import theme from '../theme'
 import { SWRConfig } from 'swr'
 import { API_URL } from '../helpers/constants'
@@ -15,12 +14,10 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <SWRConfig value={{ fetcher }}>
       <ThemeProvider theme={theme}>
-        <PreferencesProvider>
-          <GlobalStyle />
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </PreferencesProvider>
+        <GlobalStyle />
+        <Layout currency={pageProps.currency}>
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
     </SWRConfig>
   )

@@ -1,15 +1,19 @@
-import { MarketChartResponse } from '../../types'
+import { HistoryChartData } from '../../types'
 import { Analytics } from '@styled-icons/ionicons-solid'
 import { useRouter } from 'next/router'
-import useSWR from 'swr'
+import { setCookie } from 'nookies'
 import Card from '../Card'
 import FilterGroup from '../FilterGroup'
 import HistoryChart from '../HistoryChart'
 import Section from '../Section'
 import SectionHeader from '../SectionHeader'
 import SectionTitle from '../SectionTitle'
-import { usePreferences } from '../../context/preferencesContext'
-import { API_ENDPOINTS } from '../../helpers/constants'
+
+type Props = {
+  data: HistoryChartData
+  currency: string
+  days: number
+}
 
 const filters = [
   { value: 1, label: '24h' },
@@ -17,13 +21,17 @@ const filters = [
   { value: 30, label: '30 jours' }
 ]
 
-const History = () => {
+const History = ({ data, currency, days }: Props) => {
   const router = useRouter()
-  const id = router.query.id as string
-  const { currency, historyDays, setHistoryDays } = usePreferences()
-  const { data } = useSWR<MarketChartResponse>(
-    id ? [API_ENDPOINTS.marketChart(id), { vs_currency: currency, days: historyDays }] : null
-  )
+
+  const handleDaysChange = (days: number) => {
+    setCookie(null, 'days', days.toString(), {
+      maxAge: 30 * 24 * 60 * 60,
+      path: '/'
+    })
+
+    router.push(router.asPath)
+  }
 
   return (
     <Section>
@@ -32,9 +40,9 @@ const History = () => {
           <Analytics size={16} />
           Historique
         </SectionTitle>
-        <FilterGroup value={historyDays} filters={filters} onChange={setHistoryDays} />
+        <FilterGroup value={days} filters={filters} onChange={handleDaysChange} />
       </SectionHeader>
-      <Card>{data && <HistoryChart height={140} data={data?.prices} showScales showTooltip />}</Card>
+      <Card>{data && <HistoryChart height={140} data={data} currency={currency} showScales showTooltip />}</Card>
     </Section>
   )
 }

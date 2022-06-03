@@ -1,7 +1,6 @@
-import { MarketsResponse } from '../../types'
+import { CoinMarketData } from '../../types'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import useSWR from 'swr'
 import styled from 'styled-components'
 import { Trophy } from '@styled-icons/ionicons-solid'
 import Image from 'next/image'
@@ -16,18 +15,15 @@ import Pagination from '../Pagination'
 import Section from '../Section'
 import SectionHeader from '../SectionHeader'
 import SectionTitle from '../SectionTitle'
-import { usePreferences } from '../../context/preferencesContext'
-import { API_ENDPOINTS } from '../../helpers/constants'
 
-const Ranking = () => {
+type Props = {
+  coins: CoinMarketData[]
+  currency: string
+}
+
+const Ranking = ({ coins, currency }: Props) => {
   const router = useRouter()
   const page = Number(router.query.page || 1)
-  const { currency } = usePreferences()
-
-  const { data } = useSWR<MarketsResponse>([
-    API_ENDPOINTS.markets,
-    { vs_currency: currency, page, per_page: 25, sparkline: true }
-  ])
 
   return (
     <Section>
@@ -51,7 +47,7 @@ const Ranking = () => {
               </tr>
             </thead>
             <tbody>
-              {data?.map((coin) => (
+              {coins.map((coin) => (
                 <tr key={coin.id}>
                   <td>{coin.market_cap_rank}</td>
                   <td>
@@ -64,13 +60,13 @@ const Ranking = () => {
                     </Link>
                   </td>
                   <td>
-                    <CoinPrice value={coin.current_price} />
+                    <CoinPrice value={coin.current_price} currency={currency} />
                   </td>
                   <td>
                     <CoinChange value={coin.price_change_percentage_24h} />
                   </td>
                   <td>
-                    <CoinPrice value={coin.market_cap} />
+                    <CoinPrice value={coin.market_cap} currency={currency} />
                   </td>
                   <td>
                     <HistoryChart data={coin.sparkline_in_7d.price} />
@@ -80,7 +76,7 @@ const Ranking = () => {
             </tbody>
           </Table>
         </ScrollContainer>
-        <Pagination current={page} max={4} onChange={(page) => router.push(`?page=${page}`)} />
+        <Pagination current={page} max={4} />
       </Wrapper>
     </Section>
   )

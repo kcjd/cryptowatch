@@ -1,26 +1,17 @@
-import { MarketsResponse, TrendingResponse } from '../../types'
+import { CoinMarketData } from '../../types'
 import styled from 'styled-components'
-import useSWR from 'swr'
 import { Flash } from '@styled-icons/ionicons-solid'
 import Section from '../Section'
 import SectionHeader from '../SectionHeader'
 import SectionTitle from '../SectionTitle'
 import TrendingItem from './TrendingItem'
-import { usePreferences } from '../../context/preferencesContext'
-import { API_ENDPOINTS } from '../../helpers/constants'
 import { mq } from '../../helpers/mixins'
 
-const Trending = () => {
-  const { currency } = usePreferences()
-  const { data: trending } = useSWR<TrendingResponse>(API_ENDPOINTS.trending)
-  const ids = trending?.coins
-    .map(({ item }) => item.id)
-    .slice(0, 6)
-    .join(',')
-  const { data: trendingCoins } = useSWR<MarketsResponse>(
-    ids ? [API_ENDPOINTS.markets, { ids, vs_currency: currency, sparkline: true }] : null
-  )
+type Props = {
+  coins: CoinMarketData[]
+}
 
+const Trending = ({ coins }: Props) => {
   return (
     <Section>
       <SectionHeader>
@@ -30,7 +21,7 @@ const Trending = () => {
         </SectionTitle>
       </SectionHeader>
       <Grid>
-        {trendingCoins?.map((coin) => (
+        {coins.map((coin) => (
           <TrendingItem key={coin.id} coin={coin} />
         ))}
       </Grid>

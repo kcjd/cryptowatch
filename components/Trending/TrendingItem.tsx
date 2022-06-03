@@ -1,4 +1,5 @@
 import { CoinMarketData } from '../../types'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
 import Card from '../Card'
@@ -14,6 +15,8 @@ type Props = {
 }
 
 const TrendingItem = ({ coin }: Props) => {
+  const router = useRouter()
+
   return (
     <Link href={`/coins/${coin.id}`} passHref>
       <Card as="a">

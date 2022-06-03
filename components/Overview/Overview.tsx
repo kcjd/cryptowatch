@@ -1,38 +1,29 @@
-import { MarketsResponse } from '../../types'
-import { useRouter } from 'next/router'
+import { CoinMarketData } from '../../types'
 import Image from 'next/image'
-import useSWR from 'swr'
+import styled from 'styled-components'
 import Coin from '../Coin'
 import CoinChange from '../CoinChange'
 import CoinName from '../CoinName'
 import CoinPrice from '../CoinPrice'
 import CoinSymbol from '../CoinSymbol'
-import { usePreferences } from '../../context/preferencesContext'
-import { API_ENDPOINTS } from '../../helpers/constants'
-import styled from 'styled-components'
 
-const Overview = () => {
-  const router = useRouter()
-  const id = router.query.id as string
-  const { currency } = usePreferences()
-  const { data } = useSWR<MarketsResponse>(id ? [API_ENDPOINTS.markets, { ids: id, vs_currency: currency }] : null)
-  const coin = data?.[0]
+type Props = {
+  coin: CoinMarketData
+  currency: string
+}
 
+const Overview = ({ coin, currency }: Props) => {
   return (
     <section>
-      {coin && (
-        <>
-          <NameWrapper>
-            <Image src={coin.image} width={28} height={28} alt="" />
-            <CoinName>{coin.name}</CoinName>
-            <CoinSymbol>{coin.symbol}</CoinSymbol>
-          </NameWrapper>
-          <PriceWrapper>
-            <CoinPrice value={coin.current_price} />
-            <CoinChange value={coin.price_change_percentage_24h} />
-          </PriceWrapper>
-        </>
-      )}
+      <NameWrapper>
+        <Image src={coin.image} width={28} height={28} alt="" />
+        <CoinName>{coin.name}</CoinName>
+        <CoinSymbol>{coin.symbol}</CoinSymbol>
+      </NameWrapper>
+      <PriceWrapper>
+        <CoinPrice value={coin.current_price} currency={currency} />
+        <CoinChange value={coin.price_change_percentage_24h} />
+      </PriceWrapper>
     </section>
   )
 }
