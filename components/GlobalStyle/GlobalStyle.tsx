@@ -66,6 +66,10 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
   }
 
+  :root {
+    color-scheme: dark;
+  }
+
   body {
     background-color: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.text};

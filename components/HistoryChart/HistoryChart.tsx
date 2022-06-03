@@ -50,6 +50,7 @@ const SparklineChart = ({ data, width = 200, height = 60, showScales = false, sh
   }
 
   const options: ChartOptions<'line'> = {
+    animation: false,
     scales: {
       x: {
         type: 'time',

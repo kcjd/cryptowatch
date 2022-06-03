@@ -48,8 +48,7 @@ const theme = {
     300: '0.875rem',
     400: '1rem',
     500: '1.125rem',
-    600: '1.25rem',
-    700: '1.5rem'
+    600: '1.25rem'
   },
   fontWeights: {
     400: 400,
@@ -59,7 +58,6 @@ const theme = {
   borderRadius: {
     300: '0.5rem',
     400: '0.75rem',
-    500: '1rem',
     full: '9999px'
   },
   shadows: {

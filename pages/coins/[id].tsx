@@ -19,28 +19,29 @@ const CoinPage = ({
   days
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
-    <Container>
+    <>
       <Head>
-        <title>{coin?.name} - Cryptowatch</title>
+        <title>{coin.name} - Cryptowatch</title>
         <meta
           name="description"
-          content="Suivi en temps réel des crypto-monnaies les plus populaires : cours, capitalisation boursière, historique."
+          content={`Surveillez la cryptomonnaie ${coin.name} en temps réel : cours, capitalisation, volume, historique et plus encore.`}
         />
       </Head>
-
       <Breadcrumbs
         items={[
           { label: 'Monnaies', href: '/' },
           { label: coin.name, href: `/coins/${coin.id}` }
         ]}
       />
-      <Overview coin={coin} currency={currency} />
-      <Columms>
-        <History data={coinHistory} currency={currency} days={days} />
-        <Statistics coin={coin} currency={currency} />
-      </Columms>
-      <Trending coins={trendingCoins} />
-    </Container>
+      <Container>
+        <Overview coin={coin} currency={currency} />
+        <Columms>
+          <History data={coinHistory} currency={currency} days={days} />
+          <Statistics coin={coin} currency={currency} />
+        </Columms>
+        <Trending coins={trendingCoins} />
+      </Container>
+    </>
   )
 }
 

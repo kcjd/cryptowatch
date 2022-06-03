@@ -16,9 +16,9 @@ type Props = {
 }
 
 const filters = [
-  { value: 1, label: '24h' },
-  { value: 7, label: '7 jours' },
-  { value: 30, label: '30 jours' }
+  { value: 1, label: '24H' },
+  { value: 7, label: '7J' },
+  { value: 30, label: '30J' }
 ]
 
 const History = ({ data, currency, days }: Props) => {
@@ -42,7 +42,7 @@ const History = ({ data, currency, days }: Props) => {
         </SectionTitle>
         <FilterGroup value={days} filters={filters} onChange={handleDaysChange} />
       </SectionHeader>
-      <Card>{data && <HistoryChart height={140} data={data} currency={currency} showScales showTooltip />}</Card>
+      <Card>{data && <HistoryChart height={120} data={data} currency={currency} showScales showTooltip />}</Card>
     </Section>
   )
 }

@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <Wrapper as="footer">
       <div>Cryptowatch — {dayjs().year()}</div>
-      <a href="https://github.com/kcjd/crypowatch" target="_blank" rel="noreferrer">
+      <a href="https://github.com/kcjd/crypowatch" target="_blank" rel="noreferrer" aria-label="Github">
         <LogoGithub size={24} />
       </a>
     </Wrapper>

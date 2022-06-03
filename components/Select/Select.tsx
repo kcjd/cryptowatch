@@ -51,7 +51,7 @@ const Wrapper = styled.div`
 `
 
 const SelectButton = styled(Button)`
-  min-width: ${({ theme }) => theme.sizes[950]};
+  min-width: ${({ theme }) => theme.sizes[900]};
 `
 
 const SelectList = styled(motion.ul)`

@@ -15,26 +15,34 @@ type Props = {
 const Overview = ({ coin, currency }: Props) => {
   return (
     <section>
-      <NameWrapper>
-        <Image src={coin.image} width={28} height={28} alt="" />
-        <CoinName>{coin.name}</CoinName>
-        <CoinSymbol>{coin.symbol}</CoinSymbol>
-      </NameWrapper>
-      <PriceWrapper>
-        <CoinPrice value={coin.current_price} currency={currency} />
-        <CoinChange value={coin.price_change_percentage_24h} />
-      </PriceWrapper>
+      <Wrapper>
+        <Image src={coin.image} width={44} height={44} alt="" />
+        <Coin>
+          <CoinName>{coin.name}</CoinName>
+          <CoinSymbol>{coin.symbol}</CoinSymbol>
+        </Coin>
+        <Coin>
+          <CoinPrice value={coin.current_price} currency={currency} />
+          <CoinChange value={coin.price_change_percentage_24h} />
+        </Coin>
+      </Wrapper>
     </section>
   )
 }
 
-const NameWrapper = styled(Coin)`
-  margin-bottom: ${({ theme }) => theme.sizes[200]};
-  font-size: ${({ theme }) => theme.fontSizes[500]};
-`
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0 ${({ theme }) => theme.sizes[400]};
 
-const PriceWrapper = styled(Coin)`
-  font-size: ${({ theme }) => theme.fontSizes[700]};
+  & > *:first-child {
+    grid-row: span 2;
+  }
+
+  & > *:nth-child(3) {
+    font-size: ${({ theme }) => theme.fontSizes[600]};
+  }
 `
 
 export default Overview

@@ -18,7 +18,7 @@ const HomePage = ({
         <title>Cryptowatch</title>
         <meta
           name="description"
-          content="Suivi en temps réel des crypto-monnaies les plus populaires : cours, capitalisation boursière, historique."
+          content="Surveillez les cryptomonnaies les plus populaires en temps réel : cours, capitalisation, volume, historique et plus encore."
         />
       </Head>
       <Trending coins={trendingCoins} />
