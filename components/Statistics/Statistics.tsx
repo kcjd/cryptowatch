@@ -22,83 +22,58 @@ const Statistics = ({ coin, currency }: Props) => {
         </SectionTitle>
       </SectionHeader>
       <Card>
-        <Table>
-          <tbody>
-            <tr>
-              <th scope="row">Cours</th>
-              <td>
-                <CoinPrice value={coin.current_price} currency={currency} />
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Évolution 24h</th>
-              <td>
-                <CoinPrice value={coin.price_change_24h} currency={currency} />
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Cap. Marché</th>
-              <td>
-                <CoinPrice value={coin.market_cap} currency={currency} />
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Volume 24h</th>
-              <td>
-                <CoinPrice value={coin.total_volume} currency={currency} />
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Min. 24h</th>
-              <td>
-                <CoinPrice value={coin.low_24h} currency={currency} />
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Max. 24h</th>
-              <td>
-                <CoinPrice value={coin.high_24h} currency={currency} />
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Min. Historique</th>
-              <td>
-                <CoinPrice value={coin.atl} currency={currency} />
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">Max. Historique</th>
-              <td>
-                <CoinPrice value={coin.ath} currency={currency} />
-              </td>
-            </tr>
-          </tbody>
-        </Table>
+        <Row>
+          <div>Cours</div>
+          <CoinPrice value={coin.current_price} currency={currency} />
+        </Row>
+        <Row>
+          <div>Évolution 24h</div>
+          <CoinPrice value={coin.price_change_24h} currency={currency} />
+        </Row>
+        <Row>
+          <div>Cap. Marché</div>
+          <CoinPrice value={coin.market_cap} currency={currency} />
+        </Row>
+        <Row>
+          <div>Volume 24h</div>
+          <CoinPrice value={coin.total_volume} currency={currency} />
+        </Row>
+        <Row>
+          <div>Min. 24h</div>
+          <CoinPrice value={coin.low_24h} currency={currency} />
+        </Row>
+        <Row>
+          <div>Max. 24h</div>
+          <CoinPrice value={coin.high_24h} currency={currency} />
+        </Row>
+        <Row>
+          <div>Min. Historique</div>
+          <CoinPrice value={coin.atl} currency={currency} />
+        </Row>
+        <Row>
+          <div>Max. Historique</div>
+          <CoinPrice value={coin.ath} currency={currency} />
+        </Row>
       </Card>
     </Section>
   )
 }
 
-const Table = styled.table`
-  width: 100%;
-  table-layout: fixed;
-  border-collapse: collapse;
-  text-align: left;
+const Row = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: ${({ theme }) => theme.sizes[400]};
+  padding-block: ${({ theme }) => theme.sizes[400]};
 
-  & tr:not(:last-child) {
+  &:not(:last-child) {
     border-bottom: 1px solid ${({ theme }) => theme.colors.border};
   }
 
-  & th {
+  & > *:first-child {
     font-weight: ${({ theme }) => theme.fontWeights[600]};
   }
 
-  & th,
-  & td {
-    padding-block: ${({ theme }) => theme.sizes[400]};
-  }
-
-  & td {
+  & > *:last-child {
     color: ${({ theme }) => theme.colors.textLight};
   }
 `

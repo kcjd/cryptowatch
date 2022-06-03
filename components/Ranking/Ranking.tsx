@@ -34,103 +34,64 @@ const Ranking = ({ coins, currency }: Props) => {
         </SectionTitle>
       </SectionHeader>
       <Wrapper>
-        <ScrollContainer>
-          <Table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Nom</th>
-                <th>Prix</th>
-                <th>24h</th>
-                <th>Cap. Marché</th>
-                <th>7 jours</th>
-              </tr>
-            </thead>
-            <tbody>
-              {coins.map((coin) => (
-                <tr key={coin.id}>
-                  <td>{coin.market_cap_rank}</td>
-                  <td>
-                    <Link href={`/coins/${coin.id}`} passHref>
-                      <Coin as="a">
-                        <Image src={coin.image} width={24} height={24} alt="" />
-                        <CoinName>{coin.name}</CoinName>
-                        <CoinSymbol>{coin.symbol}</CoinSymbol>
-                      </Coin>
-                    </Link>
-                  </td>
-                  <td>
-                    <CoinPrice value={coin.current_price} currency={currency} />
-                  </td>
-                  <td>
-                    <CoinChange value={coin.price_change_percentage_24h} />
-                  </td>
-                  <td>
-                    <CoinPrice value={coin.market_cap} currency={currency} />
-                  </td>
-                  <td>
-                    <HistoryChart data={coin.sparkline_in_7d.price} />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </ScrollContainer>
-        <Pagination current={page} max={4} />
+        <Row>
+          <div>#</div>
+          <div>Nom</div>
+          <div>Prix</div>
+          <div>24h</div>
+          <div>Cap. Marché</div>
+          <div>7 jours</div>
+        </Row>
+
+        {coins.map((coin) => (
+          <Link key={coin.id} href={`/coins/${coin.id}`} passHref>
+            <Row as="a">
+              <div>{coin.market_cap_rank}</div>
+              <Coin>
+                <Image src={coin.image} width={24} height={24} alt="" />
+                <CoinName>{coin.name}</CoinName>
+                <CoinSymbol>{coin.symbol}</CoinSymbol>
+              </Coin>
+              <CoinPrice value={coin.current_price} currency={currency} />
+              <CoinChange value={coin.price_change_percentage_24h} />
+              <CoinPrice value={coin.market_cap} currency={currency} />
+              <div>
+                <HistoryChart data={coin.sparkline_in_7d.price} />
+              </div>
+            </Row>
+          </Link>
+        ))}
       </Wrapper>
+      <Pagination current={page} max={4} />
     </Section>
   )
 }
 
 const Wrapper = styled(Card)`
   padding: 0;
-`
-
-const ScrollContainer = styled.div`
   overflow-x: auto;
 `
 
-const Table = styled.table`
+const Row = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 4fr 2fr 2fr 2fr 2fr;
+  align-items: center;
+  gap: ${({ theme }) => theme.sizes[500]};
   width: max(60rem, 100%);
-  table-layout: fixed;
-  border-collapse: collapse;
-  text-align: left;
+  padding: ${({ theme }) => theme.sizes[400]} ${({ theme }) => theme.sizes[500]};
 
-  & tr {
-    position: relative;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-    transition: background-color 0.15s linear;
-  }
+  transition: background-color 0.15s linear;
 
-  & tbody > tr:hover {
-    background-color: ${({ theme }) => theme.colors.surfaceLight};
-  }
-
-  & th {
+  &:first-child {
     font-weight: ${({ theme }) => theme.fontWeights[600]};
-
-    &:first-child {
-      width: ${({ theme }) => theme.sizes[850]};
-    }
-
-    &:nth-child(2) {
-      width: 30%;
-    }
-
-    &:nth-child(5) {
-      width: 20%;
-    }
   }
 
-  & th,
-  & td {
-    padding: ${({ theme }) => theme.sizes[400]} ${({ theme }) => theme.sizes[500]};
+  &:not(:last-child) {
+    border-bottom: 1px solid ${({ theme }) => theme.colors.border};
   }
 
-  & a:after {
-    content: '';
-    position: absolute;
-    inset: 0;
+  a&:hover {
+    background-color: ${({ theme }) => theme.colors.surfaceLight};
   }
 `
 
