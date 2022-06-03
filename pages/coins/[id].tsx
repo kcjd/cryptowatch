@@ -10,18 +10,22 @@ import Overview from '../../components/Overview'
 import { usePreferences } from '../../context/preferencesContext'
 import { API_ENDPOINTS } from '../../helpers/constants'
 import { mq } from '../../helpers/mixins'
+import Statistics from '../../components/Statistics'
+import Trending from '../../components/Trending'
 
 const CoinPage: NextPage = () => {
   const router = useRouter()
   const id = router.query.id as string
-  const { preferences } = usePreferences()
-  const { data } = useSWR<MarketsResponse>([API_ENDPOINTS.markets, { ids: id, vs_currency: preferences.currency }])
+  const { currency } = usePreferences()
+  const { data } = useSWR<MarketsResponse>(id ? [API_ENDPOINTS.markets, { ids: id, vs_currency: currency }] : null)
   const coin = data?.[0]
 
+  console.log(router)
+
   return (
-    <>
+    <Container>
       <Head>
-        <title>Cryptowatch</title>
+        <title>{coin?.name} - Cryptowatch</title>
         <meta
           name="description"
           content="Suivi en temps réel des crypto-monnaies les plus populaires : cours, capitalisation boursière, historique."
@@ -34,24 +38,27 @@ const CoinPage: NextPage = () => {
           { label: coin?.name ?? '', href: `/coins/${id}` }
         ]}
       />
-      <Container>
-        <Overview />
+      <Overview />
+      <Columms>
         <History />
-      </Container>
-    </>
+        <Statistics />
+      </Columms>
+      <Trending />
+    </Container>
   )
 }
 
 const Container = styled.div`
   display: grid;
-  gap: ${({ theme }) => theme.sizes[800]} ${({ theme }) => theme.sizes[600]};
+  gap: ${({ theme }) => theme.sizes[800]};
+`
 
-  & > section:first-child {
-    grid-column: 1 / -1;
-  }
+const Columms = styled.div`
+  display: grid;
+  gap: ${({ theme }) => theme.sizes[600]};
 
   ${mq('lg')`
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 2fr 1fr;
   `}
 `
 

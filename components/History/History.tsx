@@ -1,14 +1,15 @@
+import { MarketChartResponse } from '../../types'
 import { Analytics } from '@styled-icons/ionicons-solid'
 import { useRouter } from 'next/router'
-import styled from 'styled-components'
 import useSWR from 'swr'
-import { usePreferences } from '../../context/preferencesContext'
-import { API_ENDPOINTS } from '../../helpers/constants'
-import { MarketChartResponse } from '../../types'
 import Card from '../Card'
 import FilterGroup from '../FilterGroup'
 import HistoryChart from '../HistoryChart'
+import Section from '../Section'
+import SectionHeader from '../SectionHeader'
 import SectionTitle from '../SectionTitle'
+import { usePreferences } from '../../context/preferencesContext'
+import { API_ENDPOINTS } from '../../helpers/constants'
 
 const filters = [
   { value: 1, label: '24h' },
@@ -19,22 +20,22 @@ const filters = [
 const History = () => {
   const router = useRouter()
   const id = router.query.id as string
-  const days = Number(router.query.days || 1)
-  const { preferences } = usePreferences()
+  const { currency, historyDays, setHistoryDays } = usePreferences()
   const { data } = useSWR<MarketChartResponse>(
-    id ? [API_ENDPOINTS.marketChart(id), { vs_currency: preferences.currency, days }] : null
+    id ? [API_ENDPOINTS.marketChart(id), { vs_currency: currency, days: historyDays }] : null
   )
 
   return (
-    <section>
-      <SectionTitle>
-        <Analytics size={16} />
-        Historique
-        <FilterGroup value={days} filters={filters} onChange={(value) => router.push(`/coins/${id}?days=${value}`)} />
-      </SectionTitle>
-
-      <Card>{data && <HistoryChart height={160} data={data?.prices} showScales showTooltip />}</Card>
-    </section>
+    <Section>
+      <SectionHeader>
+        <SectionTitle>
+          <Analytics size={16} />
+          Historique
+        </SectionTitle>
+        <FilterGroup value={historyDays} filters={filters} onChange={setHistoryDays} />
+      </SectionHeader>
+      <Card>{data && <HistoryChart height={140} data={data?.prices} showScales showTooltip />}</Card>
+    </Section>
   )
 }
 

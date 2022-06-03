@@ -13,27 +13,30 @@ import CoinChange from '../CoinChange'
 import CoinPrice from '../CoinPrice'
 import HistoryChart from '../HistoryChart'
 import Pagination from '../Pagination'
+import Section from '../Section'
+import SectionHeader from '../SectionHeader'
 import SectionTitle from '../SectionTitle'
 import { usePreferences } from '../../context/preferencesContext'
 import { API_ENDPOINTS } from '../../helpers/constants'
 
-const Trending = () => {
+const Ranking = () => {
   const router = useRouter()
   const page = Number(router.query.page || 1)
-  const { preferences } = usePreferences()
+  const { currency } = usePreferences()
 
   const { data } = useSWR<MarketsResponse>([
     API_ENDPOINTS.markets,
-    { vs_currency: preferences.currency, page, per_page: 25, sparkline: true }
+    { vs_currency: currency, page, per_page: 25, sparkline: true }
   ])
 
   return (
-    <section>
-      <SectionTitle>
-        <Trophy size={16} />
-        Top 100
-      </SectionTitle>
-
+    <Section>
+      <SectionHeader>
+        <SectionTitle>
+          <Trophy size={16} />
+          Top 100
+        </SectionTitle>
+      </SectionHeader>
       <Wrapper>
         <ScrollContainer>
           <Table>
@@ -77,10 +80,9 @@ const Trending = () => {
             </tbody>
           </Table>
         </ScrollContainer>
-
         <Pagination current={page} max={4} onChange={(page) => router.push(`?page=${page}`)} />
       </Wrapper>
-    </section>
+    </Section>
   )
 }
 
@@ -136,4 +138,4 @@ const Table = styled.table`
   }
 `
 
-export default Trending
+export default Ranking

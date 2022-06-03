@@ -20,7 +20,7 @@ const Layout = ({ children }: PropsWithChildren<{}>) => {
 
 const Wrapper = styled.div`
   display: grid;
-  gap: ${({ theme }) => theme.sizes[800]};
+  gap: ${({ theme }) => theme.sizes[600]};
 `
 
 export default Layout

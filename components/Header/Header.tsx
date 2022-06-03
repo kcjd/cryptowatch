@@ -15,7 +15,7 @@ type Props = {
 }
 
 const Header = ({ toggleSearchBar }: Props) => {
-  const { preferences, setCurrency } = usePreferences()
+  const { currency, setCurrency } = usePreferences()
 
   return (
     <Wrapper>
@@ -27,7 +27,7 @@ const Header = ({ toggleSearchBar }: Props) => {
         </Link>
 
         <ButtonGroup>
-          <Select value={preferences.currency} options={CURRENCIES} onChange={setCurrency} />
+          <Select value={currency} options={CURRENCIES} onChange={setCurrency} />
           <Button onClick={() => toggleSearchBar(true)} aria-label="Recherche">
             <Search size={16} />
           </Button>

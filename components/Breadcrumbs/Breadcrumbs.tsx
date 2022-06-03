@@ -34,7 +34,6 @@ const Wrapper = styled.nav`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.sizes[200]};
-  margin-bottom: ${({ theme }) => theme.sizes[800]};
   color: ${({ theme }) => theme.colors.textLight};
 `
 

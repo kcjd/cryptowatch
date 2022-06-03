@@ -8,9 +8,9 @@ type Props = {
 }
 
 const CoinPrice = ({ value }: Props) => {
-  const { preferences } = usePreferences()
+  const { currency } = usePreferences()
 
-  return <Price>{getPrice(value, preferences.currency)}</Price>
+  return <Price>{getPrice(value, currency)}</Price>
 }
 
 const Price = styled.span`

@@ -1,26 +1,23 @@
 import { createContext, PropsWithChildren, useContext, useState } from 'react'
 
-type Preferences = {
-  currency: string
-}
-
 type PreferencesContextType = {
-  preferences: Preferences
+  currency: string
   setCurrency: (currency: string) => void
-}
-
-const defaultPreferences: Preferences = {
-  currency: 'USD'
+  historyDays: number
+  setHistoryDays: (historyDays: number) => void
 }
 
 const PreferencesContext = createContext<PreferencesContextType>({} as PreferencesContextType)
 
 const PreferencesProvider = ({ children }: PropsWithChildren<{}>) => {
-  const [preferences, setPreferences] = useState(defaultPreferences)
+  const [currency, setCurrency] = useState('USD')
+  const [historyDays, setHistoryDays] = useState(1)
 
-  const setCurrency = (currency: string) => setPreferences({ ...preferences, currency })
-
-  return <PreferencesContext.Provider value={{ preferences, setCurrency }}>{children}</PreferencesContext.Provider>
+  return (
+    <PreferencesContext.Provider value={{ currency, setCurrency, historyDays, setHistoryDays }}>
+      {children}
+    </PreferencesContext.Provider>
+  )
 }
 
 export const usePreferences = () => useContext(PreferencesContext)

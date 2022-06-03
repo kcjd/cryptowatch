@@ -14,10 +14,8 @@ import styled from 'styled-components'
 const Overview = () => {
   const router = useRouter()
   const id = router.query.id as string
-  const { preferences } = usePreferences()
-  const { data } = useSWR<MarketsResponse>(
-    id ? [API_ENDPOINTS.markets, { ids: id, vs_currency: preferences.currency }] : null
-  )
+  const { currency } = usePreferences()
+  const { data } = useSWR<MarketsResponse>(id ? [API_ENDPOINTS.markets, { ids: id, vs_currency: currency }] : null)
   const coin = data?.[0]
 
   return (
@@ -29,7 +27,6 @@ const Overview = () => {
             <CoinName>{coin.name}</CoinName>
             <CoinSymbol>{coin.symbol}</CoinSymbol>
           </NameWrapper>
-
           <PriceWrapper>
             <CoinPrice value={coin.current_price} />
             <CoinChange value={coin.price_change_percentage_24h} />

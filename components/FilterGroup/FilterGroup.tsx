@@ -3,17 +3,14 @@ import { RadioGroup } from '@headlessui/react'
 import styled from 'styled-components'
 import Button from '../Button'
 import ButtonGroup from '../ButtonGroup'
-import SectionTitle from '../SectionTitle'
-
-type FilterValue = string | number
 
 type Props = {
-  value: FilterValue
+  value: number
   filters: {
-    value: FilterValue
+    value: number
     label: string
   }[]
-  onChange: (value: FilterValue) => void
+  onChange: (value: number) => void
 }
 
 const FilterGroup = ({ value, filters, onChange }: Props) => {
@@ -32,10 +29,6 @@ const Wrapper = styled(ButtonGroup)`
   border-radius: ${({ theme }) => theme.borderRadius[300]};
   background-color: ${({ theme }) => theme.colors.surface};
   overflow: hidden;
-
-  ${SectionTitle} & {
-    margin-left: auto;
-  }
 `
 
 const Filter = styled(Button)`
