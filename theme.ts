@@ -17,7 +17,8 @@ const theme = {
     primary: 'hsl(239 84% 67%)',
     success: 'hsl(142 77% 73%)',
     danger: 'hsl(0 94% 82%)',
-    overlay: 'hsl(0 0% 0% / 0.6)'
+    overlay: 'hsl(0 0% 0% / 0.6)',
+    ring: 'hsl(0 0% 100% / 0.2)'
   },
   sizes: {
     50: '0.125rem',

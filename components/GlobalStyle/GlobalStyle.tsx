@@ -66,6 +66,12 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
   }
 
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.ring};
+    outline-offset: 1px;
+  }
+
   :root {
     color-scheme: dark;
   }

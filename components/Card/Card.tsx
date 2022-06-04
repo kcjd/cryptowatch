@@ -8,7 +8,8 @@ const Card = styled.article`
   border: 1px solid ${({ theme }) => theme.colors.border};
   transition: border-color 0.15s linear, background-color 0.15s linear;
 
-  a&:hover {
+  a&:hover,
+  a&:focus-visible {
     border-color: ${({ theme }) => theme.colors.borderLight};
     background-color: ${({ theme }) => theme.colors.surfaceLight};
   }
