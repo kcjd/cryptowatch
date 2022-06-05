@@ -21,13 +21,11 @@ ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement, TimeScal
 type Props = {
   data: HistoryChartData
   currency?: string
-  width?: number
-  height?: number
   showScales?: boolean
   showTooltip?: boolean
 }
 
-const SparklineChart = ({ data, width = 200, height = 60, showScales = false, showTooltip = false }: Props) => {
+const HistoryChart = ({ data, currency, showScales = false, showTooltip = false }: Props) => {
   const points = data.map((v) => (typeof v === 'number' ? v : v[1]))
   const labels = data.map((v, i) => (typeof v === 'number' ? i : getDate(v[0])))
 
@@ -51,8 +49,10 @@ const SparklineChart = ({ data, width = 200, height = 60, showScales = false, sh
 
   const options: ChartOptions<'line'> = {
     animation: false,
+    maintainAspectRatio: false,
     scales: {
       x: {
+        display: showScales,
         type: 'time',
         time: {
           unit,
@@ -62,11 +62,11 @@ const SparklineChart = ({ data, width = 200, height = 60, showScales = false, sh
           },
           tooltipFormat: 'DD/MM/YYYY HH:mm'
         },
-        display: showScales,
         grid: {
           display: false
         },
         ticks: {
+          autoSkipPadding: 12,
           padding: 12,
           maxRotation: 0,
           color: theme.colors.textLight,
@@ -79,7 +79,8 @@ const SparklineChart = ({ data, width = 200, height = 60, showScales = false, sh
       y: {
         display: showScales,
         grid: {
-          color: theme.colors.border
+          color: theme.colors.border,
+          drawBorder: false
         },
         ticks: {
           color: theme.colors.textLight,
@@ -87,7 +88,7 @@ const SparklineChart = ({ data, width = 200, height = 60, showScales = false, sh
             family: theme.fontFamilies.base,
             weight: '500'
           },
-          callback: (v) => getPrice(v)
+          callback: (v) => getPrice(v, currency)
         }
       }
     },
@@ -102,14 +103,14 @@ const SparklineChart = ({ data, width = 200, height = 60, showScales = false, sh
     },
     plugins: {
       tooltip: {
+        enabled: showTooltip,
         animation: {
           duration: 100,
           easing: 'linear'
         },
         callbacks: {
-          label: (context) => getPrice(context.raw as number)
+          label: (context) => getPrice(context.raw as number, currency)
         },
-        enabled: showTooltip,
         displayColors: false,
         padding: 12,
         cornerRadius: 8,
@@ -134,7 +135,7 @@ const SparklineChart = ({ data, width = 200, height = 60, showScales = false, sh
     }
   }
 
-  return <Line width={width} height={height} data={chartData} options={options} />
+  return <Line data={chartData} options={options} />
 }
 
-export default SparklineChart
+export default HistoryChart

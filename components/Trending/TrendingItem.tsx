@@ -1,5 +1,4 @@
 import { CoinMarketData } from '../../types'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Image from 'next/image'
 import Card from '../Card'
@@ -9,14 +8,13 @@ import CoinName from '../CoinName'
 import CoinSymbol from '../CoinSymbol'
 import HistoryChart from '../HistoryChart'
 import styled from 'styled-components'
+import { mq } from '../../helpers/mixins'
 
 type Props = {
   coin: CoinMarketData
 }
 
 const TrendingItem = ({ coin }: Props) => {
-  const router = useRouter()
-
   return (
     <Link href={`/coins/${coin.id}`} passHref>
       <Card as="a">
@@ -26,8 +24,9 @@ const TrendingItem = ({ coin }: Props) => {
           <CoinSymbol>{coin.symbol}</CoinSymbol>
           <CoinChange value={coin.price_change_percentage_24h} />
         </Header>
-
-        <HistoryChart data={coin.sparkline_in_7d.price} />
+        <ChartWrapper>
+          <HistoryChart data={coin.sparkline_in_7d.price} />
+        </ChartWrapper>
       </Card>
     </Link>
   )
@@ -35,6 +34,14 @@ const TrendingItem = ({ coin }: Props) => {
 
 const Header = styled(Coin)`
   margin-bottom: ${({ theme }) => theme.sizes[400]};
+`
+
+const ChartWrapper = styled.div`
+  height: 6rem;
+
+  ${mq('md')`
+    height: 8rem;
+  `}
 `
 
 export default TrendingItem

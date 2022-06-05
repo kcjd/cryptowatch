@@ -42,7 +42,6 @@ const Ranking = ({ coins, currency }: Props) => {
           <div>Cap. Marché</div>
           <div>7 jours</div>
         </Row>
-
         {coins.map((coin) => (
           <Link key={coin.id} href={`/coins/${coin.id}`} passHref>
             <Row as="a">
@@ -55,14 +54,14 @@ const Ranking = ({ coins, currency }: Props) => {
               <CoinPrice value={coin.current_price} currency={currency} />
               <CoinChange value={coin.price_change_percentage_24h} />
               <CoinPrice value={coin.market_cap} currency={currency} />
-              <div>
+              <ChartWrapper>
                 <HistoryChart data={coin.sparkline_in_7d.price} />
-              </div>
+              </ChartWrapper>
             </Row>
           </Link>
         ))}
       </Wrapper>
-      <Pagination current={page} max={4} />
+      <Pagination current={page} max={5} />
     </Section>
   )
 }
@@ -90,9 +89,14 @@ const Row = styled.div`
     border-bottom: 1px solid ${({ theme }) => theme.colors.border};
   }
 
-  a&:hover {
+  a&:hover,
+  a&:focus-visible {
     background-color: ${({ theme }) => theme.colors.surfaceLight};
   }
+`
+
+const ChartWrapper = styled.div`
+  height: 2.5rem;
 `
 
 export default Ranking

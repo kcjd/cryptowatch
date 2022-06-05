@@ -8,6 +8,8 @@ import HistoryChart from '../HistoryChart'
 import Section from '../Section'
 import SectionHeader from '../SectionHeader'
 import SectionTitle from '../SectionTitle'
+import styled from 'styled-components'
+import { mq } from '../../helpers/mixins'
 
 type Props = {
   data: HistoryChartData
@@ -42,9 +44,19 @@ const History = ({ data, currency, days }: Props) => {
         </SectionTitle>
         <FilterGroup value={days} filters={filters} onChange={handleDaysChange} />
       </SectionHeader>
-      <Card>{data && <HistoryChart height={120} data={data} currency={currency} showScales showTooltip />}</Card>
+      <ChartWrapper>
+        <HistoryChart data={data} currency={currency} showScales showTooltip />
+      </ChartWrapper>
     </Section>
   )
 }
+
+const ChartWrapper = styled(Card)`
+  height: 26rem;
+
+  ${mq('md')`
+    height: 32rem;
+  `}
+`
 
 export default History
