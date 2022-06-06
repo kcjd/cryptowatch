@@ -3,7 +3,7 @@ const theme = {
     sm: 640,
     md: 768,
     lg: 1024,
-    xl: 1280
+    xl: 1280,
   },
   colors: {
     text: 'hsl(0 0% 100%)',
@@ -18,7 +18,7 @@ const theme = {
     success: 'hsl(142 77% 73%)',
     danger: 'hsl(0 94% 82%)',
     overlay: 'hsl(0 0% 0% / 0.6)',
-    ring: 'hsl(0 0% 100% / 0.2)'
+    ring: 'hsl(0 0% 100% / 0.2)',
   },
   sizes: {
     50: '0.125rem',
@@ -40,31 +40,31 @@ const theme = {
     850: '5rem',
     900: '6rem',
     950: '7rem',
-    container: 'min(100% - 2rem, 75rem)'
+    container: 'min(100% - 2rem, 75rem)',
   },
   fontFamilies: {
-    base: '"Inter", sans-serif'
+    base: '"Inter", sans-serif',
   },
   fontSizes: {
     300: '0.875rem',
     400: '1rem',
     500: '1.125rem',
-    600: '1.25rem'
+    600: '1.25rem',
   },
   fontWeights: {
     400: 400,
     500: 500,
-    600: 600
+    600: 600,
   },
   borderRadius: {
     300: '0.5rem',
     400: '0.75rem',
-    full: '9999px'
+    full: '9999px',
   },
   shadows: {
     400: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
-    500: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)'
-  }
+    500: '0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)',
+  },
 }
 
 export default theme

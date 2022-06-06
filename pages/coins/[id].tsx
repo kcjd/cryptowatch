@@ -1,21 +1,24 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
+
 import styled from 'styled-components'
-import Breadcrumbs from '../../components/Breadcrumbs'
-import History from '../../components/History'
-import Overview from '../../components/Overview'
-import Statistics from '../../components/Statistics'
-import Trending from '../../components/Trending'
-import { DEFAULT_CURRENCY, DEFAULT_DAYS } from '../../lib/constants'
-import { mq } from '../../lib/mixins'
-import { getCoin, getMarketChart, getTrending } from '../../lib/coingecko'
+
+import Breadcrumbs from 'components/Breadcrumbs'
+import History from 'components/History'
+import Overview from 'components/Overview'
+import Statistics from 'components/Statistics'
+import Trending from 'components/Trending'
+
+import { getCoin, getMarketChart, getTrending } from 'lib/coingecko'
+import { DEFAULT_CURRENCY, DEFAULT_DAYS } from 'lib/constants'
+import { mq } from 'lib/mixins'
 
 const CoinPage = ({
   trendingCoins,
   coin,
   coinHistory,
   currency,
-  days
+  days,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
     <>
@@ -29,7 +32,7 @@ const CoinPage = ({
       <Breadcrumbs
         items={[
           { label: 'Monnaies', href: '/' },
-          { label: coin.name, href: `/coins/${coin.id}` }
+          { label: coin.name, href: `/coins/${coin.id}` },
         ]}
       />
       <Container>
@@ -44,7 +47,10 @@ const CoinPage = ({
   )
 }
 
-export const getServerSideProps = async ({ req, query }: GetServerSidePropsContext) => {
+export const getServerSideProps = async ({
+  req,
+  query,
+}: GetServerSidePropsContext) => {
   const id = query.id as string
   const currency = req.cookies.currency || DEFAULT_CURRENCY
   const days = Number(req.cookies.days) || DEFAULT_DAYS
@@ -59,8 +65,8 @@ export const getServerSideProps = async ({ req, query }: GetServerSidePropsConte
       coin,
       coinHistory,
       currency,
-      days
-    }
+      days,
+    },
   }
 }
 

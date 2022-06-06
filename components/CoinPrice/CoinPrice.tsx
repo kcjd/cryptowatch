@@ -1,6 +1,7 @@
 import styled from 'styled-components'
-import { truncate } from '../../lib/mixins'
-import { getPrice } from '../../lib/utils'
+
+import { truncate } from 'lib/mixins'
+import { getPrice } from 'lib/utils'
 
 type Props = {
   value: number

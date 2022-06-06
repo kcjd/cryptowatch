@@ -1,7 +1,8 @@
-import { Fragment } from 'react'
 import Link from 'next/link'
-import styled from 'styled-components'
+
 import { ChevronForward } from '@styled-icons/ionicons-solid'
+import { Fragment } from 'react'
+import styled from 'styled-components'
 
 type Props = {
   items: {

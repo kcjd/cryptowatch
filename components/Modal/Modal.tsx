@@ -1,8 +1,9 @@
-import { Dispatch, PropsWithChildren, SetStateAction } from 'react'
 import { Dialog } from '@headlessui/react'
-import styled from 'styled-components'
 import { AnimatePresence, motion } from 'framer-motion'
-import { fade, slideTop, spring } from '../../lib/animations'
+import { Dispatch, PropsWithChildren, SetStateAction } from 'react'
+import styled from 'styled-components'
+
+import { fade, slideTop, spring } from 'lib/animations'
 
 type Props = {
   isOpen: boolean
@@ -10,12 +11,23 @@ type Props = {
   onExit?: () => void
 }
 
-const Modal = ({ isOpen, toggle, onExit, children }: PropsWithChildren<Props>) => {
+const Modal = ({
+  isOpen,
+  toggle,
+  onExit,
+  children,
+}: PropsWithChildren<Props>) => {
   return (
     <AnimatePresence onExitComplete={onExit}>
       {isOpen && (
         <Dialog as={ModalWrapper} open={isOpen} onClose={toggle} static>
-          <Dialog.Overlay as={ModalOverlay} variants={fade} initial="hidden" animate="visible" exit="hidden" />
+          <Dialog.Overlay
+            as={ModalOverlay}
+            variants={fade}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+          />
           <Dialog.Panel
             as={ModalBody}
             variants={slideTop}

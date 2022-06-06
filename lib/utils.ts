@@ -8,7 +8,7 @@ export const getPrice = (value: string | number, currency: string = 'USD') => {
     style: 'currency',
     currency,
     minimumFractionDigits: 0,
-    maximumFractionDigits: 6
+    maximumFractionDigits: 6,
   })
   return formatter.format(Number(value))
 }

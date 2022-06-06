@@ -1,30 +1,38 @@
-import { CoinBaseData, SearchResponse } from '../../lib/types'
-import { Dispatch, Fragment, SetStateAction, useState } from 'react'
 import { useRouter } from 'next/router'
-import useSWR from 'swr'
-import styled from 'styled-components'
+
 import { Combobox } from '@headlessui/react'
 import { Search } from '@styled-icons/ionicons-solid'
-import CoinName from '../CoinName'
-import CoinSymbol from '../CoinSymbol'
-import Loader from '../Loader'
-import MenuItem from '../MenuItem'
-import Modal from '../Modal'
-import useDebounce from '../../hooks/useDebounce'
-import { instance } from '../../lib/coingecko'
+import { Dispatch, Fragment, SetStateAction, useState } from 'react'
+import styled from 'styled-components'
+import useSWR from 'swr'
+
+import CoinName from 'components/CoinName'
+import CoinSymbol from 'components/CoinSymbol'
+import Loader from 'components/Loader'
+import MenuItem from 'components/MenuItem'
+import Modal from 'components/Modal'
+
+import useDebounce from 'hooks/useDebounce'
+
+import { instance } from 'lib/coingecko'
+import { CoinBaseData, SearchResponse } from 'lib/types'
 
 type Props = {
   isOpen: boolean
   toggle: Dispatch<SetStateAction<boolean>>
 }
 
-const fetcher = (url: string) => instance.get<SearchResponse>(url).then((res) => res.data.coins)
+const fetcher = (url: string) =>
+  instance.get<SearchResponse>(url).then((res) => res.data.coins)
 
 const SearchBar = ({ isOpen, toggle }: Props) => {
   const router = useRouter()
   const [query, setQuery] = useState('')
   const debouncedQuery = useDebounce(query)
-  const { data: results, isValidating } = useSWR(`/search?query=${debouncedQuery}`, fetcher)
+  const { data: results, isValidating } = useSWR(
+    `/search?query=${debouncedQuery}`,
+    fetcher
+  )
 
   const handleChange = (coin?: CoinBaseData) => {
     if (!coin) return

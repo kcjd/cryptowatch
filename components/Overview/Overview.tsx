@@ -1,11 +1,14 @@
-import { CoinMarketData } from '../../lib/types'
 import Image from 'next/image'
+
 import styled from 'styled-components'
-import Coin from '../Coin'
-import CoinChange from '../CoinChange'
-import CoinName from '../CoinName'
-import CoinPrice from '../CoinPrice'
-import CoinSymbol from '../CoinSymbol'
+
+import Coin from 'components/Coin'
+import CoinChange from 'components/CoinChange'
+import CoinName from 'components/CoinName'
+import CoinPrice from 'components/CoinPrice'
+import CoinSymbol from 'components/CoinSymbol'
+
+import { CoinMarketData } from 'lib/types'
 
 type Props = {
   coin: CoinMarketData

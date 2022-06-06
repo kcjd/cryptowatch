@@ -1,14 +1,17 @@
-import { CoinMarketData } from '../../lib/types'
-import Link from 'next/link'
 import Image from 'next/image'
-import Card from '../Card'
-import Coin from '../Coin'
-import CoinChange from '../CoinChange'
-import CoinName from '../CoinName'
-import CoinSymbol from '../CoinSymbol'
-import HistoryChart from '../HistoryChart'
+import Link from 'next/link'
+
 import styled from 'styled-components'
-import { mq } from '../../lib/mixins'
+
+import Card from 'components/Card'
+import Coin from 'components/Coin'
+import CoinChange from 'components/CoinChange'
+import CoinName from 'components/CoinName'
+import CoinSymbol from 'components/CoinSymbol'
+import HistoryChart from 'components/HistoryChart'
+
+import { mq } from 'lib/mixins'
+import { CoinMarketData } from 'lib/types'
 
 type Props = {
   coin: CoinMarketData

@@ -1,13 +1,19 @@
 import { LogoGithub } from '@styled-icons/ionicons-solid'
 import dayjs from 'dayjs'
 import styled from 'styled-components'
-import Container from '../Container'
+
+import Container from 'components/Container'
 
 const Footer = () => {
   return (
     <Wrapper as="footer">
       <div>Cryptowatch — {dayjs().year()}</div>
-      <a href="https://github.com/kcjd/crypowatch" target="_blank" rel="noreferrer" aria-label="Github">
+      <a
+        href="https://github.com/kcjd/crypowatch"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Github"
+      >
         <LogoGithub size={24} />
       </a>
     </Wrapper>

@@ -1,9 +1,10 @@
 import { PropsWithChildren, useState } from 'react'
 import styled from 'styled-components'
-import Container from '../Container'
-import Footer from '../Footer'
-import Header from '../Header'
-import SearchBar from '../SearchBar'
+
+import Container from 'components/Container'
+import Footer from 'components/Footer'
+import Header from 'components/Header'
+import SearchBar from 'components/SearchBar'
 
 type Props = {
   currency: string

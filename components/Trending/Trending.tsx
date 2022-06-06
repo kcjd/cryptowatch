@@ -1,11 +1,14 @@
-import { CoinMarketData } from '../../lib/types'
-import styled from 'styled-components'
 import { Flash } from '@styled-icons/ionicons-solid'
-import Section from '../Section'
-import SectionHeader from '../SectionHeader'
-import SectionTitle from '../SectionTitle'
+import styled from 'styled-components'
+
+import Section from 'components/Section'
+import SectionHeader from 'components/SectionHeader'
+import SectionTitle from 'components/SectionTitle'
+
+import { mq } from 'lib/mixins'
+import { CoinMarketData } from 'lib/types'
+
 import TrendingItem from './TrendingItem'
-import { mq } from '../../lib/mixins'
 
 type Props = {
   coins: CoinMarketData[]

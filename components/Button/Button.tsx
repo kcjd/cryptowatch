@@ -13,7 +13,8 @@ const Button = styled.button<Props>`
   padding-inline: ${({ theme }) => theme.sizes[350]};
   border-radius: ${({ theme }) => theme.borderRadius[300]};
   border: 0;
-  background-color: ${({ theme, active }) => (active ? theme.colors.highlight : theme.colors.surfaceLight)};
+  background-color: ${({ theme, active }) =>
+    active ? theme.colors.highlight : theme.colors.surfaceLight};
   color: ${({ theme }) => theme.colors.text};
   font-weight: ${({ theme }) => theme.fontWeights[500]};
   cursor: pointer;

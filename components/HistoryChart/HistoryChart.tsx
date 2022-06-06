@@ -1,22 +1,30 @@
-import { HistoryChartData } from '../../lib/types'
-import { Line } from 'react-chartjs-2'
-import dayjs, { isDayjs } from 'dayjs'
 import {
-  Chart as ChartJS,
   CategoryScale,
   ChartData,
+  Chart as ChartJS,
   ChartOptions,
+  LineElement,
+  LinearScale,
+  PointElement,
+  TimeScale,
+  Tooltip,
+} from 'chart.js'
+import 'chartjs-adapter-dayjs'
+import dayjs, { isDayjs } from 'dayjs'
+import { Line } from 'react-chartjs-2'
+
+import theme from 'lib/theme'
+import { HistoryChartData } from 'lib/types'
+import { getPrice } from 'lib/utils'
+
+ChartJS.register(
+  CategoryScale,
   LinearScale,
   LineElement,
   PointElement,
   TimeScale,
   Tooltip
-} from 'chart.js'
-import 'chartjs-adapter-dayjs'
-import { getPrice } from '../../lib/utils'
-import theme from '../../lib/theme'
-
-ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement, TimeScale, Tooltip)
+)
 
 type Props = {
   data: HistoryChartData
@@ -25,7 +33,12 @@ type Props = {
   showTooltip?: boolean
 }
 
-const HistoryChart = ({ data, currency, showScales = false, showTooltip = false }: Props) => {
+const HistoryChart = ({
+  data,
+  currency,
+  showScales = false,
+  showTooltip = false,
+}: Props) => {
   const points = data.map((v) => (typeof v === 'number' ? v : v[1]))
   const labels = data.map((v, i) => (typeof v === 'number' ? i : dayjs(v[0])))
 
@@ -34,7 +47,8 @@ const HistoryChart = ({ data, currency, showScales = false, showTooltip = false 
   const endDate = labels[labels.length - 1]
   const endValue = points[points.length - 1]
 
-  const unit = isDayjs(endDate) && endDate.diff(startDate, 'day') > 1 ? 'day' : 'hour'
+  const unit =
+    isDayjs(endDate) && endDate.diff(startDate, 'day') > 1 ? 'day' : 'hour'
 
   const isChangeUp = endValue > startValue
 
@@ -42,9 +56,9 @@ const HistoryChart = ({ data, currency, showScales = false, showTooltip = false 
     labels,
     datasets: [
       {
-        data: points
-      }
-    ]
+        data: points,
+      },
+    ],
   }
 
   const options: ChartOptions<'line'> = {
@@ -58,12 +72,12 @@ const HistoryChart = ({ data, currency, showScales = false, showTooltip = false 
           unit,
           displayFormats: {
             day: 'DD/MM',
-            hour: 'HH:mm'
+            hour: 'HH:mm',
           },
-          tooltipFormat: 'DD/MM/YYYY HH:mm'
+          tooltipFormat: 'DD/MM/YYYY HH:mm',
         },
         grid: {
-          display: false
+          display: false,
         },
         ticks: {
           autoSkipPadding: 12,
@@ -72,44 +86,44 @@ const HistoryChart = ({ data, currency, showScales = false, showTooltip = false 
           color: theme.colors.textLight,
           font: {
             family: theme.fontFamilies.base,
-            weight: '500'
-          }
-        }
+            weight: '500',
+          },
+        },
       },
       y: {
         display: showScales,
         grid: {
           color: theme.colors.border,
-          drawBorder: false
+          drawBorder: false,
         },
         ticks: {
           color: theme.colors.textLight,
           font: {
             family: theme.fontFamilies.base,
-            weight: '500'
+            weight: '500',
           },
-          callback: (v) => getPrice(v, currency)
-        }
-      }
+          callback: (v) => getPrice(v, currency),
+        },
+      },
     },
     elements: {
       line: {
         borderColor: isChangeUp ? theme.colors.success : theme.colors.danger,
-        borderWidth: 2
+        borderWidth: 2,
       },
       point: {
-        radius: 0
-      }
+        radius: 0,
+      },
     },
     plugins: {
       tooltip: {
         enabled: showTooltip,
         animation: {
           duration: 100,
-          easing: 'linear'
+          easing: 'linear',
         },
         callbacks: {
-          label: (context) => getPrice(context.raw as number, currency)
+          label: (context) => getPrice(context.raw as number, currency),
         },
         displayColors: false,
         padding: 12,
@@ -120,19 +134,19 @@ const HistoryChart = ({ data, currency, showScales = false, showTooltip = false 
         titleFont: {
           family: theme.fontFamilies.base,
           size: 14,
-          weight: '500'
+          weight: '500',
         },
         bodyFont: {
           family: theme.fontFamilies.base,
           size: 16,
-          weight: '600'
-        }
-      }
+          weight: '600',
+        },
+      },
     },
     interaction: {
       mode: 'nearest',
-      intersect: false
-    }
+      intersect: false,
+    },
   }
 
   return <Line data={chartData} options={options} />

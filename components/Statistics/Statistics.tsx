@@ -1,11 +1,13 @@
-import { CoinMarketData } from '../../lib/types'
 import { InformationCircle } from '@styled-icons/ionicons-solid'
 import styled from 'styled-components'
-import Card from '../Card'
-import CoinPrice from '../CoinPrice'
-import Section from '../Section'
-import SectionHeader from '../SectionHeader'
-import SectionTitle from '../SectionTitle'
+
+import Card from 'components/Card'
+import CoinPrice from 'components/CoinPrice'
+import Section from 'components/Section'
+import SectionHeader from 'components/SectionHeader'
+import SectionTitle from 'components/SectionTitle'
+
+import { CoinMarketData } from 'lib/types'
 
 type Props = {
   coin: CoinMarketData

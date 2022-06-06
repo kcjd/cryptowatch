@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router'
-import styled from 'styled-components'
+
 import { ChevronBack, ChevronForward } from '@styled-icons/ionicons-solid'
-import Button from '../Button'
+import styled from 'styled-components'
+
+import Button from 'components/Button'
 
 type Props = {
   current: number

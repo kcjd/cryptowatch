@@ -1,15 +1,18 @@
-import { HistoryChartData } from '../../lib/types'
-import { Analytics } from '@styled-icons/ionicons-solid'
 import { useRouter } from 'next/router'
+
+import { Analytics } from '@styled-icons/ionicons-solid'
 import { setCookie } from 'nookies'
-import Card from '../Card'
-import FilterGroup from '../FilterGroup'
-import HistoryChart from '../HistoryChart'
-import Section from '../Section'
-import SectionHeader from '../SectionHeader'
-import SectionTitle from '../SectionTitle'
 import styled from 'styled-components'
-import { mq } from '../../lib/mixins'
+
+import Card from 'components/Card'
+import FilterGroup from 'components/FilterGroup'
+import HistoryChart from 'components/HistoryChart'
+import Section from 'components/Section'
+import SectionHeader from 'components/SectionHeader'
+import SectionTitle from 'components/SectionTitle'
+
+import { mq } from 'lib/mixins'
+import { HistoryChartData } from 'lib/types'
 
 type Props = {
   data: HistoryChartData
@@ -20,7 +23,7 @@ type Props = {
 const filters = [
   { value: 1, label: '24H' },
   { value: 7, label: '7J' },
-  { value: 30, label: '30J' }
+  { value: 30, label: '30J' },
 ]
 
 const History = ({ data, currency, days }: Props) => {
@@ -29,7 +32,7 @@ const History = ({ data, currency, days }: Props) => {
   const handleDaysChange = (days: number) => {
     setCookie(null, 'days', days.toString(), {
       maxAge: 30 * 24 * 60 * 60,
-      path: '/'
+      path: '/',
     })
 
     router.push(router.asPath)
@@ -42,7 +45,11 @@ const History = ({ data, currency, days }: Props) => {
           <Analytics size={16} />
           Historique
         </SectionTitle>
-        <FilterGroup value={days} filters={filters} onChange={handleDaysChange} />
+        <FilterGroup
+          value={days}
+          filters={filters}
+          onChange={handleDaysChange}
+        />
       </SectionHeader>
       <ChartWrapper>
         <HistoryChart data={data} currency={currency} showScales showTooltip />

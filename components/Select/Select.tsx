@@ -1,11 +1,13 @@
+import { Listbox } from '@headlessui/react'
+import { ChevronDown } from '@styled-icons/ionicons-solid'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Fragment } from 'react'
 import styled from 'styled-components'
-import { Listbox } from '@headlessui/react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronDown } from '@styled-icons/ionicons-solid'
-import Button from '../Button'
-import { slideBottom, spring } from '../../lib/animations'
-import MenuItem from '../MenuItem'
+
+import Button from 'components/Button'
+import MenuItem from 'components/MenuItem'
+
+import { slideBottom, spring } from 'lib/animations'
 
 type Props = {
   value: string
@@ -34,7 +36,9 @@ const Select = ({ value, options, onChange }: Props) => {
               >
                 {options.map((option, i) => (
                   <Listbox.Option key={i} as={Fragment} value={option}>
-                    {({ active }) => <MenuItem active={active}>{option}</MenuItem>}
+                    {({ active }) => (
+                      <MenuItem active={active}>{option}</MenuItem>
+                    )}
                   </Listbox.Option>
                 ))}
               </Listbox.Options>
