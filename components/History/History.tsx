@@ -1,4 +1,4 @@
-import { HistoryChartData } from '../../types'
+import { HistoryChartData } from '../../lib/types'
 import { Analytics } from '@styled-icons/ionicons-solid'
 import { useRouter } from 'next/router'
 import { setCookie } from 'nookies'
@@ -9,7 +9,7 @@ import Section from '../Section'
 import SectionHeader from '../SectionHeader'
 import SectionTitle from '../SectionTitle'
 import styled from 'styled-components'
-import { mq } from '../../helpers/mixins'
+import { mq } from '../../lib/mixins'
 
 type Props = {
   data: HistoryChartData

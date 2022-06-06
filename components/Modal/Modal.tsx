@@ -2,7 +2,7 @@ import { Dispatch, PropsWithChildren, SetStateAction } from 'react'
 import { Dialog } from '@headlessui/react'
 import styled from 'styled-components'
 import { AnimatePresence, motion } from 'framer-motion'
-import { fade, slideTop, spring } from '../../helpers/animations'
+import { fade, slideTop, spring } from '../../lib/animations'
 
 type Props = {
   isOpen: boolean

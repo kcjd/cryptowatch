@@ -1,4 +1,4 @@
-import { CoinMarketData } from '../../types'
+import { CoinMarketData } from '../../lib/types'
 import Link from 'next/link'
 import Image from 'next/image'
 import Card from '../Card'
@@ -8,7 +8,7 @@ import CoinName from '../CoinName'
 import CoinSymbol from '../CoinSymbol'
 import HistoryChart from '../HistoryChart'
 import styled from 'styled-components'
-import { mq } from '../../helpers/mixins'
+import { mq } from '../../lib/mixins'
 
 type Props = {
   coin: CoinMarketData

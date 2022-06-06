@@ -1,11 +1,10 @@
-import { MarketsResponse, TrendingResponse } from '../types'
-import axios from 'axios'
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
 import styled from 'styled-components'
 import Ranking from '../components/Ranking'
 import Trending from '../components/Trending'
-import { API_ENDPOINTS, DEFAULT_CURRENCY } from '../helpers/constants'
+import { DEFAULT_CURRENCY } from '../lib/constants'
+import { getRanking, getTrending } from '../lib/coingecko'
 
 const HomePage = ({
   trendingCoins,
@@ -28,19 +27,11 @@ const HomePage = ({
 }
 
 export const getServerSideProps = async ({ req, query }: GetServerSidePropsContext) => {
-  const page = (query.page as string) || 1
+  const page = Number(query.page) || 1
   const currency = req.cookies.currency || DEFAULT_CURRENCY
 
-  const { data: trending } = await axios.get<TrendingResponse>(API_ENDPOINTS.trending)
-  const trendingIds = trending?.coins.map(({ item }) => item.id).slice(0, 6)
-
-  const { data: trendingCoins } = await axios.get<MarketsResponse>(API_ENDPOINTS.markets, {
-    params: { ids: trendingIds.join(','), vs_currency: currency, sparkline: true }
-  })
-
-  const { data: rankingCoins } = await axios.get<MarketsResponse>(API_ENDPOINTS.markets, {
-    params: { vs_currency: currency, page, per_page: 25, sparkline: true }
-  })
+  const trendingCoins = await getTrending(currency)
+  const rankingCoins = await getRanking(currency, page)
 
   return {
     props: {

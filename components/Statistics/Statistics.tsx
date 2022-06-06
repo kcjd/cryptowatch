@@ -1,4 +1,4 @@
-import { CoinMarketData } from '../../types'
+import { CoinMarketData } from '../../lib/types'
 import { InformationCircle } from '@styled-icons/ionicons-solid'
 import styled from 'styled-components'
 import Card from '../Card'

@@ -1,4 +1,4 @@
-import { CoinMarketData } from '../../types'
+import { CoinMarketData } from '../../lib/types'
 import Image from 'next/image'
 import styled from 'styled-components'
 import Coin from '../Coin'

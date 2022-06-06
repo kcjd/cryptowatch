@@ -55,6 +55,11 @@ const Wrapper = styled.nav`
   justify-content: center;
   gap: ${({ theme }) => theme.sizes[200]};
   padding-block: ${({ theme }) => theme.sizes[400]};
+
+  & ${Button} {
+    justify-content: center;
+    width: ${({ theme }) => theme.sizes[650]};
+  }
 `
 
 export default Pagination

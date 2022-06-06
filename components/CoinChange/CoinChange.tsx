@@ -1,6 +1,6 @@
 import { CaretDown, CaretUp } from '@styled-icons/ionicons-solid'
 import styled from 'styled-components'
-import { getPercentage } from '../../helpers/utils'
+import { getPercentage } from '../../lib/utils'
 
 type Props = {
   value: number

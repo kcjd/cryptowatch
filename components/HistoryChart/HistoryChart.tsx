@@ -1,6 +1,6 @@
-import { HistoryChartData } from '../../types'
+import { HistoryChartData } from '../../lib/types'
 import { Line } from 'react-chartjs-2'
-import { isDayjs } from 'dayjs'
+import dayjs, { isDayjs } from 'dayjs'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,8 +13,8 @@ import {
   Tooltip
 } from 'chart.js'
 import 'chartjs-adapter-dayjs'
-import { getDate, getPrice } from '../../helpers/utils'
-import theme from '../../theme'
+import { getPrice } from '../../lib/utils'
+import theme from '../../lib/theme'
 
 ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement, TimeScale, Tooltip)
 
@@ -27,7 +27,7 @@ type Props = {
 
 const HistoryChart = ({ data, currency, showScales = false, showTooltip = false }: Props) => {
   const points = data.map((v) => (typeof v === 'number' ? v : v[1]))
-  const labels = data.map((v, i) => (typeof v === 'number' ? i : getDate(v[0])))
+  const labels = data.map((v, i) => (typeof v === 'number' ? i : dayjs(v[0])))
 
   const startDate = labels[0]
   const startValue = points[0]

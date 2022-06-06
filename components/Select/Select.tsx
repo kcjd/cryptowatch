@@ -4,7 +4,7 @@ import { Listbox } from '@headlessui/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronDown } from '@styled-icons/ionicons-solid'
 import Button from '../Button'
-import { slideBottom, spring } from '../../helpers/animations'
+import { slideBottom, spring } from '../../lib/animations'
 import MenuItem from '../MenuItem'
 
 type Props = {

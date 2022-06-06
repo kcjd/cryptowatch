@@ -1,4 +1,4 @@
-import { CoinBaseData, SearchResponse } from '../../types'
+import { CoinBaseData, SearchResponse } from '../../lib/types'
 import { Dispatch, Fragment, SetStateAction, useState } from 'react'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
@@ -11,20 +11,20 @@ import Loader from '../Loader'
 import MenuItem from '../MenuItem'
 import Modal from '../Modal'
 import useDebounce from '../../hooks/useDebounce'
-import { API_ENDPOINTS } from '../../helpers/constants'
+import { instance } from '../../lib/coingecko'
 
 type Props = {
   isOpen: boolean
   toggle: Dispatch<SetStateAction<boolean>>
 }
 
+const fetcher = (url: string) => instance.get<SearchResponse>(url).then((res) => res.data.coins)
+
 const SearchBar = ({ isOpen, toggle }: Props) => {
   const router = useRouter()
   const [query, setQuery] = useState('')
   const debouncedQuery = useDebounce(query)
-  const { data: results, isValidating } = useSWR<SearchResponse>(
-    debouncedQuery ? [API_ENDPOINTS.search, { query: debouncedQuery }] : null
-  )
+  const { data: results, isValidating } = useSWR(`/search?query=${debouncedQuery}`, fetcher)
 
   const handleChange = (coin?: CoinBaseData) => {
     if (!coin) return
@@ -34,7 +34,7 @@ const SearchBar = ({ isOpen, toggle }: Props) => {
 
   return (
     <Modal isOpen={isOpen} toggle={toggle} onExit={() => setQuery('')}>
-      <Combobox value={null} onChange={handleChange}>
+      <Combobox value={results?.[0]} onChange={handleChange}>
         <InputWrapper>
           <SearchIcon size={16} />
           <Combobox.Input
@@ -46,9 +46,9 @@ const SearchBar = ({ isOpen, toggle }: Props) => {
           />
           {isValidating && <SearchLoader />}
         </InputWrapper>
-        {results && results.coins.length > 0 && (
+        {results && results.length > 0 && (
           <Combobox.Options as={ResultList} static>
-            {results.coins.slice(0, 5).map((coin) => (
+            {results.slice(0, 5).map((coin) => (
               <Combobox.Option key={coin.id} as={Fragment} value={coin}>
                 {({ active }) => (
                   <MenuItem active={active}>
@@ -80,7 +80,7 @@ const SearchIcon = styled(Search)`
 
 const Input = styled.input`
   width: 100%;
-  height: ${({ theme }) => theme.sizes[700]};
+  height: ${({ theme }) => theme.sizes[750]};
   padding-left: ${({ theme }) => theme.sizes[650]};
   padding-right: ${({ theme }) => theme.sizes[400]};
   border: 0;

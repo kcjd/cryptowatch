@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { truncate } from '../../helpers/mixins'
+import { truncate } from '../../lib/mixins'
 
 const CoinName = styled.span`
   ${truncate}

@@ -1,4 +1,4 @@
-import { CoinMarketData } from '../../types'
+import { CoinMarketData } from '../../lib/types'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import styled from 'styled-components'

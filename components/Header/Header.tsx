@@ -9,7 +9,7 @@ import Button from '../Button'
 import ButtonGroup from '../ButtonGroup'
 import Container from '../Container'
 import Select from '../Select'
-import { CURRENCIES } from '../../helpers/constants'
+import { CURRENCIES } from '../../lib/constants'
 
 type Props = {
   currency: string

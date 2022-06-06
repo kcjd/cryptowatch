@@ -1,5 +1,3 @@
-import dayjs from 'dayjs'
-
 export const getPercentage = (value: number) => {
   const absoluteValue = Math.abs(value)
   return `${absoluteValue.toFixed(2)}%`
@@ -13,8 +11,4 @@ export const getPrice = (value: string | number, currency: string = 'USD') => {
     maximumFractionDigits: 6
   })
   return formatter.format(Number(value))
-}
-
-export const getDate = (date: string | number | Date) => {
-  return dayjs(date)
 }

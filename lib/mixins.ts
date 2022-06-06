@@ -1,5 +1,5 @@
 import { css } from 'styled-components'
-import theme from '../theme'
+import theme from './theme'
 
 export const truncate = css`
   display: block;
