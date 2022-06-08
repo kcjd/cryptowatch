@@ -31,15 +31,20 @@ const FilterGroup = ({ value, filters, onChange }: Props) => {
 }
 
 const Wrapper = styled(ButtonGroup)`
-  border-radius: ${({ theme }) => theme.borderRadius[300]};
-  background-color: ${({ theme }) => theme.colors.surface};
-  overflow: hidden;
+  grid-auto-columns: 1fr;
 `
 
 const Filter = styled(Button)`
+  justify-content: center;
+  height: auto;
+  padding: ${({ theme }) => theme.sizes[150]};
   border-radius: 0;
-  background-color: ${({ theme, active }) =>
-    active ? theme.colors.highlight : 'transparent'};
+  border-bottom: 2px solid;
+  border-color: ${({ theme, active }) =>
+    active ? theme.colors.primary : 'transparent'};
+  background-color: transparent !important;
+  color: ${({ theme, active }) =>
+    active ? theme.colors.text : theme.colors.textLight};
   font-size: ${({ theme }) => theme.fontSizes[300]};
 `
 

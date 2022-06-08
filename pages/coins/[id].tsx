@@ -5,13 +5,11 @@ import styled from 'styled-components'
 
 import Breadcrumbs from 'components/Breadcrumbs'
 import History from 'components/History'
-import Overview from 'components/Overview'
 import Statistics from 'components/Statistics'
 import Trending from 'components/Trending'
 
 import { getCoin, getMarketChart, getTrending } from 'lib/coingecko'
 import { DEFAULT_CURRENCY, DEFAULT_DAYS } from 'lib/constants'
-import { mq } from 'lib/mixins'
 
 const CoinPage = ({
   trendingCoins,
@@ -21,7 +19,7 @@ const CoinPage = ({
   days,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   return (
-    <>
+    <Container>
       <Head>
         <title>{coin.name} - Cryptowatch</title>
         <meta
@@ -35,15 +33,10 @@ const CoinPage = ({
           { label: coin.name, href: `/coins/${coin.id}` },
         ]}
       />
-      <Container>
-        <Overview coin={coin} currency={currency} />
-        <Columms>
-          <History data={coinHistory} currency={currency} days={days} />
-          <Statistics coin={coin} currency={currency} />
-        </Columms>
-        <Trending coins={trendingCoins} />
-      </Container>
-    </>
+      <Statistics coin={coin} currency={currency} />
+      <History data={coinHistory} currency={currency} days={days} />
+      <Trending coins={trendingCoins} />
+    </Container>
   )
 }
 
@@ -73,15 +66,6 @@ export const getServerSideProps = async ({
 const Container = styled.div`
   display: grid;
   gap: ${({ theme }) => theme.sizes[800]};
-`
-
-const Columms = styled.div`
-  display: grid;
-  gap: ${({ theme }) => theme.sizes[600]};
-
-  ${mq('lg')`
-    grid-template-columns: 2fr 1fr;
-  `}
 `
 
 export default CoinPage

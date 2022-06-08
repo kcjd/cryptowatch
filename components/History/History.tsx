@@ -1,17 +1,13 @@
 import { useRouter } from 'next/router'
 
-import { Analytics } from '@styled-icons/ionicons-solid'
 import { setCookie } from 'nookies'
 import styled from 'styled-components'
 
-import Card from 'components/Card'
 import FilterGroup from 'components/FilterGroup'
 import HistoryChart from 'components/HistoryChart'
-import Section from 'components/Section'
-import SectionHeader from 'components/SectionHeader'
 import SectionTitle from 'components/SectionTitle'
 
-import { mq } from 'lib/mixins'
+import { screens } from 'lib/mixins'
 import { HistoryChartData } from 'lib/types'
 
 type Props = {
@@ -35,35 +31,46 @@ const History = ({ data, currency, days }: Props) => {
       path: '/',
     })
 
-    router.push(router.asPath)
+    router.reload()
   }
 
   return (
-    <Section>
-      <SectionHeader>
-        <SectionTitle>
-          <Analytics size={16} />
-          Historique
-        </SectionTitle>
+    <section>
+      <Header>
+        <SectionTitle>Historique</SectionTitle>
         <FilterGroup
           value={days}
           filters={filters}
           onChange={handleDaysChange}
         />
-      </SectionHeader>
+      </Header>
       <ChartWrapper>
         <HistoryChart data={data} currency={currency} showScales showTooltip />
       </ChartWrapper>
-    </Section>
+    </section>
   )
 }
 
-const ChartWrapper = styled(Card)`
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: ${({ theme }) => theme.sizes[450]};
+
+  & ${SectionTitle} {
+    margin-bottom: 0;
+  }
+`
+
+const ChartWrapper = styled.div`
   height: 26rem;
 
-  ${mq('md')`
+  ${screens.md} {
     height: 32rem;
-  `}
+  }
+
+  ${screens.lg} {
+    height: 32rem;
+  }
 `
 
 export default History

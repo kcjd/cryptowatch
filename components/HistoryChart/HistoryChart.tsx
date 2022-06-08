@@ -133,12 +133,12 @@ const HistoryChart = ({
         bodyColor: theme.colors.background,
         titleFont: {
           family: theme.fontFamilies.base,
-          size: 14,
+          size: 12,
           weight: '500',
         },
         bodyFont: {
           family: theme.fontFamilies.base,
-          size: 16,
+          size: 14,
           weight: '600',
         },
       },

@@ -50,6 +50,7 @@ const GlobalStyle = createGlobalStyle`
   h4,
   h5,
   h6 {
+    font: inherit;
     overflow-wrap: break-word;
   }
 
@@ -68,8 +69,7 @@ const GlobalStyle = createGlobalStyle`
 
   a:focus-visible,
   button:focus-visible {
-    outline: 2px solid ${({ theme }) => theme.colors.ring};
-    outline-offset: 1px;
+    outline: 3px solid ${({ theme }) => theme.colors.ring};
   }
 
   :root {
@@ -78,6 +78,9 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     background-color: ${({ theme }) => theme.colors.background};
+    background-image: url('/bg.png');
+    background-size: cover;
+    background-attachment: fixed;
     color: ${({ theme }) => theme.colors.text};
     font-size: ${({ theme }) => theme.fontSizes[400]};
     font-family: ${({ theme }) => theme.fontFamilies.base};

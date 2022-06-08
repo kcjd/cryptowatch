@@ -28,42 +28,32 @@ const Header = ({ currency, toggleSearchBar }: Props) => {
       path: '/',
     })
 
-    router.push(router.asPath)
+    router.reload()
   }
 
   return (
     <Wrapper>
-      <Inner>
-        <Link href="/" passHref>
-          <Logo>
-            <Image src="/logo.svg" width={20} height={20} alt="" /> Cryptowatch
-          </Logo>
-        </Link>
+      <Link href="/" passHref>
+        <Logo>
+          <Image src="/logo.svg" width={20} height={20} alt="" /> Cryptowatch
+        </Logo>
+      </Link>
 
-        <ButtonGroup>
-          <Select
-            value={currency}
-            options={CURRENCIES}
-            onChange={handleCurrencyChange}
-          />
-          <Button onClick={() => toggleSearchBar(true)} aria-label="Recherche">
-            <Search size={16} />
-          </Button>
-        </ButtonGroup>
-      </Inner>
+      <ButtonGroup>
+        <Select
+          value={currency}
+          options={CURRENCIES}
+          onChange={handleCurrencyChange}
+        />
+        <Button onClick={() => toggleSearchBar(true)} aria-label="Recherche">
+          <Search size={16} />
+        </Button>
+      </ButtonGroup>
     </Wrapper>
   )
 }
 
-const Wrapper = styled.header`
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-  background-color: ${({ theme }) => theme.colors.background};
-`
-
-const Inner = styled(Container)`
+const Wrapper = styled(Container)`
   display: flex;
   justify-content: space-between;
   align-items: center;

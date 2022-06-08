@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { Trophy } from '@styled-icons/ionicons-solid'
 import styled from 'styled-components'
 
 import Card from 'components/Card'
@@ -13,8 +12,6 @@ import CoinPrice from 'components/CoinPrice'
 import CoinSymbol from 'components/CoinSymbol'
 import HistoryChart from 'components/HistoryChart'
 import Pagination from 'components/Pagination'
-import Section from 'components/Section'
-import SectionHeader from 'components/SectionHeader'
 import SectionTitle from 'components/SectionTitle'
 
 import { CoinMarketData } from 'lib/types'
@@ -30,12 +27,7 @@ const Ranking = ({ coins, currency }: Props) => {
 
   return (
     <Section>
-      <SectionHeader>
-        <SectionTitle>
-          <Trophy size={16} />
-          Top 100
-        </SectionTitle>
-      </SectionHeader>
+      <SectionTitle>Classement</SectionTitle>
       <Wrapper>
         <Row>
           <div>#</div>
@@ -69,8 +61,12 @@ const Ranking = ({ coins, currency }: Props) => {
   )
 }
 
+const Section = styled.section`
+  display: grid;
+`
+
 const Wrapper = styled(Card)`
-  padding: 0;
+  padding: 0 !important;
   overflow-x: auto;
 `
 
@@ -81,7 +77,6 @@ const Row = styled.div`
   gap: ${({ theme }) => theme.sizes[500]};
   width: max(60rem, 100%);
   padding: ${({ theme }) => theme.sizes[400]} ${({ theme }) => theme.sizes[500]};
-
   transition: background-color 0.15s linear;
 
   &:first-child {

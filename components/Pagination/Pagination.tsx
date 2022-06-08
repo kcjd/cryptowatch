@@ -56,7 +56,7 @@ const Wrapper = styled.nav`
   display: flex;
   justify-content: center;
   gap: ${({ theme }) => theme.sizes[200]};
-  padding-block: ${({ theme }) => theme.sizes[400]};
+  margin-top: ${({ theme }) => theme.sizes[600]};
 
   & ${Button} {
     justify-content: center;

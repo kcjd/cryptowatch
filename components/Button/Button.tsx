@@ -14,10 +14,16 @@ const Button = styled.button<Props>`
   border-radius: ${({ theme }) => theme.borderRadius[300]};
   border: 0;
   background-color: ${({ theme, active }) =>
-    active ? theme.colors.highlight : theme.colors.surfaceLight};
+    active ? theme.colors.surfaceLight : theme.colors.surface};
   color: ${({ theme }) => theme.colors.text};
   font-weight: ${({ theme }) => theme.fontWeights[500]};
   cursor: pointer;
+  transition: background-color 0.15s linear;
+
+  &:hover,
+  &:focus-visible {
+    background-color: ${({ theme }) => theme.colors.surfaceLight};
+  }
 
   &:disabled {
     opacity: 0.5;

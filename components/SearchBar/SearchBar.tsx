@@ -42,7 +42,7 @@ const SearchBar = ({ isOpen, toggle }: Props) => {
 
   return (
     <Modal isOpen={isOpen} toggle={toggle} onExit={() => setQuery('')}>
-      <Combobox value={results?.[0]} onChange={handleChange}>
+      <Combobox value={null} onChange={handleChange}>
         <InputWrapper>
           <SearchIcon size={16} />
           <Combobox.Input

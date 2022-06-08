@@ -6,6 +6,7 @@ import { ThemeProvider } from 'styled-components'
 import GlobalStyle from 'components/GlobalStyle'
 import Layout from 'components/Layout'
 
+import 'lib/dayjs'
 import theme from 'lib/theme'
 
 const App = ({ Component, pageProps }: AppProps) => {

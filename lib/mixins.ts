@@ -1,7 +1,5 @@
 import { css } from 'styled-components'
 
-import theme from './theme'
-
 export const truncate = css`
   display: block;
   white-space: nowrap;
@@ -9,7 +7,7 @@ export const truncate = css`
   text-overflow: ellipsis;
 `
 
-export const mq = (key: keyof typeof theme.screens) => {
-  return (style: TemplateStringsArray | String) =>
-    `@media (min-width: ${theme.screens[key]}px) { ${style} }`
+export const screens = {
+  md: '@media (min-width: 768px)',
+  lg: '@media (min-width: 1024px)',
 }

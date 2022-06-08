@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 const ButtonGroup = styled.div`
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   gap: ${({ theme }) => theme.sizes[200]};
 `
 

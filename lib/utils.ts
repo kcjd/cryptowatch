@@ -4,7 +4,7 @@ export const getPercentage = (value: number) => {
 }
 
 export const getPrice = (value: string | number, currency: string = 'USD') => {
-  const formatter = new Intl.NumberFormat('en-US', {
+  const formatter = new Intl.NumberFormat(undefined, {
     style: 'currency',
     currency,
     minimumFractionDigits: 0,

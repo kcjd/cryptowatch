@@ -1,14 +1,18 @@
-import { Flash } from '@styled-icons/ionicons-solid'
+import Image from 'next/image'
+import Link from 'next/link'
+
 import styled from 'styled-components'
 
-import Section from 'components/Section'
-import SectionHeader from 'components/SectionHeader'
+import Card from 'components/Card'
+import Coin from 'components/Coin'
+import CoinChange from 'components/CoinChange'
+import CoinName from 'components/CoinName'
+import CoinSymbol from 'components/CoinSymbol'
+import HistoryChart from 'components/HistoryChart'
 import SectionTitle from 'components/SectionTitle'
 
-import { mq } from 'lib/mixins'
+import { screens } from 'lib/mixins'
 import { CoinMarketData } from 'lib/types'
-
-import TrendingItem from './TrendingItem'
 
 type Props = {
   coins: CoinMarketData[]
@@ -16,19 +20,26 @@ type Props = {
 
 const Trending = ({ coins }: Props) => {
   return (
-    <Section>
-      <SectionHeader>
-        <SectionTitle>
-          <Flash size={16} />
-          Populaires
-        </SectionTitle>
-      </SectionHeader>
+    <section>
+      <SectionTitle>Populaires</SectionTitle>
       <Grid>
         {coins.map((coin) => (
-          <TrendingItem key={coin.id} coin={coin} />
+          <Link key={coin.id} href={`/coins/${coin.id}`} passHref>
+            <Card as="a">
+              <Header>
+                <Image src={coin.image} width={24} height={24} alt="" />
+                <CoinName>{coin.name}</CoinName>
+                <CoinSymbol>{coin.symbol}</CoinSymbol>
+                <CoinChange value={coin.price_change_percentage_24h} />
+              </Header>
+              <ChartWrapper>
+                <HistoryChart data={coin.sparkline_in_7d.price} />
+              </ChartWrapper>
+            </Card>
+          </Link>
         ))}
       </Grid>
-    </Section>
+    </section>
   )
 }
 
@@ -40,13 +51,25 @@ const Grid = styled.div`
     min-width: 0;
   }
 
-  ${mq('md')`
+  ${screens.md} {
     grid-template-columns: repeat(2, 1fr);
-  `}
+  }
 
-  ${mq('lg')`
+  ${screens.lg} {
     grid-template-columns: repeat(3, 1fr);
-  `}
+  }
+`
+
+const Header = styled(Coin)`
+  margin-bottom: ${({ theme }) => theme.sizes[400]};
+`
+
+const ChartWrapper = styled.div`
+  height: 6rem;
+
+  ${screens.md} {
+    height: 8rem;
+  }
 `
 
 export default Trending

@@ -64,6 +64,7 @@ const ModalBody = styled(motion.div)`
   border: 1px solid ${({ theme }) => theme.colors.border};
   background-color: ${({ theme }) => theme.colors.surface};
   box-shadow: ${({ theme }) => theme.shadows[500]};
+  backdrop-filter: blur(30px);
   overflow: hidden;
 `
 
