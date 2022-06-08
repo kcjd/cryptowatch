@@ -3,14 +3,14 @@ const nextConfig = {
   reactStrictMode: true,
   i18n: {
     locales: ['fr'],
-    defaultLocale: 'fr'
+    defaultLocale: 'fr',
   },
   compiler: {
-    styledComponents: true
+    styledComponents: true,
   },
   images: {
-    domains: ['assets.coingecko.com']
-  }
+    domains: ['assets.coingecko.com', 'abs.twimg.com', 'pbs.twimg.com'],
+  },
 }
 
 module.exports = nextConfig

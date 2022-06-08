@@ -50,3 +50,36 @@ export type MarketsResponse = CoinMarketData[]
 export type MarketChartResponse = {
   prices: HistoryChartData
 }
+
+export type Tweet = {
+  id: string
+  author_id: string
+  text: string
+  public_metrics: {
+    retweet_count: number
+    reply_count: number
+    like_count: number
+    quote_count: number
+  }
+  created_at: string
+}
+
+export type TwitterUser = {
+  profile_image_url: string
+  name: string
+  id: string
+  verified: boolean
+  username: string
+}
+
+export type TweetWithUser = {
+  tweet: Tweet
+  author?: TwitterUser
+}
+
+export type TweetsResponse = {
+  data?: Tweet[]
+  includes?: {
+    users: TwitterUser[]
+  }
+}

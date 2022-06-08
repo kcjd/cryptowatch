@@ -7,14 +7,17 @@ import Breadcrumbs from 'components/Breadcrumbs'
 import History from 'components/History'
 import Statistics from 'components/Statistics'
 import Trending from 'components/Trending'
+import Tweets from 'components/Tweets'
 
 import { getCoin, getMarketChart, getTrending } from 'lib/coingecko'
 import { DEFAULT_CURRENCY, DEFAULT_DAYS } from 'lib/constants'
+import { getTweets } from 'lib/twitter'
 
 const CoinPage = ({
   trendingCoins,
   coin,
   coinHistory,
+  tweets,
   currency,
   days,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
@@ -33,8 +36,10 @@ const CoinPage = ({
           { label: coin.name, href: `/coins/${coin.id}` },
         ]}
       />
+
       <Statistics coin={coin} currency={currency} />
       <History data={coinHistory} currency={currency} days={days} />
+      <Tweets tweets={tweets} />
       <Trending coins={trendingCoins} />
     </Container>
   )
@@ -51,12 +56,14 @@ export const getServerSideProps = async ({
   const trendingCoins = await getTrending(currency)
   const coin = await getCoin(id, currency)
   const coinHistory = await getMarketChart(id, currency, days)
+  const tweets = await getTweets(coin.name)
 
   return {
     props: {
       trendingCoins,
       coin,
       coinHistory,
+      tweets,
       currency,
       days,
     },

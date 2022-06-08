@@ -28,7 +28,7 @@ type Props = {
 const Statistics = ({ coin, currency }: Props) => {
   return (
     <Section>
-      <Header>
+      <Wrapper>
         <Image src={coin.image} width={44} height={44} alt="" />
         <Coin>
           <CoinName>{coin.name}</CoinName>
@@ -38,7 +38,7 @@ const Statistics = ({ coin, currency }: Props) => {
           <CoinPrice value={coin.current_price} currency={currency} />
           <CoinChange value={coin.price_change_percentage_24h} />
         </Coin>
-      </Header>
+      </Wrapper>
       <Grid>
         <Item>
           <Podium size={22} />
@@ -80,7 +80,7 @@ const Section = styled.section`
   gap: ${({ theme }) => theme.sizes[650]};
 `
 
-const Header = styled.div`
+const Wrapper = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
