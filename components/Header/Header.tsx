@@ -57,7 +57,7 @@ const Wrapper = styled(Container)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: ${({ theme }) => theme.sizes[800]};
+  padding-block: ${({ theme }) => theme.sizes[450]};
 `
 
 const Logo = styled.a`

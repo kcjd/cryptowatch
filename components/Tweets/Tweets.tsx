@@ -114,14 +114,9 @@ const Tweets = ({ tweets }: Props) => {
 const Wrapper = styled.div`
   display: grid;
   gap: ${({ theme }) => theme.sizes[400]};
-  font-size: ${({ theme }) => theme.fontSizes[300]};
-
-  ${screens.md} {
-    grid-template-columns: repeat(2, 1fr);
-  }
 
   ${screens.lg} {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 `
 
@@ -149,13 +144,28 @@ const AuthorName = styled.div`
 
 const AuthorUsername = styled.div`
   color: ${({ theme }) => theme.colors.textLight};
+  font-size: ${({ theme }) => theme.fontSizes[300]};
 `
 
 const TweetBody = styled.p`
-  height: calc(5 * 1.5em);
-  line-height: 1.5em;
+  position: relative;
+  height: 4.5em;
   white-space: pre-wrap;
   overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 25%;
+    height: 1.5em;
+    background: linear-gradient(
+      to right,
+      transparent,
+      ${({ theme }) => theme.colors.background}
+    );
+  }
 `
 
 const TweetFooter = styled.div`
@@ -164,6 +174,7 @@ const TweetFooter = styled.div`
   align-items: center;
   margin-top: ${({ theme }) => theme.sizes[450]};
   color: ${({ theme }) => theme.colors.textLight};
+  font-size: ${({ theme }) => theme.fontSizes[300]};
 `
 
 const TweetMetrics = styled.div`

@@ -12,11 +12,6 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
-  html,
-  body {
-    height: 100%;
-  }
-
   body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
@@ -77,10 +72,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    position: relative;
     background-color: ${({ theme }) => theme.colors.background};
-    background-image: url('/bg.png');
-    background-size: cover;
-    background-attachment: fixed;
     color: ${({ theme }) => theme.colors.text};
     font-size: ${({ theme }) => theme.fontSizes[400]};
     font-family: ${({ theme }) => theme.fontFamilies.base};

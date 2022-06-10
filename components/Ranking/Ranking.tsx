@@ -72,7 +72,7 @@ const Wrapper = styled(Card)`
 
 const Row = styled.div`
   display: grid;
-  grid-template-columns: 1fr 4fr 2fr 2fr 2fr 2fr;
+  grid-template-columns: ${({ theme }) => theme.sizes[600]} 4fr 2fr 2fr 2fr 2fr;
   align-items: center;
   gap: ${({ theme }) => theme.sizes[500]};
   width: max(60rem, 100%);

@@ -64,8 +64,7 @@ const SelectList = styled(motion.ul)`
   margin-top: ${({ theme }) => theme.sizes[100]};
   padding-block: ${({ theme }) => theme.sizes[150]};
   border-radius: ${({ theme }) => theme.borderRadius[300]};
-  border: 1px solid ${({ theme }) => theme.colors.border};
-  background-color: ${({ theme }) => theme.colors.surface};
+  background-color: ${({ theme }) => theme.colors.surfaceLight};
   box-shadow: ${({ theme }) => theme.shadows[400]};
   backdrop-filter: blur(30px);
   overflow: hidden;

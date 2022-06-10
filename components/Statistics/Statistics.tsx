@@ -107,7 +107,6 @@ const Grid = styled.div`
 
 const Item = styled(Card)`
   display: grid;
-  align-content: start;
   gap: ${({ theme }) => theme.sizes[200]};
   min-width: 0;
 

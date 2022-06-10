@@ -12,8 +12,8 @@ const Card = styled.article<Props>`
   border-radius: ${({ theme }) => theme.borderRadius[400]};
   background-color: ${({ theme, outlined }) =>
     outlined ? 'transparent !important' : theme.colors.surface};
-  border: ${({ outlined }) => (outlined ? '2px' : '1px')} solid
-    ${({ theme }) => theme.colors.border};
+  border: ${({ theme, outlined }) =>
+    outlined ? `2px solid ${theme.colors.border}` : 'none'};
   transition: border-color 0.15s linear, background-color 0.15s linear;
 
   ${screens.md} {
