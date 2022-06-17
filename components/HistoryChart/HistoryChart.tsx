@@ -10,6 +10,7 @@ import {
   Tooltip,
 } from 'chart.js'
 import 'chartjs-adapter-dayjs'
+import useCurrency from 'contexts/currencyContext'
 import dayjs, { isDayjs } from 'dayjs'
 import { Line } from 'react-chartjs-2'
 
@@ -28,17 +29,17 @@ ChartJS.register(
 
 type Props = {
   data: HistoryChartData
-  currency?: string
   showScales?: boolean
   showTooltip?: boolean
 }
 
 const HistoryChart = ({
   data,
-  currency,
   showScales = false,
   showTooltip = false,
 }: Props) => {
+  const { currency } = useCurrency()
+
   const points = data.map((v) => (typeof v === 'number' ? v : v[1]))
   const labels = data.map((v, i) => (typeof v === 'number' ? i : dayjs(v[0])))
 

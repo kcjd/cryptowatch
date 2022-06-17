@@ -9,7 +9,7 @@ const Footer = () => {
     <Wrapper as="footer">
       <div>Cryptowatch — {dayjs().year()}</div>
       <a
-        href="https://github.com/kcjd/crypowatch"
+        href="https://github.com/kcjd/cryptowatch"
         target="_blank"
         rel="noreferrer"
         aria-label="Github"

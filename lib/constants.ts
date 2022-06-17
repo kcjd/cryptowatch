@@ -1,5 +1,5 @@
-export const CURRENCIES = ['USD', 'EUR', 'BTC', 'ETH']
+export const CURRENCIES = ['USD', 'EUR', 'BTC']
 
 export const DEFAULT_CURRENCY = CURRENCIES[0]
 
-export const DEFAULT_DAYS = 1
+export const COIN_API_URL = 'https://api.coingecko.com/api/v3'

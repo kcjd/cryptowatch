@@ -1,4 +1,3 @@
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
 
 import styled from 'styled-components'
@@ -6,14 +5,7 @@ import styled from 'styled-components'
 import Ranking from 'components/Ranking'
 import Trending from 'components/Trending'
 
-import { getRanking, getTrending } from 'lib/coingecko'
-import { DEFAULT_CURRENCY } from 'lib/constants'
-
-const HomePage = ({
-  trendingCoins,
-  rankingCoins,
-  currency,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const HomePage = () => {
   return (
     <Container>
       <Head>
@@ -23,29 +15,10 @@ const HomePage = ({
           content="Surveillez les cryptomonnaies les plus populaires en temps réel : cours, capitalisation, volume, historique et plus encore."
         />
       </Head>
-      <Trending coins={trendingCoins} />
-      <Ranking coins={rankingCoins} currency={currency} />
+      <Trending />
+      <Ranking />
     </Container>
   )
-}
-
-export const getServerSideProps = async ({
-  req,
-  query,
-}: GetServerSidePropsContext) => {
-  const page = Number(query.page) || 1
-  const currency = req.cookies.currency || DEFAULT_CURRENCY
-
-  const trendingCoins = await getTrending(currency)
-  const rankingCoins = await getRanking(currency, page)
-
-  return {
-    props: {
-      trendingCoins,
-      rankingCoins,
-      currency,
-    },
-  }
 }
 
 const Container = styled.div`

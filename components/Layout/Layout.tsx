@@ -1,4 +1,4 @@
-import { PropsWithChildren, useState } from 'react'
+import { ReactNode, useState } from 'react'
 import styled from 'styled-components'
 
 import Container from 'components/Container'
@@ -7,17 +7,17 @@ import Header from 'components/Header'
 import SearchBar from 'components/SearchBar'
 
 type Props = {
-  currency: string
+  children: ReactNode
 }
 
-const Layout = ({ currency, children }: PropsWithChildren<Props>) => {
+const Layout = ({ children }: Props) => {
   const [isSearchBarOpen, setIsSearchBarOpen] = useState(false)
 
   return (
     <>
       <Background />
       <Wrapper>
-        <Header currency={currency} toggleSearchBar={setIsSearchBarOpen} />
+        <Header toggleSearchBar={setIsSearchBarOpen} />
         <Container as="main">{children}</Container>
         <Footer />
         <SearchBar isOpen={isSearchBarOpen} toggle={setIsSearchBarOpen} />
@@ -28,7 +28,9 @@ const Layout = ({ currency, children }: PropsWithChildren<Props>) => {
 
 const Wrapper = styled.div`
   display: grid;
+  grid-template-rows: auto 1fr auto;
   gap: ${({ theme }) => theme.sizes[600]};
+  min-height: 100vh;
   overflow: hidden;
 `
 

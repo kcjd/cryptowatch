@@ -3,7 +3,7 @@ export const getPercentage = (value: number) => {
   return `${absoluteValue.toFixed(2)}%`
 }
 
-export const getPrice = (value: string | number, currency: string = 'USD') => {
+export const getPrice = (value: string | number, currency: string) => {
   const formatter = new Intl.NumberFormat(undefined, {
     style: 'currency',
     currency,

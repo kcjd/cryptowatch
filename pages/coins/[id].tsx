@@ -1,72 +1,54 @@
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 import styled from 'styled-components'
 
-import Breadcrumbs from 'components/Breadcrumbs'
 import History from 'components/History'
 import Statistics from 'components/Statistics'
 import Trending from 'components/Trending'
-import Tweets from 'components/Tweets'
 
-import { getCoin, getMarketChart, getTrending } from 'lib/coingecko'
-import { DEFAULT_CURRENCY, DEFAULT_DAYS } from 'lib/constants'
-import { getTweets } from 'lib/twitter'
+import axios from 'lib/axios'
+import { MarketsResponse } from 'lib/types'
 
 const CoinPage = ({
-  trendingCoins,
   coin,
-  coinHistory,
-  tweets,
-  currency,
-  days,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const router = useRouter()
+  const id = router.query.id as string
+
   return (
     <Container>
       <Head>
-        <title>{coin.name} - Cryptowatch</title>
+        <title>{coin?.name} - Cryptowatch</title>
         <meta
           name="description"
-          content={`Surveillez la cryptomonnaie ${coin.name} en temps réel : cours, capitalisation, volume, historique et plus encore.`}
+          content={`Surveillez la cryptomonnaie ${coin?.name} en temps réel : cours, capitalisation, volume, historique et plus encore.`}
         />
       </Head>
-      <Breadcrumbs
-        items={[
-          { label: 'Monnaies', href: '/' },
-          { label: coin.name, href: `/coins/${coin.id}` },
-        ]}
-      />
-
-      <Statistics coin={coin} currency={currency} />
-      <History data={coinHistory} currency={currency} days={days} />
-      <Tweets tweets={tweets} />
-      <Trending coins={trendingCoins} />
+      <Statistics coinId={id} />
+      <History coinId={id} />
+      <Trending />
     </Container>
   )
 }
 
 export const getServerSideProps = async ({
-  req,
   query,
 }: GetServerSidePropsContext) => {
   const id = query.id as string
-  const currency = req.cookies.currency || DEFAULT_CURRENCY
-  const days = Number(req.cookies.days) || DEFAULT_DAYS
 
-  const trendingCoins = await getTrending(currency)
-  const coin = await getCoin(id, currency)
-  const coinHistory = await getMarketChart(id, currency, days)
-  const tweets = await getTweets(coin.name)
+  const { data } = await axios.get<MarketsResponse>(
+    `/coins/markets?ids=${id}&vs_currency=USD`
+  )
+
+  const notFound = data.length === 0
 
   return {
     props: {
-      trendingCoins,
-      coin,
-      coinHistory,
-      tweets,
-      currency,
-      days,
+      coin: data[0],
     },
+    notFound,
   }
 }
 

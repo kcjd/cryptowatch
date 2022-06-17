@@ -14,7 +14,6 @@ import Modal from 'components/Modal'
 
 import useDebounce from 'hooks/useDebounce'
 
-import { instance } from 'lib/coingecko'
 import { CoinBaseData, SearchResponse } from 'lib/types'
 
 type Props = {
@@ -22,16 +21,13 @@ type Props = {
   toggle: Dispatch<SetStateAction<boolean>>
 }
 
-const fetcher = (url: string) =>
-  instance.get<SearchResponse>(url).then((res) => res.data.coins)
-
 const SearchBar = ({ isOpen, toggle }: Props) => {
   const router = useRouter()
   const [query, setQuery] = useState('')
   const debouncedQuery = useDebounce(query)
-  const { data: results, isValidating } = useSWR(
-    `/search?query=${debouncedQuery}`,
-    fetcher
+
+  const { data: results, isValidating } = useSWR<SearchResponse>(
+    debouncedQuery ? `/search?query=${debouncedQuery}` : null
   )
 
   const handleChange = (coin?: CoinBaseData) => {
@@ -54,9 +50,9 @@ const SearchBar = ({ isOpen, toggle }: Props) => {
           />
           {isValidating && <SearchLoader />}
         </InputWrapper>
-        {results && results.length > 0 && (
+        {results && results.coins.length > 0 && (
           <Combobox.Options as={ResultList} static>
-            {results.slice(0, 5).map((coin) => (
+            {results.coins.slice(0, 5).map((coin) => (
               <Combobox.Option key={coin.id} as={Fragment} value={coin}>
                 {({ active }) => (
                   <MenuItem active={active}>
@@ -105,7 +101,6 @@ const SearchLoader = styled(Loader)`
   top: 0;
   bottom: 0;
   right: ${({ theme }) => theme.sizes[400]};
-  margin-block: auto;
 `
 
 const ResultList = styled.ul`

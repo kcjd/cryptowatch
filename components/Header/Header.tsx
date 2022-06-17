@@ -1,9 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 import { Search } from '@styled-icons/ionicons-solid'
-import { setCookie } from 'nookies'
+import useCurrency from 'contexts/currencyContext'
 import { Dispatch, SetStateAction } from 'react'
 import styled from 'styled-components'
 
@@ -15,21 +14,11 @@ import Select from 'components/Select'
 import { CURRENCIES } from 'lib/constants'
 
 type Props = {
-  currency: string
   toggleSearchBar: Dispatch<SetStateAction<boolean>>
 }
 
-const Header = ({ currency, toggleSearchBar }: Props) => {
-  const router = useRouter()
-
-  const handleCurrencyChange = (currency: string) => {
-    setCookie(null, 'currency', currency, {
-      maxAge: 30 * 24 * 60 * 60,
-      path: '/',
-    })
-
-    router.reload()
-  }
+const Header = ({ toggleSearchBar }: Props) => {
+  const { currency, setCurrency } = useCurrency()
 
   return (
     <Wrapper>
@@ -40,11 +29,7 @@ const Header = ({ currency, toggleSearchBar }: Props) => {
       </Link>
 
       <ButtonGroup>
-        <Select
-          value={currency}
-          options={CURRENCIES}
-          onChange={handleCurrencyChange}
-        />
+        <Select value={currency} options={CURRENCIES} onChange={setCurrency} />
         <Button onClick={() => toggleSearchBar(true)} aria-label="Recherche">
           <Search size={16} />
         </Button>

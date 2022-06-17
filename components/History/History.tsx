@@ -1,51 +1,54 @@
-import { useRouter } from 'next/router'
-
-import { setCookie } from 'nookies'
+import useCurrency from 'contexts/currencyContext'
+import { useState } from 'react'
 import styled from 'styled-components'
+import useSWR from 'swr'
 
+import FetchError from 'components/FetchError'
 import FilterGroup from 'components/FilterGroup'
 import HistoryChart from 'components/HistoryChart'
+import Loader from 'components/Loader'
 import SectionTitle from 'components/SectionTitle'
 
 import { screens } from 'lib/mixins'
-import { HistoryChartData } from 'lib/types'
+import { MarketChartResponse } from 'lib/types'
 
 type Props = {
-  data: HistoryChartData
-  currency: string
-  days: number
+  coinId: string
 }
 
-const filters = [
+const daysFilterList = [
   { value: 1, label: '24H' },
   { value: 7, label: '7J' },
   { value: 30, label: '30J' },
 ]
 
-const History = ({ data, currency, days }: Props) => {
-  const router = useRouter()
+const History = ({ coinId }: Props) => {
+  const { currency } = useCurrency()
 
-  const handleDaysChange = (days: number) => {
-    setCookie(null, 'days', days.toString(), {
-      maxAge: 30 * 24 * 60 * 60,
-      path: '/',
-    })
+  const [daysFilter, setDaysFilter] = useState(1)
 
-    router.reload()
-  }
+  const { data: historyData, isValidating } = useSWR<MarketChartResponse>(
+    `/coins/${coinId}/market_chart?days=${daysFilter}&vs_currency=${currency}`
+  )
 
   return (
     <section>
       <Header>
         <SectionTitle>Historique</SectionTitle>
         <FilterGroup
-          value={days}
-          filters={filters}
-          onChange={handleDaysChange}
+          value={daysFilter}
+          filters={daysFilterList}
+          onChange={setDaysFilter}
         />
       </Header>
       <ChartWrapper>
-        <HistoryChart data={data} currency={currency} showScales showTooltip />
+        {historyData ? (
+          <HistoryChart data={historyData.prices} showScales showTooltip />
+        ) : isValidating ? (
+          <Loader />
+        ) : (
+          <FetchError />
+        )}
       </ChartWrapper>
     </section>
   )
