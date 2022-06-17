@@ -1,6 +1,6 @@
 import { Dialog } from '@headlessui/react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Dispatch, PropsWithChildren, SetStateAction } from 'react'
+import { Dispatch, ReactNode, SetStateAction } from 'react'
 import styled from 'styled-components'
 
 import { fade, slideTop, spring } from 'lib/animations'
@@ -9,14 +9,10 @@ type Props = {
   isOpen: boolean
   toggle: Dispatch<SetStateAction<boolean>>
   onExit?: () => void
+  children: ReactNode
 }
 
-const Modal = ({
-  isOpen,
-  toggle,
-  onExit,
-  children,
-}: PropsWithChildren<Props>) => {
+const Modal = ({ isOpen, toggle, onExit, children }: Props) => {
   return (
     <AnimatePresence onExitComplete={onExit}>
       {isOpen && (

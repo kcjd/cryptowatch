@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode } from 'react'
 import styled from 'styled-components'
 
 import Container from 'components/Container'
@@ -11,16 +11,13 @@ type Props = {
 }
 
 const Layout = ({ children }: Props) => {
-  const [isSearchBarOpen, setIsSearchBarOpen] = useState(false)
-
   return (
     <>
       <Background />
       <Wrapper>
-        <Header toggleSearchBar={setIsSearchBarOpen} />
+        <Header />
         <Container as="main">{children}</Container>
         <Footer />
-        <SearchBar isOpen={isSearchBarOpen} toggle={setIsSearchBarOpen} />
       </Wrapper>
     </>
   )

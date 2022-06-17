@@ -11,16 +11,17 @@ import { slideBottom, spring } from 'lib/animations'
 
 type Props = {
   value: string
+  label: string
   options: string[]
   onChange: (value: string) => void
 }
 
-const Select = ({ value, options, onChange }: Props) => {
+const Select = ({ value, label, options, onChange }: Props) => {
   return (
     <Listbox as={Wrapper} value={value} onChange={onChange}>
       {({ open }) => (
         <>
-          <Listbox.Button as={SelectButton}>
+          <Listbox.Button as={SelectButton} aria-label={label}>
             {value} <ChevronDown size={12} />
           </Listbox.Button>
           <AnimatePresence>
