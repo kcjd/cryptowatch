@@ -22,11 +22,9 @@ const Header = ({ toggleSearchBar }: Props) => {
 
   return (
     <Wrapper>
-      <Link href="/" passHref>
-        <Logo>
-          <Image src="/logo.svg" width={20} height={20} alt="" /> Cryptowatch
-        </Logo>
-      </Link>
+      <Logo href="/">
+        <Image src="/logo.svg" width={20} height={20} alt="" /> Cryptowatch
+      </Logo>
 
       <ButtonGroup>
         <Select value={currency} options={CURRENCIES} onChange={setCurrency} />
@@ -45,7 +43,7 @@ const Wrapper = styled(Container)`
   padding-block: ${({ theme }) => theme.sizes[450]};
 `
 
-const Logo = styled.a`
+const Logo = styled(Link)`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.sizes[200]};

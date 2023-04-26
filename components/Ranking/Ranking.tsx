@@ -44,22 +44,20 @@ const Ranking = () => {
             <div>7 jours</div>
           </Row>
           {coins.map((coin) => (
-            <Link key={coin.id} href={`/coins/${coin.id}`} passHref>
-              <Row as="a">
-                <div>{coin.market_cap_rank}</div>
-                <Coin>
-                  <Image src={coin.image} width={24} height={24} alt="" />
-                  <CoinName>{coin.name}</CoinName>
-                  <CoinSymbol>{coin.symbol}</CoinSymbol>
-                </Coin>
-                <CoinPrice value={coin.current_price} />
-                <CoinChange value={coin.price_change_percentage_24h} />
-                <CoinPrice value={coin.market_cap} />
-                <ChartWrapper>
-                  <HistoryChart data={coin.sparkline_in_7d.price} />
-                </ChartWrapper>
-              </Row>
-            </Link>
+            <Row key={coin.id} as={Link} href={`/coins/${coin.id}`}>
+              <div>{coin.market_cap_rank}</div>
+              <Coin>
+                <Image src={coin.image} width={24} height={24} alt="" />
+                <CoinName>{coin.name}</CoinName>
+                <CoinSymbol>{coin.symbol}</CoinSymbol>
+              </Coin>
+              <CoinPrice value={coin.current_price} />
+              <CoinChange value={coin.price_change_percentage_24h} />
+              <CoinPrice value={coin.market_cap} />
+              <ChartWrapper>
+                <HistoryChart data={coin.sparkline_in_7d.price} />
+              </ChartWrapper>
+            </Row>
           ))}
         </Wrapper>
       ) : isValidating ? (

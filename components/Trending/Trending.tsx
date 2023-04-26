@@ -35,19 +35,17 @@ const Trending = () => {
       {coins ? (
         <Grid>
           {coins.slice(0, 6).map((coin) => (
-            <Link key={coin.id} href={`/coins/${coin.id}`} passHref>
-              <Card as="a">
-                <Header>
-                  <Image src={coin.image} width={24} height={24} alt="" />
-                  <CoinName>{coin.name}</CoinName>
-                  <CoinSymbol>{coin.symbol}</CoinSymbol>
-                  <CoinChange value={coin.price_change_percentage_24h} />
-                </Header>
-                <ChartWrapper>
-                  <HistoryChart data={coin.sparkline_in_7d.price} />
-                </ChartWrapper>
-              </Card>
-            </Link>
+            <Card key={coin.id} as={Link} href={`/coins/${coin.id}`}>
+              <Header>
+                <Image src={coin.image} width={24} height={24} alt="" />
+                <CoinName>{coin.name}</CoinName>
+                <CoinSymbol>{coin.symbol}</CoinSymbol>
+                <CoinChange value={coin.price_change_percentage_24h} />
+              </Header>
+              <ChartWrapper>
+                <HistoryChart data={coin.sparkline_in_7d.price} />
+              </ChartWrapper>
+            </Card>
           ))}
         </Grid>
       ) : isValidating ? (
