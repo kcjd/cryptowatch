@@ -1,43 +1,39 @@
-import { useRouter } from 'next/router'
-
-import { Combobox } from '@headlessui/react'
-import { Search } from '@styled-icons/ionicons-solid'
-import { Dispatch, Fragment, SetStateAction, useState } from 'react'
-import styled from 'styled-components'
-import useSWR from 'swr'
-
-import CoinName from 'components/CoinName'
-import CoinSymbol from 'components/CoinSymbol'
-import Loader from 'components/Loader'
-import MenuItem from 'components/MenuItem'
-import Modal from 'components/Modal'
-
-import useDebounce from 'hooks/useDebounce'
-
-import { CoinBaseData, SearchResponse } from 'lib/types'
+import { useRouter } from "next/router";
+import { Combobox } from "@headlessui/react";
+import { Search } from "@styled-icons/ionicons-solid";
+import { Dispatch, Fragment, SetStateAction, useState } from "react";
+import styled from "styled-components";
+import useSWR from "swr";
+import CoinName from "components/CoinName";
+import CoinSymbol from "components/CoinSymbol";
+import Loader from "components/Loader";
+import MenuItem from "components/MenuItem";
+import Modal from "components/Modal";
+import useDebounce from "hooks/useDebounce";
+import { CoinBaseData, SearchResponse } from "lib/types";
 
 type Props = {
-  isOpen: boolean
-  toggle: Dispatch<SetStateAction<boolean>>
-}
+  isOpen: boolean;
+  toggle: Dispatch<SetStateAction<boolean>>;
+};
 
 const SearchBar = ({ isOpen, toggle }: Props) => {
-  const router = useRouter()
-  const [query, setQuery] = useState('')
-  const debouncedQuery = useDebounce(query)
+  const router = useRouter();
+  const [query, setQuery] = useState("");
+  const debouncedQuery = useDebounce(query);
 
   const { data: results, isValidating } = useSWR<SearchResponse>(
     debouncedQuery ? `/search?query=${debouncedQuery}` : null
-  )
+  );
 
   const handleChange = (coin?: CoinBaseData) => {
-    if (!coin) return
-    router.push(`/coins/${coin.id}`)
-    toggle(false)
-  }
+    if (!coin) return;
+    router.push(`/coins/${coin.id}`);
+    toggle(false);
+  };
 
   return (
-    <Modal isOpen={isOpen} toggle={toggle} onExit={() => setQuery('')}>
+    <Modal isOpen={isOpen} toggle={toggle} onExit={() => setQuery("")}>
       <Combobox value={null} onChange={handleChange}>
         <InputWrapper>
           <SearchIcon size={16} />
@@ -66,12 +62,12 @@ const SearchBar = ({ isOpen, toggle }: Props) => {
         )}
       </Combobox>
     </Modal>
-  )
-}
+  );
+};
 
 const InputWrapper = styled.div`
   position: relative;
-`
+`;
 
 const SearchIcon = styled(Search)`
   position: absolute;
@@ -80,7 +76,7 @@ const SearchIcon = styled(Search)`
   left: ${({ theme }) => theme.sizes[400]};
   margin-block: auto;
   pointer-events: none;
-`
+`;
 
 const Input = styled.input`
   width: 100%;
@@ -94,18 +90,18 @@ const Input = styled.input`
   &::placeholder {
     color: ${({ theme }) => theme.colors.textLight};
   }
-`
+`;
 
 const SearchLoader = styled(Loader)`
   position: absolute;
   top: 0;
   bottom: 0;
   right: ${({ theme }) => theme.sizes[400]};
-`
+`;
 
 const ResultList = styled.ul`
   border-top: 1px solid ${({ theme }) => theme.colors.border};
   padding-block: ${({ theme }) => theme.sizes[250]};
-`
+`;
 
-export default SearchBar
+export default SearchBar;

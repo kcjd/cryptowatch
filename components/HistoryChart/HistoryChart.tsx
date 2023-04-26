@@ -8,15 +8,14 @@ import {
   PointElement,
   TimeScale,
   Tooltip,
-} from 'chart.js'
-import 'chartjs-adapter-dayjs'
-import useCurrency from 'contexts/currencyContext'
-import dayjs, { isDayjs } from 'dayjs'
-import { Line } from 'react-chartjs-2'
-
-import theme from 'lib/theme'
-import { HistoryChartData } from 'lib/types'
-import { getPrice } from 'lib/utils'
+} from "chart.js";
+import "chartjs-adapter-dayjs";
+import useCurrency from "contexts/currencyContext";
+import dayjs, { isDayjs } from "dayjs";
+import { Line } from "react-chartjs-2";
+import theme from "lib/theme";
+import { HistoryChartData } from "lib/types";
+import { getPrice } from "lib/utils";
 
 ChartJS.register(
   CategoryScale,
@@ -25,57 +24,57 @@ ChartJS.register(
   PointElement,
   TimeScale,
   Tooltip
-)
+);
 
 type Props = {
-  data: HistoryChartData
-  showScales?: boolean
-  showTooltip?: boolean
-}
+  data: HistoryChartData;
+  showScales?: boolean;
+  showTooltip?: boolean;
+};
 
 const HistoryChart = ({
   data,
   showScales = false,
   showTooltip = false,
 }: Props) => {
-  const { currency } = useCurrency()
+  const { currency } = useCurrency();
 
-  const points = data.map((v) => (typeof v === 'number' ? v : v[1]))
-  const labels = data.map((v, i) => (typeof v === 'number' ? i : dayjs(v[0])))
+  const points = data.map((v) => (typeof v === "number" ? v : v[1]));
+  const labels = data.map((v, i) => (typeof v === "number" ? i : dayjs(v[0])));
 
-  const startDate = labels[0]
-  const startValue = points[0]
-  const endDate = labels[labels.length - 1]
-  const endValue = points[points.length - 1]
+  const startDate = labels[0];
+  const startValue = points[0];
+  const endDate = labels[labels.length - 1];
+  const endValue = points[points.length - 1];
 
   const unit =
-    isDayjs(endDate) && endDate.diff(startDate, 'day') > 1 ? 'day' : 'hour'
+    isDayjs(endDate) && endDate.diff(startDate, "day") > 1 ? "day" : "hour";
 
-  const isChangeUp = endValue > startValue
+  const isChangeUp = endValue > startValue;
 
-  const chartData: ChartData<'line'> = {
+  const chartData: ChartData<"line"> = {
     labels,
     datasets: [
       {
         data: points,
       },
     ],
-  }
+  };
 
-  const options: ChartOptions<'line'> = {
+  const options: ChartOptions<"line"> = {
     animation: false,
     maintainAspectRatio: false,
     scales: {
       x: {
         display: showScales,
-        type: 'time',
+        type: "time",
         time: {
           unit,
           displayFormats: {
-            day: 'DD/MM',
-            hour: 'HH:mm',
+            day: "DD/MM",
+            hour: "HH:mm",
           },
-          tooltipFormat: 'DD/MM/YYYY HH:mm',
+          tooltipFormat: "DD/MM/YYYY HH:mm",
         },
         grid: {
           display: false,
@@ -87,7 +86,7 @@ const HistoryChart = ({
           color: theme.colors.textLight,
           font: {
             family: theme.fontFamilies.base,
-            weight: '500',
+            weight: "500",
           },
         },
       },
@@ -101,7 +100,7 @@ const HistoryChart = ({
           color: theme.colors.textLight,
           font: {
             family: theme.fontFamilies.base,
-            weight: '500',
+            weight: "500",
           },
           callback: (v) => getPrice(v, currency),
         },
@@ -121,7 +120,7 @@ const HistoryChart = ({
         enabled: showTooltip,
         animation: {
           duration: 100,
-          easing: 'linear',
+          easing: "linear",
         },
         callbacks: {
           label: (context) => getPrice(context.raw as number, currency),
@@ -135,22 +134,22 @@ const HistoryChart = ({
         titleFont: {
           family: theme.fontFamilies.base,
           size: 12,
-          weight: '500',
+          weight: "500",
         },
         bodyFont: {
           family: theme.fontFamilies.base,
           size: 14,
-          weight: '600',
+          weight: "600",
         },
       },
     },
     interaction: {
-      mode: 'nearest',
+      mode: "nearest",
       intersect: false,
     },
-  }
+  };
 
-  return <Line data={chartData} options={options} />
-}
+  return <Line data={chartData} options={options} />;
+};
 
-export default HistoryChart
+export default HistoryChart;

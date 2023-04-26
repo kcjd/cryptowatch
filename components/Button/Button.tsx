@@ -1,8 +1,8 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 type Props = {
-  active?: boolean
-}
+  active?: boolean;
+};
 
 const Button = styled.button<Props>`
   display: flex;
@@ -29,6 +29,6 @@ const Button = styled.button<Props>`
     opacity: 0.5;
     pointer-events: none;
   }
-`
+`;
 
-export default Button
+export default Button;

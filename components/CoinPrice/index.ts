@@ -1,1 +1,1 @@
-export { default } from './CoinPrice'
+export { default } from "./CoinPrice";

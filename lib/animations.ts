@@ -1,10 +1,10 @@
-import { Transition, Variants } from 'framer-motion'
+import { Transition, Variants } from "framer-motion";
 
 export const spring: Transition = {
-  type: 'spring',
+  type: "spring",
   stiffness: 150,
   mass: 0.2,
-}
+};
 
 export const fade: Variants = {
   visible: {
@@ -13,7 +13,7 @@ export const fade: Variants = {
   hidden: {
     opacity: 0,
   },
-}
+};
 
 export const slideTop: Variants = {
   visible: {
@@ -23,10 +23,10 @@ export const slideTop: Variants = {
   },
   hidden: {
     opacity: 0,
-    y: '1rem',
+    y: "1rem",
     scale: 0.95,
   },
-}
+};
 
 export const slideBottom: Variants = {
   visible: {
@@ -36,7 +36,7 @@ export const slideBottom: Variants = {
   },
   hidden: {
     opacity: 0,
-    y: '-1rem',
+    y: "-1rem",
     scale: 0.95,
   },
-}
+};

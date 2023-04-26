@@ -1,9 +1,9 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 type Props = {
-  active?: boolean
-  selected?: boolean
-}
+  active?: boolean;
+  selected?: boolean;
+};
 
 const MenuItem = styled.li<Props>`
   display: flex;
@@ -14,6 +14,6 @@ const MenuItem = styled.li<Props>`
   color: ${({ theme }) => theme.colors.text};
   cursor: pointer;
   transition: background-color 0.15s linear;
-`
+`;
 
-export default MenuItem
+export default MenuItem;

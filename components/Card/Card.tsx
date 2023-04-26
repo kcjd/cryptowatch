@@ -1,6 +1,5 @@
-import styled from 'styled-components'
-
-import { screens } from 'lib/mixins'
+import styled from "styled-components";
+import { screens } from "lib/mixins";
 
 const Card = styled.article`
   display: block;
@@ -18,6 +17,6 @@ const Card = styled.article`
     border-color: ${({ theme }) => theme.colors.borderLight};
     background-color: ${({ theme }) => theme.colors.surfaceLight};
   }
-`
+`;
 
-export default Card
+export default Card;

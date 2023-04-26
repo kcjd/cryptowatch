@@ -1,34 +1,31 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-
-import useCurrency from 'contexts/currencyContext'
-import styled from 'styled-components'
-import useSWR from 'swr'
-
-import Card from 'components/Card'
-import Coin from 'components/Coin'
-import CoinChange from 'components/CoinChange'
-import CoinName from 'components/CoinName'
-import CoinPrice from 'components/CoinPrice'
-import CoinSymbol from 'components/CoinSymbol'
-import FetchError from 'components/FetchError'
-import HistoryChart from 'components/HistoryChart'
-import Loader from 'components/Loader'
-import Pagination from 'components/Pagination'
-import SectionTitle from 'components/SectionTitle'
-
-import { MarketsResponse } from 'lib/types'
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import useCurrency from "contexts/currencyContext";
+import styled from "styled-components";
+import useSWR from "swr";
+import Card from "components/Card";
+import Coin from "components/Coin";
+import CoinChange from "components/CoinChange";
+import CoinName from "components/CoinName";
+import CoinPrice from "components/CoinPrice";
+import CoinSymbol from "components/CoinSymbol";
+import FetchError from "components/FetchError";
+import HistoryChart from "components/HistoryChart";
+import Loader from "components/Loader";
+import Pagination from "components/Pagination";
+import SectionTitle from "components/SectionTitle";
+import { MarketsResponse } from "lib/types";
 
 const Ranking = () => {
-  const router = useRouter()
-  const page = Number(router.query.page || 1)
+  const router = useRouter();
+  const page = Number(router.query.page || 1);
 
-  const { currency } = useCurrency()
+  const { currency } = useCurrency();
 
   const { data: coins, isValidating } = useSWR<MarketsResponse>(
     `/coins/markets?vs_currency=${currency}&per_page=20&page=${page}&sparkline=true`
-  )
+  );
 
   return (
     <Section>
@@ -67,17 +64,17 @@ const Ranking = () => {
       )}
       <Pagination current={page} max={5} />
     </Section>
-  )
-}
+  );
+};
 
 const Section = styled.section`
   display: grid;
-`
+`;
 
 const Wrapper = styled(Card)`
   padding: 0 !important;
   overflow-x: auto;
-`
+`;
 
 const Row = styled.div`
   display: grid;
@@ -100,10 +97,10 @@ const Row = styled.div`
   a&:focus-visible {
     background-color: ${({ theme }) => theme.colors.surfaceLight};
   }
-`
+`;
 
 const ChartWrapper = styled.div`
   height: 2.5rem;
-`
+`;
 
-export default Ranking
+export default Ranking;

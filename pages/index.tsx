@@ -1,9 +1,7 @@
-import Head from 'next/head'
-
-import styled from 'styled-components'
-
-import Ranking from 'components/Ranking'
-import Trending from 'components/Trending'
+import Head from "next/head";
+import styled from "styled-components";
+import Ranking from "components/Ranking";
+import Trending from "components/Trending";
 
 const HomePage = () => {
   return (
@@ -18,12 +16,12 @@ const HomePage = () => {
       <Trending />
       <Ranking />
     </Container>
-  )
-}
+  );
+};
 
 const Container = styled.div`
   display: grid;
   gap: ${({ theme }) => theme.sizes[800]};
-`
+`;
 
-export default HomePage
+export default HomePage;

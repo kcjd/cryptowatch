@@ -1,8 +1,7 @@
-import { LogoGithub } from '@styled-icons/ionicons-solid'
-import dayjs from 'dayjs'
-import styled from 'styled-components'
-
-import Container from 'components/Container'
+import { LogoGithub } from "@styled-icons/ionicons-solid";
+import dayjs from "dayjs";
+import styled from "styled-components";
+import Container from "components/Container";
 
 const Footer = () => {
   return (
@@ -17,8 +16,8 @@ const Footer = () => {
         <LogoGithub size={24} />
       </a>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled(Container)`
   display: flex;
@@ -28,6 +27,6 @@ const Wrapper = styled(Container)`
   font-size: ${({ theme }) => theme.fontSizes[300]};
   font-weight: ${({ theme }) => theme.fontWeights[500]};
   color: ${({ theme }) => theme.colors.textLight};
-`
+`;
 
-export default Footer
+export default Footer;

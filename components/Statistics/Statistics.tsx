@@ -1,5 +1,4 @@
-import Image from 'next/image'
-
+import Image from "next/image";
 import {
   CaretDown,
   CaretUp,
@@ -7,34 +6,32 @@ import {
   PieChart,
   Podium,
   TrendingUp,
-} from '@styled-icons/ionicons-solid'
-import useCurrency from 'contexts/currencyContext'
-import styled from 'styled-components'
-import useSWR from 'swr'
-
-import Card from 'components/Card'
-import Coin from 'components/Coin'
-import CoinChange from 'components/CoinChange'
-import CoinName from 'components/CoinName'
-import CoinPrice from 'components/CoinPrice'
-import CoinSymbol from 'components/CoinSymbol'
-import FetchError from 'components/FetchError'
-import Loader from 'components/Loader'
-
-import { screens } from 'lib/mixins'
-import { MarketsResponse } from 'lib/types'
+} from "@styled-icons/ionicons-solid";
+import useCurrency from "contexts/currencyContext";
+import styled from "styled-components";
+import useSWR from "swr";
+import Card from "components/Card";
+import Coin from "components/Coin";
+import CoinChange from "components/CoinChange";
+import CoinName from "components/CoinName";
+import CoinPrice from "components/CoinPrice";
+import CoinSymbol from "components/CoinSymbol";
+import FetchError from "components/FetchError";
+import Loader from "components/Loader";
+import { screens } from "lib/mixins";
+import { MarketsResponse } from "lib/types";
 
 type Props = {
-  coinId: string
-}
+  coinId: string;
+};
 
 const Statistics = ({ coinId }: Props) => {
-  const { currency } = useCurrency()
+  const { currency } = useCurrency();
 
   const { data: coins, isValidating } = useSWR<MarketsResponse>(
     `/coins/markets?ids=${coinId}&vs_currency=${currency}`
-  )
-  const coin = coins?.[0]
+  );
+  const coin = coins?.[0];
 
   return (
     <>
@@ -90,13 +87,13 @@ const Statistics = ({ coinId }: Props) => {
         <FetchError />
       )}
     </>
-  )
-}
+  );
+};
 
 const Section = styled.section`
   display: grid;
   gap: ${({ theme }) => theme.sizes[650]};
-`
+`;
 
 const Wrapper = styled.div`
   display: grid;
@@ -111,7 +108,7 @@ const Wrapper = styled.div`
   & > *:nth-child(3) {
     font-size: ${({ theme }) => theme.fontSizes[600]};
   }
-`
+`;
 
 const Grid = styled.div`
   display: grid;
@@ -121,7 +118,7 @@ const Grid = styled.div`
   ${screens.lg} {
     grid-template-columns: repeat(3, 1fr);
   }
-`
+`;
 
 const Item = styled(Card)`
   display: grid;
@@ -135,12 +132,12 @@ const Item = styled(Card)`
   & > *:last-child {
     font-size: ${({ theme }) => theme.fontSizes[500]};
   }
-`
+`;
 
 const Heading = styled.div`
   margin-bottom: ${({ theme }) => theme.sizes[100]};
   color: ${({ theme }) => theme.colors.textLight};
   font-weight: ${({ theme }) => theme.fontWeights[500]};
-`
+`;
 
-export default Statistics
+export default Statistics;

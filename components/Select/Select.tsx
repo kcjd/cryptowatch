@@ -1,19 +1,17 @@
-import { Listbox } from '@headlessui/react'
-import { ChevronDown } from '@styled-icons/ionicons-solid'
-import { AnimatePresence, motion } from 'framer-motion'
-import { Fragment } from 'react'
-import styled from 'styled-components'
-
-import Button from 'components/Button'
-import MenuItem from 'components/MenuItem'
-
-import { slideBottom, spring } from 'lib/animations'
+import { Listbox } from "@headlessui/react";
+import { ChevronDown } from "@styled-icons/ionicons-solid";
+import { AnimatePresence, motion } from "framer-motion";
+import { Fragment } from "react";
+import styled from "styled-components";
+import Button from "components/Button";
+import MenuItem from "components/MenuItem";
+import { slideBottom, spring } from "lib/animations";
 
 type Props = {
-  value: string
-  options: string[]
-  onChange: (value: string) => void
-}
+  value: string;
+  options: string[];
+  onChange: (value: string) => void;
+};
 
 const Select = ({ value, options, onChange }: Props) => {
   return (
@@ -47,16 +45,16 @@ const Select = ({ value, options, onChange }: Props) => {
         </>
       )}
     </Listbox>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   position: relative;
-`
+`;
 
 const SelectButton = styled(Button)`
   min-width: ${({ theme }) => theme.sizes[900]};
-`
+`;
 
 const SelectList = styled(motion.ul)`
   position: absolute;
@@ -68,6 +66,6 @@ const SelectList = styled(motion.ul)`
   box-shadow: ${({ theme }) => theme.shadows[400]};
   backdrop-filter: blur(30px);
   overflow: hidden;
-`
+`;
 
-export default Select
+export default Select;

@@ -1,33 +1,30 @@
-import Image from 'next/image'
-import Link from 'next/link'
-
-import useCurrency from 'contexts/currencyContext'
-import styled from 'styled-components'
-import useSWR from 'swr'
-
-import Card from 'components/Card'
-import Coin from 'components/Coin'
-import CoinChange from 'components/CoinChange'
-import CoinName from 'components/CoinName'
-import CoinSymbol from 'components/CoinSymbol'
-import FetchError from 'components/FetchError'
-import HistoryChart from 'components/HistoryChart'
-import Loader from 'components/Loader'
-import SectionTitle from 'components/SectionTitle'
-
-import { screens } from 'lib/mixins'
-import { MarketsResponse, TrendingResponse } from 'lib/types'
+import Image from "next/image";
+import Link from "next/link";
+import useCurrency from "contexts/currencyContext";
+import styled from "styled-components";
+import useSWR from "swr";
+import Card from "components/Card";
+import Coin from "components/Coin";
+import CoinChange from "components/CoinChange";
+import CoinName from "components/CoinName";
+import CoinSymbol from "components/CoinSymbol";
+import FetchError from "components/FetchError";
+import HistoryChart from "components/HistoryChart";
+import Loader from "components/Loader";
+import SectionTitle from "components/SectionTitle";
+import { screens } from "lib/mixins";
+import { MarketsResponse, TrendingResponse } from "lib/types";
 
 const Trending = () => {
-  const { currency } = useCurrency()
+  const { currency } = useCurrency();
 
-  const { data: trending } = useSWR<TrendingResponse>(`/search/trending`)
+  const { data: trending } = useSWR<TrendingResponse>(`/search/trending`);
 
-  const trendingIds = trending?.coins.map(({ item }) => item.id).join(',')
+  const trendingIds = trending?.coins.map(({ item }) => item.id).join(",");
 
   const { data: coins, isValidating } = useSWR<MarketsResponse>(
     `/coins/markets?vs_currency=${currency}&ids=${trendingIds}&sparkline=true`
-  )
+  );
 
   return (
     <section>
@@ -54,8 +51,8 @@ const Trending = () => {
         <FetchError />
       )}
     </section>
-  )
-}
+  );
+};
 
 const Grid = styled.div`
   display: grid;
@@ -72,11 +69,11 @@ const Grid = styled.div`
   ${screens.lg} {
     grid-template-columns: repeat(3, 1fr);
   }
-`
+`;
 
 const Header = styled(Coin)`
   margin-bottom: ${({ theme }) => theme.sizes[400]};
-`
+`;
 
 const ChartWrapper = styled.div`
   height: 6rem;
@@ -84,6 +81,6 @@ const ChartWrapper = styled.div`
   ${screens.md} {
     height: 8rem;
   }
-`
+`;
 
-export default Trending
+export default Trending;

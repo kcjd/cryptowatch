@@ -1,1 +1,1 @@
-export { default } from './CoinSymbol'
+export { default } from "./CoinSymbol";

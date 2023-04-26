@@ -1,18 +1,17 @@
-import { RadioGroup } from '@headlessui/react'
-import { Fragment } from 'react'
-import styled from 'styled-components'
-
-import Button from 'components/Button'
-import ButtonGroup from 'components/ButtonGroup'
+import { RadioGroup } from "@headlessui/react";
+import { Fragment } from "react";
+import styled from "styled-components";
+import Button from "components/Button";
+import ButtonGroup from "components/ButtonGroup";
 
 type Props = {
-  value: number
+  value: number;
   filters: {
-    value: number
-    label: string
-  }[]
-  onChange: (value: number) => void
-}
+    value: number;
+    label: string;
+  }[];
+  onChange: (value: number) => void;
+};
 
 const FilterGroup = ({ value, filters, onChange }: Props) => {
   return (
@@ -27,12 +26,12 @@ const FilterGroup = ({ value, filters, onChange }: Props) => {
         </RadioGroup.Option>
       ))}
     </RadioGroup>
-  )
-}
+  );
+};
 
 const Wrapper = styled(ButtonGroup)`
   grid-auto-columns: 1fr;
-`
+`;
 
 const Filter = styled(Button)`
   justify-content: center;
@@ -41,11 +40,11 @@ const Filter = styled(Button)`
   border-radius: 0;
   border-bottom: 2px solid;
   border-color: ${({ theme, active }) =>
-    active ? theme.colors.primary : 'transparent'};
+    active ? theme.colors.primary : "transparent"};
   background-color: transparent !important;
   color: ${({ theme, active }) =>
     active ? theme.colors.text : theme.colors.textLight};
   font-size: ${({ theme }) => theme.fontSizes[300]};
-`
+`;
 
-export default FilterGroup
+export default FilterGroup;

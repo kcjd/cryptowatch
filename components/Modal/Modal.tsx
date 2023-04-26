@@ -1,15 +1,14 @@
-import { Dialog } from '@headlessui/react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { Dispatch, PropsWithChildren, SetStateAction } from 'react'
-import styled from 'styled-components'
-
-import { fade, slideTop, spring } from 'lib/animations'
+import { Dialog } from "@headlessui/react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Dispatch, PropsWithChildren, SetStateAction } from "react";
+import styled from "styled-components";
+import { fade, slideTop, spring } from "lib/animations";
 
 type Props = {
-  isOpen: boolean
-  toggle: Dispatch<SetStateAction<boolean>>
-  onExit?: () => void
-}
+  isOpen: boolean;
+  toggle: Dispatch<SetStateAction<boolean>>;
+  onExit?: () => void;
+};
 
 const Modal = ({
   isOpen,
@@ -41,19 +40,19 @@ const Modal = ({
         </Dialog>
       )}
     </AnimatePresence>
-  )
-}
+  );
+};
 
 const ModalWrapper = styled.div`
   position: fixed;
   inset: 0;
-`
+`;
 
 const ModalOverlay = styled(motion.div)`
   position: fixed;
   inset: 0;
   background-color: ${({ theme }) => theme.colors.overlay};
-`
+`;
 
 const ModalBody = styled(motion.div)`
   position: relative;
@@ -65,6 +64,6 @@ const ModalBody = styled(motion.div)`
   box-shadow: ${({ theme }) => theme.shadows[500]};
   backdrop-filter: blur(30px);
   overflow: hidden;
-`
+`;
 
-export default Modal
+export default Modal;

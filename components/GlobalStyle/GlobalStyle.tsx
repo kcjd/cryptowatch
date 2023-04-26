@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   *,
@@ -78,6 +78,6 @@ const GlobalStyle = createGlobalStyle`
     font-size: ${({ theme }) => theme.fontSizes[400]};
     font-family: ${({ theme }) => theme.fontFamilies.base};
   }
-`
+`;
 
-export default GlobalStyle
+export default GlobalStyle;
