@@ -1,29 +1,26 @@
 import Head from "next/head";
 import styled from "styled-components";
 
-const ErrorPage = () => {
+const Page = () => {
   return (
-    <Container>
+    <StyledPage>
       <Head>
         <title>404 - Cryptowatch</title>
       </Head>
-      <Heading>404</Heading>
-      <p>Oups ! Cette page n&rsquo;existe pas</p>
-    </Container>
+      <h1>404</h1>
+    </StyledPage>
   );
 };
 
-const Container = styled.div`
+const StyledPage = styled.div`
   display: grid;
   place-content: center;
   height: 100%;
-  text-align: center;
+
+  h1 {
+    font-size: ${(props) => props.theme.fontSizes[600]};
+    font-weight: ${(props) => props.theme.fontWeights[600]};
+  }
 `;
 
-const Heading = styled.h1`
-  margin-bottom: ${({ theme }) => theme.sizes[250]};
-  font-size: ${({ theme }) => theme.fontSizes[600]};
-  font-weight: ${({ theme }) => theme.fontWeights[600]};
-`;
-
-export default ErrorPage;
+export default Page;

@@ -1,26 +1,28 @@
 import { AppProps } from "next/app";
 import { CurrencyProvider } from "contexts/currencyContext";
-import ProgressBar from "nextjs-progressbar";
 import { ThemeProvider } from "styled-components";
 import { SWRConfig } from "swr";
 import GlobalStyle from "components/GlobalStyle";
 import Layout from "components/Layout";
-import axios from "lib/axios";
-import "lib/dayjs";
 import theme from "lib/theme";
 
-const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+const apiUrl = "https://api.coingecko.com/api/v3";
+
+const fetcher = (url: string) => fetch(apiUrl + url).then((res) => res.json());
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ThemeProvider theme={theme}>
-      <SWRConfig value={{ fetcher }}>
+      <SWRConfig
+        value={{
+          fetcher,
+          revalidateOnFocus: false,
+          shouldRetryOnError: false,
+          revalidateIfStale: false,
+        }}
+      >
         <CurrencyProvider>
           <GlobalStyle />
-          <ProgressBar
-            color={theme.colors.primary}
-            options={{ showSpinner: false }}
-          />
           <Layout>
             <Component {...pageProps} />
           </Layout>

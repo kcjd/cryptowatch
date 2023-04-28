@@ -1,11 +1,10 @@
 import Head from "next/head";
-import styled from "styled-components";
-import Ranking from "components/Ranking";
-import Trending from "components/Trending";
+import RankingSection from "components/RankingSection";
+import TrendingSection from "components/TrendingSection";
 
-const HomePage = () => {
+const Page = () => {
   return (
-    <Container>
+    <>
       <Head>
         <title>Cryptowatch</title>
         <meta
@@ -13,15 +12,10 @@ const HomePage = () => {
           content="Surveillez les cryptomonnaies les plus populaires en temps réel : cours, capitalisation, volume, historique et plus encore."
         />
       </Head>
-      <Trending />
-      <Ranking />
-    </Container>
+      <TrendingSection />
+      <RankingSection />
+    </>
   );
 };
 
-const Container = styled.div`
-  display: grid;
-  gap: ${({ theme }) => theme.sizes[800]};
-`;
-
-export default HomePage;
+export default Page;

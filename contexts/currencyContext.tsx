@@ -1,46 +1,24 @@
-import {
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useState } from "react";
 
 type CurrencyContextType = {
   currency: string;
+  currencies: string[];
   setCurrency: (currency: string) => void;
 };
 
 const CurrencyContext = createContext({} as CurrencyContextType);
 
-type Props = {
-  children: ReactNode;
-};
+const currencies = ["USD", "EUR", "BTC"];
+const defaultCurrency = currencies[0];
 
-export const CurrencyProvider = ({ children }: Props) => {
-  const [currency, setCurrency] = useState("USD");
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const currencyFromStorage = localStorage.getItem("currency");
-    if (!currencyFromStorage) return;
-    setCurrency(currencyFromStorage);
-  }, []);
-
-  const setCurrencyInStorage = (currency: string) => {
-    localStorage.setItem("currency", currency);
-    setCurrency(currency);
-  };
+export function CurrencyProvider({ children }: React.PropsWithChildren) {
+  const [currency, setCurrency] = useState(defaultCurrency);
 
   return (
-    <CurrencyContext.Provider
-      value={{ currency, setCurrency: setCurrencyInStorage }}
-    >
+    <CurrencyContext.Provider value={{ currency, currencies, setCurrency }}>
       {children}
     </CurrencyContext.Provider>
   );
-};
+}
 
-const useCurrency = () => useContext(CurrencyContext);
-
-export default useCurrency;
+export const useCurrency = () => useContext(CurrencyContext);

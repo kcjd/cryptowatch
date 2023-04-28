@@ -3,6 +3,7 @@
     "^(next/(.*)$)|^(next$)",
     "<THIRD_PARTY_MODULES>",
     "^components/(.*)$",
+    "^contexts/(.*)$",
     "^hooks/(.*)$",
     "^lib/(.*)$",
     "^[./]"

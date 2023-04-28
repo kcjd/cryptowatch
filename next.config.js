@@ -9,7 +9,7 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ["assets.coingecko.com", "abs.twimg.com", "pbs.twimg.com"],
+    domains: ["assets.coingecko.com"],
   },
 };
 
