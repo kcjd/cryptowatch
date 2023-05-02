@@ -45,32 +45,32 @@ const OverviewSection = ({ coinId }: Props) => {
           <StyledGrid>
             <OverviewCard
               icon={Podium}
-              heading="Cap. Marché"
+              heading="Market Cap"
               content={coin.market_cap}
             />
             <OverviewCard
               icon={PieChart}
-              heading="Volume"
+              heading="Total Volume"
               content={coin.total_volume}
             />
             <OverviewCard
               icon={Layers}
-              heading="Offre totale"
+              heading="Circulating Supply"
               content={coin.circulating_supply}
             />
             <OverviewCard
               icon={TrendingUp}
-              heading="Évolution 24h"
+              heading="24h Change"
               content={coin.price_change_24h}
             />
             <OverviewCard
               icon={CaretDown}
-              heading="Min. 24h"
+              heading="24h Low"
               content={coin.low_24h}
             />
             <OverviewCard
               icon={CaretUp}
-              heading="Max. 24h"
+              heading="24h High"
               content={coin.high_24h}
             />
           </StyledGrid>

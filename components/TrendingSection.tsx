@@ -12,7 +12,7 @@ const TrendingSection = () => {
 
   return (
     <Section>
-      <SectionTitle>Populaires</SectionTitle>
+      <SectionTitle>Trending</SectionTitle>
       {coins && (
         <StyledGrid>
           {coins.slice(0, 6).map((coin) => (

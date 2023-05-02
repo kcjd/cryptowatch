@@ -23,16 +23,16 @@ const RankingSection = () => {
 
   return (
     <Section>
-      <SectionTitle>Classement</SectionTitle>
+      <SectionTitle>Ranking</SectionTitle>
       {coins && (
         <StyledWrapper>
           <StyledRow>
             <div>#</div>
-            <div>Nom</div>
-            <div>Prix</div>
+            <div>Name</div>
+            <div>Price</div>
             <div>24h</div>
-            <div>Cap. Marché</div>
-            <div>7 jours</div>
+            <div>Market Cap</div>
+            <div>7 days</div>
           </StyledRow>
           {coins.map((coin) => (
             <StyledRow key={coin.id} as={Link} href={`/coins/${coin.id}`}>

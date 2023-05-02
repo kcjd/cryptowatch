@@ -33,10 +33,10 @@ const SearchBar = ({ isOpen, setOpen }: Props) => {
           <Search size={16} />
           <Combobox.Input
             as={FieldInput}
-            placeholder="Que recherchez-vous ?"
+            placeholder="Search token name"
             autoComplete="off"
             onChange={(e) => setQuery(e.target.value)}
-            aria-label="Recherche"
+            aria-label="Search"
           />
           {isValidating && <Loader />}
         </Field>

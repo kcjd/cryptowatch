@@ -10,20 +10,18 @@ const Page = () => {
   const coinId = router.query.id as string;
   const { data: coin } = useCoin(coinId);
 
-  return (
-    <>
-      <Head>
-        <title>{coin?.name} - Cryptowatch</title>
-        <meta
-          name="description"
-          content={`Surveillez la cryptomonnaie ${coin?.name} en temps réel : cours, capitalisation, volume, historique et plus encore.`}
-        />
-      </Head>
-      <OverviewSection coinId={coinId} />
-      <HistorySection coinId={coinId} />
-      <Trending />
-    </>
-  );
+  if (coin) {
+    return (
+      <>
+        <Head>
+          <title>{coin.name} - Cryptowatch</title>
+        </Head>
+        <OverviewSection coinId={coinId} />
+        <HistorySection coinId={coinId} />
+        <Trending />
+      </>
+    );
+  }
 };
 
 export default Page;

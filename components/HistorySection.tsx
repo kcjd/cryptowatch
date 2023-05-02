@@ -12,8 +12,8 @@ type Props = {
 
 const options = [
   { value: 1, label: "24H" },
-  { value: 7, label: "7J" },
-  { value: 30, label: "30J" },
+  { value: 7, label: "7D" },
+  { value: 30, label: "30D" },
 ];
 
 const HistorySection = ({ coinId }: Props) => {
@@ -23,7 +23,7 @@ const HistorySection = ({ coinId }: Props) => {
   return (
     <Section>
       <SectionHeader>
-        <SectionTitle>Historique</SectionTitle>
+        <SectionTitle>History</SectionTitle>
         <ToggleGroup value={days} options={options} onChange={setDays} />
       </SectionHeader>
       <StyledChartWrapper>

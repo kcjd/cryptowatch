@@ -67,10 +67,10 @@ const Chart = ({ data, showScales = false, showTooltip = false }: Props) => {
         time: {
           unit,
           displayFormats: {
-            day: "DD/MM",
+            day: "MM/DD",
             hour: "HH:mm",
           },
-          tooltipFormat: "DD/MM/YYYY HH:mm",
+          tooltipFormat: "MM/DD/YYYY HH:mm",
         },
         grid: {
           display: false,

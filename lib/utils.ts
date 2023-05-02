@@ -3,7 +3,7 @@ export function formatPercentage(value: number) {
 }
 
 export function formatCurrency(value: string | number, currency: string) {
-  const formatter = new Intl.NumberFormat(undefined, {
+  const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency,
     minimumFractionDigits: 0,

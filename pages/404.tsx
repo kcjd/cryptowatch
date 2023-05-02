@@ -1,12 +1,8 @@
-import Head from "next/head";
 import styled from "styled-components";
 
 const Page = () => {
   return (
     <StyledPage>
-      <Head>
-        <title>404 - Cryptowatch</title>
-      </Head>
       <h1>404</h1>
     </StyledPage>
   );

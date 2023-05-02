@@ -20,7 +20,7 @@ const Header = ({ setSearchOpen }: Props) => {
       </StyledLogo>
       <ButtonGroup>
         <Select value={currency} options={currencies} onChange={setCurrency} />
-        <Button onClick={() => setSearchOpen(true)} aria-label="Recherche">
+        <Button onClick={() => setSearchOpen(true)} aria-label="Open search">
           <Search size={16} />
         </Button>
       </ButtonGroup>

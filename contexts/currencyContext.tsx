@@ -8,7 +8,7 @@ type CurrencyContextType = {
 
 const CurrencyContext = createContext({} as CurrencyContextType);
 
-const currencies = ["USD", "EUR", "BTC"];
+const currencies = ["USD", "EUR", "JPY"];
 const defaultCurrency = currencies[0];
 
 export function CurrencyProvider({ children }: React.PropsWithChildren) {

@@ -14,7 +14,7 @@ const Pagination = ({ current, max, onChange }: Props) => {
       <Button
         onClick={() => onChange(Math.max(current - 1, 1))}
         disabled={current === 1}
-        aria-label="Page précédente"
+        aria-label="Go to previous page"
       >
         <ChevronBack size={16} />
       </Button>
@@ -27,7 +27,7 @@ const Pagination = ({ current, max, onChange }: Props) => {
             isActive={isActive}
             onClick={() => onChange(page)}
             aria-current={isActive ? "page" : "false"}
-            aria-label={`Page ${page}`}
+            aria-label={`Go to page ${page}`}
           >
             {page}
           </Button>
@@ -36,7 +36,7 @@ const Pagination = ({ current, max, onChange }: Props) => {
       <Button
         onClick={() => onChange(Math.min(current + 1, max))}
         disabled={current === max}
-        aria-label="Page suivante"
+        aria-label="Go to next page"
       >
         <ChevronForward size={16} />
       </Button>
