@@ -27,7 +27,13 @@ const HistorySection = ({ coinId }: Props) => {
         <ToggleGroup value={days} options={options} onChange={setDays} />
       </SectionHeader>
       <StyledChartWrapper>
-        {history && <Chart data={history.prices} showScales showTooltip />}
+        {history && (
+          <Chart
+            data={history.prices.map((x) => ({ date: x[0], price: x[1] }))}
+            showAxis
+            showTooltip
+          />
+        )}
         {isValidating && <Loader />}
       </StyledChartWrapper>
     </Section>
@@ -35,14 +41,11 @@ const HistorySection = ({ coinId }: Props) => {
 };
 
 const StyledChartWrapper = styled.div`
-  height: 26rem;
+  min-width: 0;
+  height: 30rem;
 
   @media (min-width: ${(props) => props.theme.screens.md}) {
-    height: 32rem;
-  }
-
-  @media (min-width: ${(props) => props.theme.screens.lg}) {
-    height: 32rem;
+    height: 38rem;
   }
 `;
 

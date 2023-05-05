@@ -19,10 +19,10 @@ export type CoinData = CoinBaseData & {
   price_change_24h: number;
   price_change_percentage_24h: number;
   sparkline_in_7d: {
-    price: HistoryData;
+    price: number[];
   };
   total_supply: number;
   total_volume: number;
 };
 
-export type HistoryData = number[] | number[][];
+export type HistoryData = number[][];

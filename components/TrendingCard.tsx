@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
 import Card from "components/Card";
-import HistoryChart from "components/Chart";
+import Chart from "components/Chart";
 import { Coin, CoinChange, CoinName, CoinSymbol } from "components/Coin";
 import { CoinData } from "lib/types";
 
@@ -20,7 +20,7 @@ const TrendingCard = ({ coin }: Props) => {
         <CoinChange>{coin.price_change_percentage_24h}</CoinChange>
       </Coin>
       <StyledChartWrapper>
-        <HistoryChart data={coin.sparkline_in_7d.price} />
+        <Chart data={coin.sparkline_in_7d.price.map((x) => ({ price: x }))} />
       </StyledChartWrapper>
     </StyledCard>
   );
@@ -32,6 +32,7 @@ const StyledCard = styled(Card)`
 `;
 
 const StyledChartWrapper = styled.div`
+  min-width: 0;
   height: 6rem;
 
   @media (min-width: ${(props) => props.theme.screens.md}) {

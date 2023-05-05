@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import Card from "components/Card";
-import HistoryChart from "components/Chart";
+import Chart from "components/Chart";
 import {
   Coin,
   CoinChange,
@@ -46,7 +46,9 @@ const RankingSection = () => {
               <CoinChange>{coin.price_change_percentage_24h}</CoinChange>
               <CoinPrice>{coin.market_cap}</CoinPrice>
               <StyledChartWrapper>
-                <HistoryChart data={coin.sparkline_in_7d.price} />
+                <Chart
+                  data={coin.sparkline_in_7d.price.map((x) => ({ price: x }))}
+                />
               </StyledChartWrapper>
             </StyledRow>
           ))}

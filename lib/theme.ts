@@ -39,6 +39,7 @@ const theme = {
     base: '"Inter", sans-serif',
   },
   fontSizes: {
+    200: "0.75rem",
     300: "0.875rem",
     400: "1rem",
     500: "1.125rem",
@@ -50,6 +51,7 @@ const theme = {
     600: 600,
   },
   borderRadius: {
+    200: "0.375rem",
     300: "0.5rem",
     400: "0.75rem",
     full: "9999px",

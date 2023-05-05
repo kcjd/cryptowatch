@@ -12,14 +12,12 @@
   "dependencies": {
     "@headlessui/react": "^1.7.14",
     "@styled-icons/ionicons-solid": "^10.46.0",
-    "chart.js": "^3.8.0",
-    "chartjs-adapter-dayjs": "^1.0.0",
     "dayjs": "^1.11.7",
     "framer-motion": "^10.12.4",
     "next": "13.3.1",
     "react": "18.2.0",
-    "react-chartjs-2": "^4.1.0",
     "react-dom": "18.2.0",
+    "recharts": "^2.5.0",
     "styled-components": "^5.3.10",
     "swr": "^2.1.5"
   },

@@ -1,151 +1,110 @@
 import {
-  CategoryScale,
-  ChartData,
-  Chart as ChartJS,
-  ChartOptions,
-  LineElement,
-  LinearScale,
-  PointElement,
-  TimeScale,
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
   Tooltip,
-} from "chart.js";
-import "chartjs-adapter-dayjs";
-import dayjs, { isDayjs } from "dayjs";
-import { Line } from "react-chartjs-2";
+  XAxis,
+  YAxis,
+} from "recharts";
 import { useCurrency } from "contexts/currencyContext";
 import theme from "lib/theme";
-import { HistoryData } from "lib/types";
-import { formatCurrency } from "lib/utils";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  LineElement,
-  PointElement,
-  TimeScale,
-  Tooltip
-);
+import { formatCurrency, formatDate, getTicks, getUnit } from "lib/utils";
 
 type Props = {
-  data: HistoryData;
-  showScales?: boolean;
+  data: {
+    price: number;
+    date?: number;
+  }[];
+  showAxis?: boolean;
   showTooltip?: boolean;
 };
 
-const Chart = ({ data, showScales = false, showTooltip = false }: Props) => {
+const Chart = ({ data, showAxis, showTooltip }: Props) => {
   const { currency } = useCurrency();
+  const chartData = data.map((x, i) => ({ ...x, date: x.date || i }));
+  const unit = getUnit(chartData.map((x) => x.date));
+  const ticks = getTicks(chartData.map((x) => x.date));
+  const isChangeUp = chartData[chartData.length - 1].price > chartData[0].price;
 
-  const points = data.map((v) => (typeof v === "number" ? v : v[1]));
-  const labels = data.map((v, i) => (typeof v === "number" ? i : dayjs(v[0])));
-
-  const startDate = labels[0];
-  const startValue = points[0];
-  const endDate = labels[labels.length - 1];
-  const endValue = points[points.length - 1];
-
-  const unit =
-    isDayjs(endDate) && endDate.diff(startDate, "day") > 1 ? "day" : "hour";
-
-  const isChangeUp = endValue > startValue;
-
-  const chartData: ChartData<"line"> = {
-    labels,
-    datasets: [
-      {
-        data: points,
-      },
-    ],
-  };
-
-  const options: ChartOptions<"line"> = {
-    animation: false,
-    maintainAspectRatio: false,
-    scales: {
-      x: {
-        display: showScales,
-        type: "time",
-        time: {
-          unit,
-          displayFormats: {
-            day: "MM/DD",
-            hour: "HH:mm",
-          },
-          tooltipFormat: "MM/DD/YYYY HH:mm",
-        },
-        grid: {
-          display: false,
-        },
-        ticks: {
-          autoSkipPadding: 12,
-          padding: 12,
-          maxRotation: 0,
-          color: theme.colors.textLight,
-          font: {
-            family: theme.fontFamilies.base,
-            weight: "500",
-          },
-        },
-      },
-      y: {
-        display: showScales,
-        grid: {
-          color: theme.colors.border,
-          drawBorder: false,
-        },
-        ticks: {
-          color: theme.colors.textLight,
-          font: {
-            family: theme.fontFamilies.base,
-            weight: "500",
-          },
-          callback: (v) => formatCurrency(v, currency),
-        },
-      },
-    },
-    elements: {
-      line: {
-        borderColor: isChangeUp ? theme.colors.success : theme.colors.danger,
-        borderWidth: 2,
-      },
-      point: {
-        radius: 0,
-      },
-    },
-    plugins: {
-      tooltip: {
-        enabled: showTooltip,
-        animation: {
-          duration: 100,
-          easing: "linear",
-        },
-        callbacks: {
-          label: (context) => formatCurrency(context.raw as number, currency),
-        },
-        displayColors: false,
-        padding: 12,
-        cornerRadius: 8,
-        backgroundColor: theme.colors.text,
-        titleColor: theme.colors.primary,
-        bodyColor: theme.colors.background,
-        titleFont: {
-          family: theme.fontFamilies.base,
-          size: 12,
-          weight: "500",
-        },
-        bodyFont: {
-          family: theme.fontFamilies.base,
-          size: 14,
-          weight: "600",
-        },
-      },
-    },
-    interaction: {
-      mode: "nearest",
-      intersect: false,
-    },
-  };
-
-  return <Line data={chartData} options={options} />;
+  return (
+    <ResponsiveContainer>
+      <LineChart
+        data={chartData}
+        margin={{ top: 4, right: 4, bottom: 4, left: 4 }}
+        style={{ cursor: "unset" }}
+      >
+        {showAxis && (
+          <CartesianGrid
+            horizontal={showAxis}
+            vertical={false}
+            stroke={theme.colors.border}
+          />
+        )}
+        {showTooltip && (
+          <Tooltip
+            isAnimationActive={false}
+            contentStyle={{
+              padding: theme.sizes[200],
+              borderRadius: theme.borderRadius[200],
+              borderWidth: 0,
+              backgroundColor: theme.colors.text,
+            }}
+            cursor={{ stroke: theme.colors.borderLight }}
+            labelFormatter={(v: number) => formatDate(v)}
+            labelStyle={{
+              fontSize: theme.fontSizes[300],
+              fontWeight: 500,
+              color: theme.colors.primary,
+            }}
+            formatter={(v) => [formatCurrency(Number(v), currency)]}
+            itemStyle={{
+              fontSize: theme.fontSizes[400],
+              fontWeight: 600,
+              color: theme.colors.background,
+            }}
+          />
+        )}
+        <XAxis
+          hide={!showAxis}
+          dataKey="date"
+          type="number"
+          domain={["dataMin", "dataMax"]}
+          axisLine={false}
+          ticks={ticks}
+          tick={{
+            fontSize: theme.fontSizes[200],
+            fontWeight: 500,
+            fill: theme.colors.textLight,
+          }}
+          tickFormatter={(v: number) => formatDate(v, unit)}
+          tickLine={false}
+          minTickGap={32}
+        />
+        <YAxis
+          hide={!showAxis}
+          type="number"
+          domain={["auto", "auto"]}
+          axisLine={false}
+          tick={{
+            fontSize: theme.fontSizes[200],
+            fontWeight: 500,
+            fill: theme.colors.textLight,
+          }}
+          tickFormatter={(v: number) => formatCurrency(v, currency)}
+          tickCount={10}
+          tickLine={false}
+        />
+        <Line
+          dataKey="price"
+          stroke={isChangeUp ? theme.colors.success : theme.colors.danger}
+          strokeWidth={1.5}
+          dot={false}
+          activeDot={false}
+        />
+      </LineChart>
+    </ResponsiveContainer>
+  );
 };
 
 export default Chart;
