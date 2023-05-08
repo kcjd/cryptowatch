@@ -3,9 +3,9 @@ import { Combobox } from "@headlessui/react";
 import { Search } from "@styled-icons/ionicons-solid";
 import { useState } from "react";
 import styled from "styled-components";
-import { Field, FieldInput } from "components/Field";
+import Field from "components/Field";
 import Loader from "components/Loader";
-import { Menu, MenuItem } from "components/Menu";
+import Menu from "components/Menu";
 import Modal from "components/Modal";
 import useSearch from "hooks/useSearch";
 import { CoinBaseData } from "lib/types";
@@ -32,7 +32,6 @@ const SearchBar = ({ isOpen, setOpen }: Props) => {
         <Field>
           <Search size={16} />
           <Combobox.Input
-            as={FieldInput}
             placeholder="Search token name"
             autoComplete="off"
             onChange={(e) => setQuery(e.target.value)}
@@ -43,7 +42,7 @@ const SearchBar = ({ isOpen, setOpen }: Props) => {
         {results && results.coins.length > 0 && (
           <Combobox.Options as={StyledMenu} static>
             {results.coins.slice(0, 5).map((coin) => (
-              <Combobox.Option key={coin.id} as={MenuItem} value={coin}>
+              <Combobox.Option key={coin.id} value={coin}>
                 {coin.name}
               </Combobox.Option>
             ))}
@@ -55,7 +54,7 @@ const SearchBar = ({ isOpen, setOpen }: Props) => {
 };
 
 const StyledMenu = styled(Menu)`
-  border-top: 1px solid ${(props) => props.theme.colors.border};
+  border-top: 1px solid ${(props) => props.theme.colors.neutral[700]};
 `;
 
 export default SearchBar;

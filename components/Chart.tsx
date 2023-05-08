@@ -38,7 +38,7 @@ const Chart = ({ data, showAxis, showTooltip }: Props) => {
           <CartesianGrid
             horizontal={showAxis}
             vertical={false}
-            stroke={theme.colors.border}
+            stroke={theme.colors.neutral[800]}
           />
         )}
         {showTooltip && (
@@ -48,20 +48,20 @@ const Chart = ({ data, showAxis, showTooltip }: Props) => {
               padding: theme.sizes[200],
               borderRadius: theme.borderRadius[200],
               borderWidth: 0,
-              backgroundColor: theme.colors.text,
+              backgroundColor: theme.colors.neutral[50],
             }}
-            cursor={{ stroke: theme.colors.borderLight }}
+            cursor={{ stroke: theme.colors.neutral[600] }}
             labelFormatter={(v: number) => formatDate(v)}
             labelStyle={{
               fontSize: theme.fontSizes[300],
               fontWeight: 500,
-              color: theme.colors.primary,
+              color: theme.colors.primary[500],
             }}
             formatter={(v) => [formatCurrency(Number(v), currency)]}
             itemStyle={{
               fontSize: theme.fontSizes[400],
               fontWeight: 600,
-              color: theme.colors.background,
+              color: theme.colors.neutral[900],
             }}
           />
         )}
@@ -75,7 +75,7 @@ const Chart = ({ data, showAxis, showTooltip }: Props) => {
           tick={{
             fontSize: theme.fontSizes[200],
             fontWeight: 500,
-            fill: theme.colors.textLight,
+            fill: theme.colors.neutral[400],
           }}
           tickFormatter={(v: number) => formatDate(v, unit)}
           tickLine={false}
@@ -89,7 +89,7 @@ const Chart = ({ data, showAxis, showTooltip }: Props) => {
           tick={{
             fontSize: theme.fontSizes[200],
             fontWeight: 500,
-            fill: theme.colors.textLight,
+            fill: theme.colors.neutral[400],
           }}
           tickFormatter={(v: number) => formatCurrency(v, currency)}
           tickCount={10}
@@ -97,7 +97,9 @@ const Chart = ({ data, showAxis, showTooltip }: Props) => {
         />
         <Line
           dataKey="price"
-          stroke={isChangeUp ? theme.colors.success : theme.colors.danger}
+          stroke={
+            isChangeUp ? theme.colors.success[400] : theme.colors.danger[400]
+          }
           strokeWidth={1.5}
           dot={false}
           activeDot={false}

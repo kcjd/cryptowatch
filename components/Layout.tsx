@@ -9,7 +9,6 @@ const Layout = ({ children }: React.PropsWithChildren) => {
 
   return (
     <>
-      <StyledBackground />
       <StyledLayout>
         <Header setSearchOpen={setSearchOpen} />
         <main>{children}</main>
@@ -27,28 +26,6 @@ const StyledLayout = styled.div`
   width: ${(props) => props.theme.sizes.container};
   min-height: 100vh;
   margin-inline: auto;
-`;
-
-const StyledBackground = styled.div`
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background-size: max(100%, 70rem) auto;
-    background-repeat: no-repeat;
-  }
-
-  &::before {
-    background-image: url("/bg-top.png");
-    background-position: top left;
-  }
-
-  &::after {
-    background-image: url("/bg-bottom.png");
-    background-position: bottom left;
-  }
 `;
 
 export default Layout;

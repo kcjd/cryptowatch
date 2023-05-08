@@ -54,9 +54,9 @@ const StyledBody = styled(motion.div)`
   margin-inline: auto;
   margin-top: 25vh;
   border-radius: ${(props) => props.theme.borderRadius[400]};
-  background-color: ${(props) => props.theme.colors.surfaceLight};
+  background-color: ${(props) => props.theme.colors.surface[300]};
   box-shadow: ${(props) => props.theme.shadows[500]};
-  backdrop-filter: blur(30px);
+  backdrop-filter: blur(16px);
   overflow: hidden;
 `;
 

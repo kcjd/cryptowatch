@@ -23,8 +23,8 @@ const StyledFooter = styled.footer`
   align-items: center;
   padding-block: ${(props) => props.theme.sizes[600]};
   font-size: ${(props) => props.theme.fontSizes[300]};
-  font-weight: ${(props) => props.theme.fontWeights[500]};
-  color: ${(props) => props.theme.colors.textLight};
+  font-weight: 500;
+  color: ${(props) => props.theme.colors.neutral[400]};
 `;
 
 export default Footer;

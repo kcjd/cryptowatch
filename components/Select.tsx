@@ -2,8 +2,8 @@ import { Listbox } from "@headlessui/react";
 import { ChevronDown } from "@styled-icons/ionicons-solid";
 import { AnimatePresence, motion } from "framer-motion";
 import styled from "styled-components";
-import { Button } from "components/Button";
-import { Menu, MenuItem } from "components/Menu";
+import Button from "components/Button";
+import Menu from "components/Menu";
 import { slideBottom, spring } from "lib/animations";
 
 type Props = {
@@ -32,7 +32,7 @@ const Select = ({ value, options, onChange }: Props) => {
                 static
               >
                 {options.map((option, i) => (
-                  <Listbox.Option key={i} as={MenuItem} value={option}>
+                  <Listbox.Option key={i} value={option}>
                     {option}
                   </Listbox.Option>
                 ))}
@@ -58,9 +58,9 @@ const StyledMenu = styled(motion(Menu))`
   width: 100%;
   margin-top: ${(props) => props.theme.sizes[100]};
   border-radius: ${(props) => props.theme.borderRadius[300]};
-  background-color: ${(props) => props.theme.colors.surfaceLight};
+  background-color: ${(props) => props.theme.colors.surface[400]};
   box-shadow: ${(props) => props.theme.shadows[400]};
-  backdrop-filter: blur(30px);
+  backdrop-filter: blur(8px);
 `;
 
 export default Select;

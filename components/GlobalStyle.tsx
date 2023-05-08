@@ -64,7 +64,7 @@ const GlobalStyle = createGlobalStyle`
 
   a:focus-visible,
   button:focus-visible {
-    outline: 3px solid ${(props) => props.theme.colors.ring};
+    outline: 2px solid ${(props) => props.theme.colors.primary[300]};
   }
 
   :root {
@@ -73,10 +73,14 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     position: relative;
-    background-color: ${(props) => props.theme.colors.background};
-    color: ${(props) => props.theme.colors.text};
+    background-color: ${(props) => props.theme.colors.neutral[900]};
+    color: ${(props) => props.theme.colors.neutral[50]};
     font-size: ${(props) => props.theme.fontSizes[400]};
     font-family: ${(props) => props.theme.fontFamilies.base};
+    background-image: url("/bg-top.png"), url("/bg-bottom.png");
+    background-position: top left, bottom left;
+    background-size: max(100%, 70rem) auto;
+    background-repeat: no-repeat;
   }
 `;
 

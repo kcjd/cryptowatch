@@ -1,22 +1,19 @@
-import { motion } from "framer-motion";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
-const Loader = () => {
-  return (
-    <StyledLoader
-      animate={{ rotate: 360 }}
-      transition={{ ease: "linear", duration: 2, repeat: Infinity }}
-    />
-  );
-};
+const loaderAnimation = keyframes`
+  to {
+    transform: rotate(360deg);
+  }
+`;
 
-const StyledLoader = styled(motion.div)`
+const Loader = styled.div`
   width: ${(props) => props.theme.sizes[600]};
   height: ${(props) => props.theme.sizes[600]};
-  border-radius: ${(props) => props.theme.borderRadius.full};
+  border-radius: 50%;
   border: 4px solid transparent;
-  border-bottom-color: ${(props) => props.theme.colors.primary};
+  border-bottom-color: ${(props) => props.theme.colors.primary[500]};
   pointer-events: none;
+  animation: ${loaderAnimation} 1600ms linear infinite;
 `;
 
 export default Loader;

@@ -1,23 +1,9 @@
-import Image from "next/image";
-import {
-  CaretDown,
-  CaretUp,
-  Layers,
-  PieChart,
-  Podium,
-  TrendingUp,
-} from "@styled-icons/ionicons-solid";
 import styled from "styled-components";
-import {
-  Coin,
-  CoinChange,
-  CoinName,
-  CoinPrice,
-  CoinSymbol,
-} from "components/Coin";
+import Coin from "components/Coin";
+import ErrorMessage from "components/ErrorMessage";
 import Loader from "components/Loader";
 import OverviewCard from "components/OverviewCard";
-import { Section } from "components/Section";
+import Section from "components/Section";
 import useCoin from "hooks/useCoin";
 
 type Props = {
@@ -25,78 +11,43 @@ type Props = {
 };
 
 const OverviewSection = ({ coinId }: Props) => {
-  const { data: coin, isValidating } = useCoin(coinId);
+  const { data: coin, isValidating, error } = useCoin(coinId);
 
   return (
     <>
       {coin && (
         <Section>
-          <StyledHeader>
-            <Image src={coin.image} width={44} height={44} alt="" />
-            <Coin>
-              <CoinName>{coin.name}</CoinName>
-              <CoinSymbol>{coin.symbol}</CoinSymbol>
-            </Coin>
-            <Coin>
-              <CoinPrice>{coin.current_price}</CoinPrice>
-              <CoinChange>{coin.price_change_percentage_24h}</CoinChange>
-            </Coin>
-          </StyledHeader>
+          <h1>
+            <Coin
+              image={coin.image}
+              name={coin.name}
+              symbol={coin.symbol}
+              change={coin.price_change_percentage_24h}
+            />
+          </h1>
           <StyledGrid>
-            <OverviewCard
-              icon={Podium}
-              heading="Market Cap"
-              content={coin.market_cap}
-            />
-            <OverviewCard
-              icon={PieChart}
-              heading="Total Volume"
-              content={coin.total_volume}
-            />
-            <OverviewCard
-              icon={Layers}
-              heading="Circulating Supply"
-              content={coin.circulating_supply}
-            />
-            <OverviewCard
-              icon={TrendingUp}
-              heading="24h Change"
-              content={coin.price_change_24h}
-            />
-            <OverviewCard
-              icon={CaretDown}
-              heading="24h Low"
-              content={coin.low_24h}
-            />
-            <OverviewCard
-              icon={CaretUp}
-              heading="24h High"
-              content={coin.high_24h}
-            />
+            <OverviewCard heading="Price" content={coin.current_price} />
+            <OverviewCard heading="Market Cap" content={coin.market_cap} />
+            <OverviewCard heading="Total Volume" content={coin.total_volume} />
+            <OverviewCard heading="Total Supply" content={coin.total_supply} />
+            <OverviewCard heading="All Time Low" content={coin.atl} />
+            <OverviewCard heading="All Time High" content={coin.ath} />
           </StyledGrid>
         </Section>
       )}
       {isValidating && <Loader />}
+      {error && <ErrorMessage>Network Error</ErrorMessage>}
     </>
   );
 };
 
-const StyledHeader = styled.div`
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: 0 ${(props) => props.theme.sizes[400]};
-  margin-bottom: ${({ theme }) => theme.sizes[650]};
-
-  & > *:first-child {
-    grid-row: span 2;
-  }
-`;
-
 const StyledGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   gap: ${(props) => props.theme.sizes[400]};
+
+  @media (min-width: ${(props) => props.theme.screens.md}) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
   @media (min-width: ${(props) => props.theme.screens.lg}) {
     grid-template-columns: repeat(3, 1fr);

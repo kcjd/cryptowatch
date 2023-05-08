@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Search } from "@styled-icons/ionicons-solid";
 import styled from "styled-components";
-import { Button, ButtonGroup } from "components/Button";
+import Button from "components/Button";
 import Select from "components/Select";
 import { useCurrency } from "contexts/currencyContext";
 
@@ -18,12 +18,12 @@ const Header = ({ setSearchOpen }: Props) => {
       <StyledLogo href="/">
         <Image src="/logo.svg" width={20} height={20} alt="" /> Cryptowatch
       </StyledLogo>
-      <ButtonGroup>
+      <StyledButtonGroup>
         <Select value={currency} options={currencies} onChange={setCurrency} />
         <Button onClick={() => setSearchOpen(true)} aria-label="Open search">
           <Search size={16} />
         </Button>
-      </ButtonGroup>
+      </StyledButtonGroup>
     </StyledHeader>
   );
 };
@@ -39,7 +39,12 @@ const StyledLogo = styled(Link)`
   display: flex;
   align-items: center;
   gap: ${(props) => props.theme.sizes[200]};
-  font-weight: ${(props) => props.theme.fontWeights[600]};
+  font-weight: 600;
+`;
+
+const StyledButtonGroup = styled.div`
+  display: flex;
+  gap: ${(props) => props.theme.sizes[200]};
 `;
 
 export default Header;

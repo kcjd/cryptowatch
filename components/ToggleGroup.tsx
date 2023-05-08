@@ -1,6 +1,5 @@
 import { RadioGroup } from "@headlessui/react";
 import styled from "styled-components";
-import { Button, ButtonGroup } from "components/Button";
 
 type Props = {
   value: number;
@@ -13,13 +12,9 @@ type Props = {
 
 const ToggleGroup = ({ value, options, onChange }: Props) => {
   return (
-    <RadioGroup as={ButtonGroup} value={value} onChange={onChange}>
+    <RadioGroup as={StyledToggleGroup} value={value} onChange={onChange}>
       {options.map((option) => (
-        <RadioGroup.Option
-          as={StyledOption}
-          key={option.value}
-          value={option.value}
-        >
+        <RadioGroup.Option key={option.value} value={option.value}>
           {option.label}
         </RadioGroup.Option>
       ))}
@@ -27,20 +22,23 @@ const ToggleGroup = ({ value, options, onChange }: Props) => {
   );
 };
 
-const StyledOption = styled(Button)`
-  justify-content: center;
-  height: auto;
-  padding: ${(props) => props.theme.sizes[150]};
-  border-radius: 0;
-  border-bottom: 2px solid;
-  border-color: transparent;
-  background-color: transparent !important;
-  color: ${(props) => props.theme.colors.textLight};
-  font-size: ${(props) => props.theme.fontSizes[300]};
+const StyledToggleGroup = styled.div`
+  display: flex;
+  gap: ${(props) => props.theme.sizes[200]};
 
-  &[data-headlessui-state~="checked"] {
-    border-color: ${(props) => props.theme.colors.primary};
-    color: ${(props) => props.theme.colors.text};
+  div {
+    padding: ${(props) => props.theme.sizes[150]};
+    border-bottom: 2px solid;
+    border-color: transparent;
+    color: ${(props) => props.theme.colors.neutral[400]};
+    font-size: ${(props) => props.theme.fontSizes[300]};
+    font-weight: 500;
+    cursor: pointer;
+
+    &[data-headlessui-state~="checked"] {
+      border-color: ${(props) => props.theme.colors.primary[500]};
+      color: ${(props) => props.theme.colors.neutral[50]};
+    }
   }
 `;
 

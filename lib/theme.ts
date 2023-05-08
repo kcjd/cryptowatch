@@ -1,17 +1,31 @@
 const theme = {
   colors: {
-    text: "hsl(0 0% 100%)",
-    textLight: "hsl(218 11% 65%)",
-    background: "hsl(222 27% 12%)",
-    surface: "hsl(222 27% 42% / 0.2)",
-    surfaceLight: "hsl(222 27% 42% / 0.3)",
-    border: "hsl(222 27% 26% / 0.6)",
-    borderLight: "hsl(222 27% 30% / 0.6)",
-    primary: "hsl(239 84% 67%)",
-    success: "hsl(156 72% 67%)",
-    danger: "hsl(353 96% 82%)",
+    neutral: {
+      50: "hsl(210 40% 98%)",
+      400: "hsl(215 20% 65%)",
+      600: "hsl(215 19% 35%)",
+      700: "hsl(215 25% 27%)",
+      800: "hsl(217 33% 17%)",
+      900: "hsl(222 47% 11%)",
+    },
+    success: {
+      400: "hsl(158 64% 52%)",
+    },
+    danger: {
+      400: "hsl(0 91% 71%)",
+    },
+    primary: {
+      200: "hsl(228 96% 89%)",
+      300: "hsl(230 94% 82%)",
+      500: "hsl(239 84% 67%)",
+      800: "hsl(244 55% 41%)",
+    },
+    surface: {
+      200: "hsl(222 27% 42% / 0.6)",
+      300: "hsl(222 27% 42% / 0.4)",
+      400: "hsl(222 27% 42% / 0.3)",
+    },
     overlay: "hsl(0 0% 0% / 0.6)",
-    ring: "hsl(222 27% 50% / 0.5)",
   },
   sizes: {
     50: "0.125rem",
@@ -33,10 +47,10 @@ const theme = {
     850: "5rem",
     900: "6rem",
     950: "7rem",
-    container: "min(100% - 2rem, 75rem)",
+    container: "min(100% - 2rem, 80rem)",
   },
   fontFamilies: {
-    base: '"Inter", sans-serif',
+    base: "'Inter', sans-serif",
   },
   fontSizes: {
     200: "0.75rem",
@@ -45,16 +59,10 @@ const theme = {
     500: "1.125rem",
     600: "1.25rem",
   },
-  fontWeights: {
-    400: 400,
-    500: 500,
-    600: 600,
-  },
   borderRadius: {
     200: "0.375rem",
     300: "0.5rem",
     400: "0.75rem",
-    full: "9999px",
   },
   shadows: {
     400: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",

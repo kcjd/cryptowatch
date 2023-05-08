@@ -14,11 +14,11 @@
     "@styled-icons/ionicons-solid": "^10.46.0",
     "dayjs": "^1.11.7",
     "framer-motion": "^10.12.4",
-    "next": "13.3.1",
+    "next": "13.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "recharts": "^2.5.0",
-    "styled-components": "^5.3.10",
+    "styled-components": "^6.0.0-rc.1",
     "swr": "^2.1.5"
   },
   "devDependencies": {
@@ -26,7 +26,6 @@
     "@types/node": "18.16.1",
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.1",
-    "@types/styled-components": "^5.1.26",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.1",
     "eslint-config-prettier": "^8.8.0",

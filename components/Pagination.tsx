@@ -1,6 +1,6 @@
 import { ChevronBack, ChevronForward } from "@styled-icons/ionicons-solid";
 import styled from "styled-components";
-import { Button } from "components/Button";
+import Button from "components/Button";
 
 type Props = {
   current: number;
@@ -24,7 +24,6 @@ const Pagination = ({ current, max, onChange }: Props) => {
         return (
           <Button
             key={page}
-            isActive={isActive}
             onClick={() => onChange(page)}
             aria-current={isActive ? "page" : "false"}
             aria-label={`Go to page ${page}`}

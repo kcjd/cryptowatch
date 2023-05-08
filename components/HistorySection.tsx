@@ -1,8 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Chart from "components/Chart";
+import ErrorMessage from "components/ErrorMessage";
 import Loader from "components/Loader";
-import { Section, SectionHeader, SectionTitle } from "components/Section";
+import Section from "components/Section";
 import ToggleGroup from "components/ToggleGroup";
 import useHistory from "hooks/useHistory";
 
@@ -18,14 +19,14 @@ const options = [
 
 const HistorySection = ({ coinId }: Props) => {
   const [days, setDays] = useState(1);
-  const { data: history, isValidating } = useHistory(coinId, days);
+  const { data: history, isValidating, error } = useHistory(coinId, days);
 
   return (
     <Section>
-      <SectionHeader>
-        <SectionTitle>History</SectionTitle>
+      <header>
+        <h2>History</h2>
         <ToggleGroup value={days} options={options} onChange={setDays} />
-      </SectionHeader>
+      </header>
       <StyledChartWrapper>
         {history && (
           <Chart
@@ -35,6 +36,7 @@ const HistorySection = ({ coinId }: Props) => {
           />
         )}
         {isValidating && <Loader />}
+        {error && <ErrorMessage>Network Error</ErrorMessage>}
       </StyledChartWrapper>
     </Section>
   );
